@@ -17,9 +17,9 @@ public class MembershipClass {
     @Column(unique = true, nullable = false, length = 30)
     private String name;
 
-    @Column(unique = true, nullable = false)
-    private Short discount_percent;
+    @Column(name = "discount_percent", nullable = false)
+    private Short discountPercent;
 
-    @Column(unique = true, nullable = false)
-    private Integer minimum_no_point;
+    @Column(name = "minimum_no_point", unique = true, nullable = false)
+    private Integer minimumNoPoint;
 }

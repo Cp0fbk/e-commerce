@@ -4,7 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ecommerce.backend.model.MembershipClass;
 
+import java.util.List;
+
 public interface MembershipClassRepository extends JpaRepository<MembershipClass,Integer> {
-    public MembershipClass findByName(String name);
-     
+    MembershipClass findByName(String name);
+    MembershipClass findById(int id);
+    List<MembershipClass> findByDiscountPercent(int percent);
 }

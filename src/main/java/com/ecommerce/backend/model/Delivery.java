@@ -32,4 +32,8 @@ public class Delivery {
 
     @Column(length = 15, nullable = false)
     private String fname;
+
+    private boolean checkShippingProvince() {
+
+    }
 }

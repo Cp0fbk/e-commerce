@@ -3,6 +3,21 @@
 -- Insert bảng MembershipClass
 SET FOREIGN_KEY_CHECKS = 0;
 
+INSERT INTO `account` (username, `password`, `role`)
+VALUES
+	('0376872568', '123456789', 'customer'),
+    ('0968125694', '2159561563', 'customer'),
+    ('0352583109', '7822463256', 'customer'),
+    ('0369142631', 'setgsr85gs', 'customer'),
+    ('0862549670', 'st9e8ds567', 'customer'),
+    ('0761295168', 'sgresgh7se5', 'customer'),
+    ('0932345678', '5455dsfg56', 'employee'),
+    ('0946343210', 'wdgew8ga6s', 'employee'),
+    ('0975344567', 'ewe4s5eg48', 'employee'),
+    ('0914344156', 'se8ssd125e', 'employee'),
+    ('0352689512', 'sw3dg48fds', 'employee'),
+    ('0368512569', '37sei9dke8', 'employee');
+
 INSERT INTO membership_class (`name`, discount_percent, minimum_no_point)  
 VALUES 
     ('Normal', 0, 0),
@@ -13,14 +28,14 @@ VALUES
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- Insert bảng Customer
-INSERT INTO customer (phone_number, email, registration_date, shipping_address, lname, fname, total_points, membership_class_id) 
+INSERT INTO customer (customer_id, phone_number, email, registration_date, shipping_address, lname, fname, total_points, membership_class_id) 
 VALUES 
-    ('0376872568', 'nguyenvannam@gmail.com', '2024-11-01', 'KP6, Tan Lap Street, Dong Hoa, Di An, Binh Duong', 'Nguyen', 'Nam', 0, 1),
-    ('0968125694', 'ledinhbao@gmail.com', '2024-11-02', 'KP6, Tan Lap Street, Dong Hoa, Di An, Binh Duong', 'Le', 'Bao', 0, 1),
-    ('0352583109', 'buiconglan@gmail.com', '2024-10-03', 'KP6, Tan Lap Street, Dong Hoa, Di An, Binh Duong', 'Bui', 'Lan', 0, 1),
-    ('0369142631', 'nguyenhoa1594@gmail.com', '2023-12-04', 'KP6, Tan Lap Street, Dong Hoa, Di An, Binh Duong', 'Nguyen', 'Hoa', 0, 1),
-    ('0862549670', 'tnguyen21ah@gmail.com', '2022-11-01', 'KP6, Tan Lap Street, Dong Hoa, Di An, Binh Duong', 'Tran', 'Nguyen', 0, 1),
-    ('0761295168', 'thanhnguyen51@gmail.com', '2021-11-05', 'KP6, Tan Lap Street, Dong Hoa, Di An, Binh Duong', 'Nguyen', 'Thanh', 0, 1);
+    (1, '0376872568', 'nguyenvannam@gmail.com', '2024-11-01', 'KP6, Tan Lap Street, Dong Hoa, Di An, Binh Duong', 'Nguyen', 'Nam', 0, 1),
+    (2, '0968125694', 'ledinhbao@gmail.com', '2024-11-02', 'KP6, Tan Lap Street, Dong Hoa, Di An, Binh Duong', 'Le', 'Bao', 0, 1),
+    (3, '0352583109', 'buiconglan@gmail.com', '2024-10-03', 'KP6, Tan Lap Street, Dong Hoa, Di An, Binh Duong', 'Bui', 'Lan', 0, 1),
+    (4, '0369142631', 'nguyenhoa1594@gmail.com', '2023-12-04', 'KP6, Tan Lap Street, Dong Hoa, Di An, Binh Duong', 'Nguyen', 'Hoa', 0, 1),
+    (5, '0862549670', 'tnguyen21ah@gmail.com', '2022-11-01', 'KP6, Tan Lap Street, Dong Hoa, Di An, Binh Duong', 'Tran', 'Nguyen', 0, 1),
+    (6, '0761295168', 'thanhnguyen51@gmail.com', '2021-11-05', 'KP6, Tan Lap Street, Dong Hoa, Di An, Binh Duong', 'Nguyen', 'Thanh', 0, 1);
 
 -- Insert bảng Cart
 INSERT INTO cart (customer_id, total_amount, created_date) 
@@ -80,34 +95,34 @@ VALUES
     (7,'20 hours');
 
 -- Insert bảng Delivery
-INSERT INTO delivery (shipping_provider, delivery_status, actual_delivery_date, estimated_delivery_date, shipping_address, lname, fname) 
+INSERT INTO delivery (shipping_provider, actual_delivery_date, estimated_delivery_date, shipping_address, lname, fname) 
 VALUES 
-    ('Viettel Post', 'completed', '2023-11-08', '2023-11-08', '345 Pham Van Dong Street, Thu Duc, HCMC', 'Tran', 'Nguyen'),
-    ('Vietnam Post', 'completed', '2023-01-13', '2023-01-14', '31A Pham Van Dong Street, Thu Duc, HCMC', 'Le', 'Bao'),
-    ('J&T Express', 'completed', '2023-12-05', '2023-12-04', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Hoa'),
-    ('Viettel Post', 'completed', '2024-11-03', '2024-11-03', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Hoa'),
-	('J&T Express', 'completed', '2024-12-03', '2023-12-02', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Bui', 'Lan'),
-	('J&T Express', 'completed', '2023-12-01', '2023-12-01', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Nam');
+    ('Viettel Post', '2023-11-08', '2023-11-08', '345 Pham Van Dong Street, Thu Duc, HCMC', 'Tran', 'Nguyen'),
+    ('Vietnam Post', '2023-01-13', '2023-01-14', '31A Pham Van Dong Street, Thu Duc, HCMC', 'Le', 'Bao'),
+    ('J&T Express', '2023-12-05', '2023-12-04', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Hoa'),
+    ('Viettel Post', '2024-11-03', '2024-11-03', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Hoa'),
+	('J&T Express', '2024-12-03', '2023-12-02', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Bui', 'Lan'),
+	('J&T Express', '2023-12-01', '2023-12-01', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Nam');
 
 -- Insert bảng Employee
-INSERT INTO employee (identity_card, lname, fname, phone_number, dob, hire_date, email, supervisor_id, supervise_date, store_id) 
+INSERT INTO employee (employee_id, identity_card, lname, fname, phone_number, dob, hire_date, email, supervisor_id, supervise_date, store_id) 
 VALUES 
-    ('056190536152', 'Nguyen', 'Anh', '0932345678', '1990-01-15', '2023-11-09', 'anh.nguyen@example.com', NULL, NULL, 1),
-    ('075292436579', 'Tran', 'Khoa', '0946343210', '1992-04-25', '2023-04-09', 'khoa.tran@example.com', 1, '2023-04-10', 1),
-    ('043388016869', 'Nguyen', 'Phi', '0975344567', '1988-03-12', '2022-12-09', 'phi.nguyen@example.com', 2, '2022-12-09', 1),
-    ('048135287416', 'Le', 'Phi', '0914344156', '1993-07-19', '2021-11-09', 'phi.le@example.com', 2, '2023-10-07', 1),
-	('052201895236', 'Pham', 'Tai', '0352689512', '2001-10-08', '2022-05-02', 'ptai205@example.com', NULL, NULL, 2),
-	('075103956102', 'Tran', 'Khoa', '0368512569', '2003-02-19', '2022-12-23', 'khoatrk22@example.com', 5, '2023-01-05', 2);
+    (7, '056190536152', 'Nguyen', 'Anh', '0932345678', '1990-01-15', '2023-11-09', 'anh.nguyen@example.com', NULL, NULL, 1),
+    (8, '075292436579', 'Tran', 'Khoa', '0946343210', '1992-04-25', '2023-04-09', 'khoa.tran@example.com', 7, '2023-04-10', 1),
+    (9, '043388016869', 'Nguyen', 'Phi', '0975344567', '1988-03-12', '2022-12-09', 'phi.nguyen@example.com', 8, '2022-12-09', 1),
+    (10, '048135287416', 'Le', 'Phi', '0914344156', '1993-07-19', '2021-11-09', 'phi.le@example.com', 8, '2023-10-07', 1),
+	(11, '052201895236', 'Pham', 'Tai', '0352689512', '2001-10-08', '2022-05-02', 'ptai205@example.com', NULL, NULL, 2),
+	(12, '075103956102', 'Tran', 'Khoa', '0368512569', '2003-02-19', '2022-12-23', 'khoatrk22@example.com', 11, '2023-01-05', 2);
 
 -- Insert bảng [Order]
 INSERT INTO `order` (order_date, order_status, total_amount, employee_id, customer_id, delivery_id) 
 VALUES 
-    ('2023-12-05', 'pending', 0, 1, 4, 1),
-    ('2024-11-03', 'pending', 0, 2, 4, 4),
-    ('2023-11-08', 'pending', 0, 1, 5, 2),
-    ('2023-01-13', 'pending', 0, 2, 2, 3),
-	('2024-12-01', 'pending', 0, 5, 3, 5),
-	('2024-11-29', 'pending', 0, 4, 1, 6);
+    ('2023-12-05', 'pending', 0, 7, 4, 1),
+    ('2024-11-03', 'pending', 0, 8, 4, 4),
+    ('2023-11-08', 'pending', 0, 7, 5, 2),
+    ('2023-01-13', 'pending', 0, 8, 2, 3),
+	('2024-12-01', 'pending', 0, 11, 3, 5),
+	('2024-11-29', 'pending', 0, 10, 1, 6);
 
 -- Insert bảng Payment
 INSERT INTO payment (order_id, payment_date, payment_status, method) 
@@ -122,10 +137,10 @@ VALUES
 -- Insert bảng GoodsDeliveryNote
 INSERT INTO goods_delivery_note(`date`, order_id, employee_id) 
 VALUES 
-    ('2023-12-04', 1, 1),
-    ('2024-11-03', 2, 2),
-    ('2024-01-13', 4, 2),
-	('2024-11-30', 6, 4);
+    ('2023-12-04', 1, 7),
+    ('2024-11-03', 2, 8),
+    ('2024-01-13', 4, 8),
+	('2024-11-30', 6, 10);
 
 -- Insert bảng Product
 INSERT INTO `product`(store_id, device_id, note_id) 
@@ -197,11 +212,11 @@ UPDATE `order` SET order_status = 'Completed';
 -- Insert bảng ProductLineManagedByEmployee
 INSERT INTO product_line_managed_by_employee(product_line_id, employee_id) 
 VALUES 
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 2),
-    (5, 1);
+    (1, 7),
+    (2, 8),
+    (3, 9),
+    (4, 8),
+    (5, 7);
 
 -- Insert bảng AccessoryInStore
 INSERT INTO `accessory_in_store` (accessory_id, store_id, stock_quantity) 

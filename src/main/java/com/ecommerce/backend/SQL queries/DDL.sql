@@ -1,14 +1,22 @@
 CREATE SCHEMA `e-commerce`;
 USE `e-commerce`;
+
+CREATE TABLE `e-commerce`.`account` (
+    account_id          INT             auto_increment PRIMARY KEY,
+    username            VARCHAR(20)     UNIQUE NOT NULL,
+    `password`          VARCHAR(30)     NOT NULL,
+    `role`              VARCHAR(8)      NOT NULL CHECK(role in ('customer', 'employee'))
+);
+
 CREATE TABLE `e-commerce`.`membership_class` (
 	id					int				primary key auto_increment,
     `name`				varchar(30)		unique not null,
-    discount_percent	smallint		unique not null check(discount_percent >= 0 AND discount_percent < 100),
+    discount_percent	smallint		not null check(discount_percent >= 0 AND discount_percent < 100),
     minimum_no_point	int				unique not null
 );
 
 CREATE TABLE `e-commerce`.`customer` (
-	customer_id				INT				auto_increment PRIMARY KEY,
+	customer_id				INT				PRIMARY KEY,
 	phone_number			CHAR(10)		UNIQUE NOT NULL,
 	email					VARCHAR(50)		UNIQUE,
 	registration_date		DATE			NOT NULL DEFAULT '2000-01-01',
@@ -19,7 +27,9 @@ CREATE TABLE `e-commerce`.`customer` (
 	membership_class_id		INT				NOT NULL,
 	is_deleted				BOOLEAN			NOT NULL DEFAULT 0,
 	CONSTRAINT fk_membership_class_customer
-		FOREIGN KEY (membership_class_id) REFERENCES membership_class(id)
+		FOREIGN KEY (membership_class_id) REFERENCES membership_class(id),
+    CONSTRAINT fk_customer_id_customer
+        FOREIGN KEY (customer_id) REFERENCES account(account_id)
 );
 
 CREATE TABLE `e-commerce`.cart (
@@ -94,16 +104,16 @@ CREATE TABLE `e-commerce`.accessory (
 CREATE TABLE `e-commerce`.delivery (
 	delivery_id				INT				auto_increment PRIMARY KEY,
 	shipping_provider		VARCHAR(30),
-	delivery_status			VARCHAR(20)		NOT NULL DEFAULT 'shipping' CHECK (delivery_status IN ('shipping', 'completed')),
 	actual_delivery_date	DATE,
 	estimated_delivery_date	DATE,
+    shipping_province       VARCHAR(17),    -- check if shipping_province is valid
 	shipping_address		VARCHAR(100),
 	lname					VARCHAR(40)		NOT NULL,
 	fname					VARCHAR(15)		NOT NULL
 );
 
 CREATE TABLE `e-commerce`.employee (
-	employee_id				INT				auto_increment PRIMARY KEY,
+	employee_id				INT				PRIMARY KEY,
 	identity_card			CHAR(12)		UNIQUE NOT NULL,
 	lname					VARCHAR(40)		NOT NULL,
 	fname					VARCHAR(15)		NOT NULL,
@@ -118,7 +128,9 @@ CREATE TABLE `e-commerce`.employee (
 	CONSTRAINT fk_supervisor_id_employee
 		FOREIGN KEY (supervisor_id) REFERENCES employee(employee_id),
 	CONSTRAINT fk_store_id_employee
-		FOREIGN KEY (store_id) REFERENCES store(store_id)
+		FOREIGN KEY (store_id) REFERENCES store(store_id),
+    CONSTRAINT fk_employee_id_employee
+        FOREIGN KEY (employee_id) REFERENCES account(account_id)
 );
 
 CREATE TABLE `e-commerce`.`order`(
