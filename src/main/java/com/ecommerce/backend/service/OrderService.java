@@ -1,9 +1,7 @@
 package com.ecommerce.backend.service;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.backend.dtos.Order.Response.GetOrderResponse;

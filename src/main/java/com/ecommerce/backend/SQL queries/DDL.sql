@@ -133,7 +133,7 @@ CREATE TABLE `e-commerce`.employee (
         FOREIGN KEY (employee_id) REFERENCES account(account_id)
 );
 
-CREATE TABLE `e-commerce`.`order`(
+CREATE TABLE `e-commerce`.`orders`(
 	order_id			INT				auto_increment PRIMARY KEY,
 	order_date			DATE,
 	order_status		VARCHAR(20)		NOT NULL DEFAULT 'pending' CHECK (order_status IN ('pending', 'shipping', 'completed')),
@@ -155,7 +155,7 @@ CREATE TABLE `e-commerce`.payment (
 	payment_status		VARCHAR(20)		NOT NULL DEFAULT 'pending' CHECK (payment_status IN ('pending', 'completed')),
 	method				VARCHAR(30),
 	CONSTRAINT fk_order_id_payment
-		FOREIGN KEY (order_id) REFERENCES `order`(order_id)
+		FOREIGN KEY (order_id) REFERENCES `orders`(order_id)
 );
 
 CREATE TABLE `e-commerce`.goods_delivery_note (
@@ -164,7 +164,7 @@ CREATE TABLE `e-commerce`.goods_delivery_note (
 	order_id				INT				UNIQUE NOT NULL,
 	employee_id				INT,
 	CONSTRAINT fk_order_id_goods_delivery_note
-		FOREIGN KEY (order_id) REFERENCES `order`(order_id),
+		FOREIGN KEY (order_id) REFERENCES `orders`(order_id),
 	CONSTRAINT fk_employee_id_goods_delivery_note
 		FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
@@ -248,7 +248,7 @@ CREATE TABLE `e-commerce`.order_includes_product_line (
 	CONSTRAINT fk_product_line_id_order_includes_product_line
 		FOREIGN KEY (product_line_id) REFERENCES product_line(id),
 	CONSTRAINT fk_order_id_order_includes_product_line
-		FOREIGN KEY (order_id) REFERENCES `order`(order_id)
+		FOREIGN KEY (order_id) REFERENCES `orders`(order_id)
 );
 
 CREATE TABLE `e-commerce`.product_line_managed_by_employee (

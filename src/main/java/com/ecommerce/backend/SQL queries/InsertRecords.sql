@@ -115,7 +115,7 @@ VALUES
 	(12, '075103956102', 'Tran', 'Khoa', '0368512569', '2003-02-19', '2022-12-23', 'khoatrk22@example.com', 11, '2023-01-05', 2);
 
 -- Insert bảng [Order]
-INSERT INTO `order` (order_date, order_status, total_amount, employee_id, customer_id, delivery_id) 
+INSERT INTO `orders` (order_date, order_status, total_amount, employee_id, customer_id, delivery_id) 
 VALUES 
     ('2023-12-05', 'pending', 0, 7, 4, 1),
     ('2024-11-03', 'pending', 0, 8, 4, 4),
@@ -207,7 +207,9 @@ VALUES (3, 6, 9090000, 1);
 INSERT INTO order_includes_product_line(product_line_id, order_id, price, quantity) 
 VALUES (5, 2, 18500000, 1);
 
-UPDATE `order` SET order_status = 'Completed';
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE `orders` SET order_status = 'Completed';
 
 -- Insert bảng ProductLineManagedByEmployee
 INSERT INTO product_line_managed_by_employee(product_line_id, employee_id) 

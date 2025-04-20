@@ -52,7 +52,7 @@ public class SecurityConfig {
 													"/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/webjars/**", "/swagger-ui.html")						
 												.permitAll()
 												// Các endpoint khác yêu cầu xác thực
-												.anyRequest().authenticated());
+												.anyRequest().permitAll());
 			return http.build();
 		}
 
