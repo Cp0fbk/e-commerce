@@ -17,14 +17,12 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.ecommerce.backend.service.AccountDetailService;
-
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
-	private final AccountDetailService accountDetailService;
+public class SecurityConfig {	
+	private final CustomAccountDetailService accountDetailService;
 
-	public SecurityConfig(AccountDetailService accountDetailService) {
+	public SecurityConfig(CustomAccountDetailService accountDetailService) {
 		this.accountDetailService = accountDetailService;
 	}
 
@@ -50,9 +48,10 @@ public class SecurityConfig {
 												.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless
 				.authorizeHttpRequests(auth -> auth
 												// Các endpoint không yêu cầu xác thực
-												.requestMatchers("/", "/login", "/error","/signup")
+												.requestMatchers("/", "/api/auth/**", "/login", "/error")
 												.permitAll()
-												.anyRequest().permitAll());
+												// Các endpoint khác yêu cầu xác thực
+												.anyRequest().authenticated());
 			return http.build();
 		}
 
