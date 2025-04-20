@@ -21,7 +21,7 @@ import com.ecommerce.backend.service.AccountDetailService;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {	
+public class SecurityConfig {
 	private final AccountDetailService accountDetailService;
 
 	public SecurityConfig(AccountDetailService accountDetailService) {
@@ -31,7 +31,7 @@ public class SecurityConfig {
 		@Bean
 		public CorsConfigurationSource corsConfigurationSource() {
 				CorsConfiguration configuration = new CorsConfiguration();
-				configuration.setAllowedOrigins(List.of("*")); 
+				configuration.setAllowedOrigins(List.of("*"));
 				configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 				configuration.setAllowedHeaders(List.of("*"));
 				configuration.setAllowCredentials(true);
@@ -52,7 +52,7 @@ public class SecurityConfig {
 												// Các endpoint không yêu cầu xác thực
 												.requestMatchers("/", "/login", "/error","/signup")
 												.permitAll()
-												.anyRequest().authenticated());
+												.anyRequest().permitAll());
 			return http.build();
 		}
 
