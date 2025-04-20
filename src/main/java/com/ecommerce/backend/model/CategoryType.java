@@ -10,7 +10,8 @@ import lombok.*;
 public class CategoryType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer category_type_id;
+    @Column(name = "category_type_id")
+    private Integer categoryTypeId;
 
     @Column(unique = true, nullable = false, length = 30)
     private String name;

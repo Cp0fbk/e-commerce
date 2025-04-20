@@ -18,11 +18,11 @@ public class ProductLine {
     @Column(length = 50, nullable = false)
     private String brand;
 
-    @Column(nullable = false)
-    private Boolean is_used;
+    @Column(name = "is_used",nullable = false)
+    private Boolean isUsed;
 
-    @Column(nullable = false)
-    private Boolean stock_status;
+    @Column(name = "stock_status",nullable = false)
+    private Boolean stockStatus;
 
     @Column(nullable = false)
     private Double price;
@@ -38,11 +38,12 @@ public class ProductLine {
 
     @ManyToOne
     @JoinColumn(name = "promotion_id")
-    private Promotion promotion_id;
+    private Promotion promotion;
 
-    private Short discount_percentage;
+    @Column(name = "discount_percentage")
+    private Short discountPercentage;
 
     @ManyToOne
     @JoinColumn(name = "category_type_id", nullable = false)
-    private CategoryType category_type_id;
+    private CategoryType categoryType;
 }

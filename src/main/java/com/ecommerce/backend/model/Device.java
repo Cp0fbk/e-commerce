@@ -11,14 +11,19 @@ public class Device {
     @Id
     private Integer id;
 
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    private ProductLine productLine;
+
     @Column(length = 15)
     private String ram;
 
-    @Column(length = 20)
-    private String operator_system;
+    @Column(name = "operator_system",length = 20)
+    private String operatorSystem;
 
-    @Column(length = 30)
-    private String battery_capacity;
+    @Column(name = "battery_capacity",length = 30)
+    private String batteryCapacity;
 
     @Column(length = 15)
     private String weight;
@@ -29,14 +34,9 @@ public class Device {
     @Column(length = 15)
     private String storage;
 
-    @Column(length = 30)
-    private String screen_size;
+    @Column(name = "screen_size",length = 30)
+    private String screenSize;
 
-    @Column(length = 30)
-    private String display_resolution;
-
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "id")
-    private ProductLine productLine;
+    @Column(name = "display_resolution",length = 30)
+    private String displayResolution;
 }

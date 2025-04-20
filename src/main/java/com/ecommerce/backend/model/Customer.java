@@ -13,20 +13,24 @@ import lombok.Setter;
 @Table(name = "customer")
 public class Customer {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer customer_id;
 
-    @Column(unique = true, nullable = false, length = 10)
-    private String phone_number;
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "customer_id")
+    private Account account;
+
+    @Column(name = "phone_number", unique = true, nullable = false, length = 10)
+    private String phoneNumber;
 
     @Column(unique = true, length = 50)
     private String email;
 
-    @Column(nullable = false)
-    private LocalDate registration_date;
+    @Column(name = "registration_date", nullable = false)
+    private LocalDate registrationDate;
 
-    @Column(length = 100)
-    private String shipping_address;
+    @Column(name= "shipping_address", length = 100)
+    private String shippingAddress;
 
     @Column(nullable = false, length = 40)
     private String lname;
@@ -34,11 +38,12 @@ public class Customer {
     @Column(nullable = false, length = 15)
     private String fname;
 
-    private Integer total_points;
+    @Column(name="total_points")
+    private Integer totalPoints = 0;
 
     @ManyToOne
     @JoinColumn(name = "membership_class_id", nullable = false)
-    private MembershipClass membership_class_id;
+    private MembershipClass membershipClass;
 
     @Column(nullable = false)
     private Boolean is_deleted;
