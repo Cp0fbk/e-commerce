@@ -12,7 +12,8 @@ import lombok.*;
 public class Promotion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer promotion_id;
+    @Column(name = "promotion_id")
+    private Integer promotionId;
 
     @Column(length = 20)
     private String type;

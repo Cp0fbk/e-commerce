@@ -11,7 +11,8 @@ public class Images {
     @EmbeddedId
     private ImagesId id;
 
-    @ManyToOne
-    @JoinColumn(name = "id")
-    private ProductLine product_line_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("productLineId")
+    @JoinColumn(name = "product_line_id")
+    private ProductLine productLine;
 }

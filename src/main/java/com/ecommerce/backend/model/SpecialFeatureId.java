@@ -1,13 +1,18 @@
 package com.ecommerce.backend.model;
 
+import java.io.Serializable;
+
 import jakarta.persistence.*;
 import lombok.*;
 
 @Embeddable
 @Data
-public class SpecialFeatureId {
-    private Integer device_id;
+@NoArgsConstructor
+@AllArgsConstructor
+public class SpecialFeatureId implements Serializable{
+    @Column(name = "device_id")
+    private Integer deviceId;
 
-    @Column(length = 75)
-    private String special_feature;
+    @Column(name = "special_feature", length = 75)
+    private String specialFeature;
 }

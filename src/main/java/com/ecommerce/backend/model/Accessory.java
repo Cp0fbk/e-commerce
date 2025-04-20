@@ -16,6 +16,6 @@ public class Accessory {
     @JoinColumn(name = "id")
     private ProductLine productLine;
 
-    @Column(length = 30)
-    private String battery_capacity;
+    @Column(name = "battery_capacity",length = 30)
+    private String batteryCapacity;
 }

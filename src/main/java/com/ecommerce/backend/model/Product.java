@@ -14,13 +14,13 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
-    private Store store_id;
+    private Store store;
 
     @ManyToOne
     @JoinColumn(name = "device_id", nullable = false)
-    private Device device_id;
+    private Device device;
 
     @ManyToOne
     @JoinColumn(name = "note_id")
-    private GoodsDeliveryNote note_id;
+    private GoodsDeliveryNote goodsDeliveryNote;
 }

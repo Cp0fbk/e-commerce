@@ -10,7 +10,7 @@ import lombok.*;
 public class Store {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer store_id;
+    private Integer storeId;
 
     @Column(nullable = false)
     private Integer number_of_employees;

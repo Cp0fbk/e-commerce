@@ -11,11 +11,15 @@ import lombok.*;
 @Table(name = "employee")
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer employee_id;
 
-    @Column(length = 12, unique = true, nullable = false)
-    private String identity_card;
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "employee_id")
+    private Account account;
+
+    @Column(name = "identity_card",length = 12, unique = true, nullable = false)
+    private String identityCard;
 
     @Column(length = 40, nullable = false)
     private String lname;
@@ -23,14 +27,14 @@ public class Employee {
     @Column(length = 15, nullable = false)
     private String fname;
 
-    @Column(length = 10, unique = true)
-    private String phone_number;
+    @Column(name = "phone_number",length = 10, unique = true)
+    private String phoneNumber;
 
     @Column(nullable = false)
     private LocalDate dob;
 
-    @Column(nullable = false)
-    private LocalDate hire_date;
+    @Column(name ="hire_date",nullable = false)
+    private LocalDate hireDate = LocalDate.of(2000, 1, 1);;
 
     @Column(length = 50)
     private String email;
@@ -39,12 +43,13 @@ public class Employee {
     @JoinColumn(name = "supervisor_id")
     private Employee supervisor;
 
-    private LocalDate supervise_date;
+    @Column(name = "supervise_date")
+    private LocalDate superviseDate;
 
     @ManyToOne
     @JoinColumn(name = "store_id", nullable = false)
-    private Store store_id;
+    private Store store;
 
-    @Column(nullable = false)
-    private Boolean is_deleted;
+    @Column(name = "is_deleted",nullable = false)
+    private Boolean isDDeleted;
 }
