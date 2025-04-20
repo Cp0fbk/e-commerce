@@ -12,25 +12,27 @@ import lombok.*;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer order_id;
+    @Column(name = "order_id")
+    private Integer orderId;
 
-    private LocalDate order_date;
+    @Column(name = "order_date", nullable = false)
+    private LocalDate orderDate;
 
-    @Column(length = 20, nullable = false)
-    private String order_status;
+    @Column(name ="order_status" ,length = 20, nullable = false)
+    private String orderStatus;
 
-    @Column(nullable = false)
-    private Double total_amount;
+    @Column(name ="total_amount",nullable = false)
+    private Double totalAmount;
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
-    private Employee employee_id;
+    private Employee employee;
 
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
-    private Customer customer_id;
+    private Customer customer;
 
     @OneToOne
     @JoinColumn(name = "delivery_id")
-    private Delivery delivery_id;
+    private Delivery delivery;
 }

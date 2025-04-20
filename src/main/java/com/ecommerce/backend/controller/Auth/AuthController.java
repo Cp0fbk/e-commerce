@@ -12,6 +12,7 @@ import com.ecommerce.backend.dtos.auth.response.RegisterDto;
 import com.ecommerce.backend.response.ApiResponse;
 import com.ecommerce.backend.service.AccountService;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -43,5 +44,10 @@ public class AuthController {
 			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 		} 
 	}
-	
+
+	@GetMapping("/logout")
+	public ResponseEntity<ApiResponse<String>> logout() {
+		ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK.value(), "Logout successful", null);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
 }

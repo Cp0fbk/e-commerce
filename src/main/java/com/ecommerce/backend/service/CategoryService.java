@@ -1,7 +1,6 @@
 package com.ecommerce.backend.service;
 
 import com.ecommerce.backend.dtos.categoryTypeDTO.CategoryTypeDTO;
-import com.ecommerce.backend.model.CategoryType;
 import com.ecommerce.backend.repository.CategoryTypeRepository;
 import org.springframework.stereotype.Service;
 

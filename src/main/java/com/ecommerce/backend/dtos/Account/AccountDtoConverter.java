@@ -24,8 +24,8 @@ public class AccountDtoConverter {
         return from.stream().map(this::convert).collect(Collectors.toList());
     }
 
-    public Optional<AccountDto> convert(Optional<Account> from) {
-        return from.map(this::convert);
-    }
+	public Optional<AccountDto> convert(Optional<Account> from) {
+			return from.map(this::convert);
+	}
 
 }
