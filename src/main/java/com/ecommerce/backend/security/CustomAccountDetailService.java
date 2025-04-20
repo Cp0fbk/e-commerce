@@ -1,4 +1,4 @@
-package com.ecommerce.backend.service;
+package com.ecommerce.backend.security;
 
 import java.util.Collection;
 import java.util.List;
@@ -15,10 +15,11 @@ import com.ecommerce.backend.model.Account;
 import com.ecommerce.backend.repository.AccountRepository;
 
 @Service
-public class AccountDetailService implements UserDetailsService{
+public class CustomAccountDetailService implements UserDetailsService{
 	private final AccountRepository accountRepository;
+
 	
-	public AccountDetailService(AccountRepository accountRepository) {
+	public CustomAccountDetailService(AccountRepository accountRepository) {
 		this.accountRepository = accountRepository;
 	}
 
@@ -34,6 +35,5 @@ public class AccountDetailService implements UserDetailsService{
 
 	public Collection<? extends GrantedAuthority> getAuthorities(String role) {
 		return List.of(new SimpleGrantedAuthority(role));
-	}
-	
+	}	
 }
