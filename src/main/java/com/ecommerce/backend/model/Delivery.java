@@ -12,20 +12,23 @@ import lombok.*;
 public class Delivery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer delivery_id;
+    @Column(name = "delivery_id")
+    private Integer deliveryId;
 
-    @Column(length = 30)
-    private String shipping_provider;
+    @Column(name = "shipping_provider",length = 30)
+    private String shippingProvider;
 
-    @Column(length = 20, nullable = false)
-    private String delivery_status;
+    @Column(name = "delivery_status",length = 20, nullable = false)
+    private String deliveryStatus;
 
-    private LocalDate actual_delivery_date;
+    @Column(name = "actual_delivery_date")
+    private LocalDate actualDeliveryDate;
 
-    private LocalDate estimated_delivery_date;
+    @Column(name = "estimated_delivery_date")
+    private LocalDate estimatedDeliveryDate;
 
-    @Column(length = 100)
-    private String shipping_address;
+    @Column(name = "shipping_address",length = 100)
+    private String shippingAddress;
 
     @Column(length = 40, nullable = false)
     private String lname;
