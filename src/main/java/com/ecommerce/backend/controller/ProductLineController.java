@@ -79,8 +79,22 @@ public class ProductLineController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductLineDetailsDTO> getProductById(@PathVariable Integer id) {
-        ProductLineDetailsDTO productDetails = productLineService.getProductDetails(id);
-        return ResponseEntity.ok(productDetails);
+    public ResponseEntity<ApiResponse<ProductLineDetailsDTO>> getProductById(@PathVariable Integer id) {
+        try {
+            ProductLineDetailsDTO productDetails = productLineService.getProductDetails(id);
+            ApiResponse<ProductLineDetailsDTO> response = new ApiResponse<>(
+                    HttpStatus.OK.value(),
+                    "Product fetched successfully",
+                    productDetails
+            );
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            ApiResponse<ProductLineDetailsDTO> response = new ApiResponse<>(
+                    HttpStatus.NOT_FOUND.value(),
+                    "Failed to fetch product: " + e.getMessage(),
+                    null
+            );
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
     }
 }
