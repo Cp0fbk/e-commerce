@@ -151,6 +151,7 @@ CREATE TABLE `e-commerce`.`orders`(
 
 CREATE TABLE `e-commerce`.payment (
 	order_id			INT				PRIMARY KEY,
+	payos_order_code   BIGINT UNIQUE,
 	payment_date		DATE,
 	payment_status		VARCHAR(20)		NOT NULL DEFAULT 'pending' CHECK (payment_status IN ('pending', 'completed')),
 	method				VARCHAR(30),

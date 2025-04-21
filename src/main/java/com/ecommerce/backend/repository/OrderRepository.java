@@ -13,4 +13,5 @@ import com.ecommerce.backend.model.Order;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 	Page<Order> findByCustomer_Account_AccountId(Integer accountId, Pageable pageable);
 	Optional<Order> findByOrderId(Integer orderId);
+	void deleteByOrderId(Integer orderId);
 }
