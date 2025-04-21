@@ -21,9 +21,9 @@ public class Promotion {
     @Column(length = 70, nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private LocalDate start_date;
+    @Column(name = "start_date", nullable = false)
+    private LocalDate startDate;
 
-    @Column(nullable = false)
-    private LocalDate end_date;
+    @Column(name = "end_date", nullable = false)
+    private LocalDate endDate;
 }

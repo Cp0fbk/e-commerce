@@ -31,34 +31,11 @@ public class ProductLineController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/filter")
+    @PostMapping("/filter")
     public ResponseEntity<ApiResponse<Page<ProductLine>>> filterProducts(
-            @RequestParam(required = false) String keyword,
-            @RequestParam(required = false) String brand,
-            @RequestParam(required = false) Integer categoryTypeId,
-            @RequestParam(required = false) Double minPrice,
-            @RequestParam(required = false) Double maxPrice,
-            @RequestParam(required = false) Boolean isUsed,
-            @RequestParam(required = false) Boolean stockStatus,
-            @RequestParam(required = false) Short minDiscountPercentage,
-            @RequestParam(required = false) Integer promotionId,
-            @RequestParam(defaultValue = "0") int offset,
-            @RequestParam(defaultValue = "15") int limit) {
+            @RequestBody ProductFilterDTO filterDTO) {
 
         try {
-            ProductFilterDTO filterDTO = new ProductFilterDTO();
-            filterDTO.setKeyword(keyword);
-            filterDTO.setBrand(brand);
-            filterDTO.setCategoryTypeId(categoryTypeId);
-            filterDTO.setMinPrice(minPrice);
-            filterDTO.setMaxPrice(maxPrice);
-            filterDTO.setIsUsed(isUsed);
-            filterDTO.setStockStatus(stockStatus);
-            filterDTO.setMinDiscountPercentage(minDiscountPercentage);
-            filterDTO.setPromotionId(promotionId);
-            filterDTO.setOffset(offset);
-            filterDTO.setLimit(limit);
-
             Page<ProductLine> filteredProducts = productLineService.FilterProducts(filterDTO);
 
             return ResponseEntity.ok(

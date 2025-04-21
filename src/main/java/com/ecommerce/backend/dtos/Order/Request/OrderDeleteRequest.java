@@ -1,4 +1,4 @@
-package com.ecommerce.backend.dtos.auth.response;
+package com.ecommerce.backend.dtos.Order.Request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterDto {
+public class OrderDeleteRequest {
 	@NotBlank
-	private String username;
-	@NotBlank
-	private String password;
+	private Integer orderId;
 }

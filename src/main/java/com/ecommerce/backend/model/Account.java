@@ -14,10 +14,10 @@ public class Account {
     @Column(name = "account_id")
     private Integer accountId;
 
-    @Column(name = "username", unique = true, nullable = false, length = 20)
+    @Column(name = "username", unique = true, nullable = false, length = 50)
     private String username;
 
-    @Column(name = "password", nullable = false, length = 30)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "role", nullable = false, length = 8)
