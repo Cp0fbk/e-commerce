@@ -8,7 +8,10 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface CartIncludesProductLineRepository extends JpaRepository<CartIncludesProductLine,CartIncludesProductLineId> {
+public interface CartIncludesProductLineRepository extends JpaRepository<CartIncludesProductLine, CartIncludesProductLineId> {
     @Query(value = "SELECT * FROM cart_includes_product_line WHERE customer_id = :id;", nativeQuery = true)
     List<CartIncludesProductLine> findByCustomer_id(@Param("id") Integer id);
+
+    List<CartIncludesProductLine> findByProductLineId_Id(Integer productId);
 }
+
