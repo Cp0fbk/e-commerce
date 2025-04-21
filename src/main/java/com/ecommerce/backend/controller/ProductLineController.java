@@ -2,16 +2,14 @@ package com.ecommerce.backend.controller;
 
 import com.ecommerce.backend.dtos.productlineDTO.ProductFilterDTO;
 import com.ecommerce.backend.dtos.productlineDTO.ProductLineDTO;
+import com.ecommerce.backend.dtos.productlineDTO.ProductLineDetailsDTO;
 import com.ecommerce.backend.model.ProductLine;
 import com.ecommerce.backend.response.ApiResponse;
 import com.ecommerce.backend.service.ProductLineService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -78,5 +76,11 @@ public class ProductLineController {
                             null
                     ));
         }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductLineDetailsDTO> getProductById(@PathVariable Integer id) {
+        ProductLineDetailsDTO productDetails = productLineService.getProductDetails(id);
+        return ResponseEntity.ok(productDetails);
     }
 }
