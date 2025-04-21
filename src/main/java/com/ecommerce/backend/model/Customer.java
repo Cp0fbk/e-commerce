@@ -13,7 +13,7 @@ import lombok.Setter;
 @Table(name = "customer")
 public class Customer {
     @Id
-    private Integer customer_id;
+    private Integer id;
 
     @OneToOne
     @MapsId
@@ -46,5 +46,5 @@ public class Customer {
     private MembershipClass membershipClass;
 
     @Column(nullable = false)
-    private Boolean is_deleted;
+    private Boolean isDeleted;
 }
