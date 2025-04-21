@@ -3,9 +3,9 @@ USE `e-commerce`;
 
 CREATE TABLE `e-commerce`.`account` (
     account_id          INT             auto_increment PRIMARY KEY,
-    username            VARCHAR(20)     UNIQUE NOT NULL,
-    `password`          VARCHAR(30)     NOT NULL,
-    `role`              VARCHAR(8)      NOT NULL CHECK(role in ('customer', 'employee'))
+    username            VARCHAR(50)     UNIQUE NOT NULL,
+    `password`          VARCHAR(70)     NOT NULL,
+    `role`              VARCHAR(15)      NOT NULL CHECK(role in ('ROLE_CUSTOMER', 'ROLE_EMPLOYEE'))
 );
 
 CREATE TABLE `e-commerce`.`membership_class` (

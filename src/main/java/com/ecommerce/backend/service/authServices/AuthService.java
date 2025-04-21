@@ -1,4 +1,4 @@
-package com.ecommerce.backend.service;
+package com.ecommerce.backend.service.authServices;
 
 import org.springframework.stereotype.Service;
 

@@ -2,6 +2,8 @@ package com.ecommerce.backend.security;
 
 import java.util.List;
 
+import com.ecommerce.backend.component.JwtFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,6 +15,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -25,6 +28,9 @@ public class SecurityConfig {
 	public SecurityConfig(CustomAccountDetailService accountDetailService) {
 		this.accountDetailService = accountDetailService;
 	}
+
+	@Autowired
+	private JwtFilter jwtFilter;
 
 		@Bean
 		public CorsConfigurationSource corsConfigurationSource() {
@@ -51,7 +57,8 @@ public class SecurityConfig {
 												.requestMatchers("/", "/api/auth/**", "/login", "/error")
 												.permitAll()
 												// Các endpoint khác yêu cầu xác thực
-												.anyRequest().authenticated());
+												.anyRequest().authenticated())
+												.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 			return http.build();
 		}
 

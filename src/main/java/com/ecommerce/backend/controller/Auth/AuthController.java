@@ -1,8 +1,25 @@
 package com.ecommerce.backend.controller.Auth;
 
+import com.ecommerce.backend.component.JwtUtil;
+import com.ecommerce.backend.dtos.auth.response.LoginDto;
+import com.ecommerce.backend.model.Account;
+import com.ecommerce.backend.repository.AccountRepository;
+import com.ecommerce.backend.service.authServices.LoginFunc;
+import com.ecommerce.backend.service.authServices.MyUserDetailsService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,6 +32,9 @@ import com.ecommerce.backend.service.AccountService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.Date;
+import java.util.Map;
+
 
 @RestController
 @RequestMapping("/api/auth")
@@ -22,13 +42,25 @@ public class AuthController {
 	private final AuthenticationManager authenticationManager;
 	private final AccountService accountService;
 	private final AccountDtoConverter accountDtoConverter;
+	private final AccountRepository accountRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	public AuthController(AuthenticationManager authenticationManager,
-			AccountService accountService, AccountDtoConverter accountDtoConverter) {
+			AccountService accountService, AccountDtoConverter accountDtoConverter,
+			AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
 		this.authenticationManager = authenticationManager;
 		this.accountService = accountService;
 		this.accountDtoConverter = accountDtoConverter;
+		this.accountRepository = accountRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
+
+	@Autowired
+	private JwtUtil jwtUtil;
+	@Autowired
+	private AuthenticationManager authManager;
+	@Autowired
+	private MyUserDetailsService userDetailsService;
 
 	@PostMapping("/register")
 	public ResponseEntity<ApiResponse<AccountDto>> register(@RequestBody RegisterDto request) {
@@ -43,5 +75,38 @@ public class AuthController {
 			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 		} 
 	}
-	
+
+	@PostMapping("/login")
+	public ResponseEntity<?> login(HttpServletRequest request, HttpServletResponse response, @RequestBody Map<String, String> info) throws Exception {
+		try {
+			String username = info.get("username");
+			String password = info.get("password");
+
+			if (username == null || password == null) {
+				throw new Exception("Cannot find username or password");
+			}
+
+			Account account = accountRepository.findByUsername(username).orElse(null);
+			if (account == null) {
+				throw new Exception("User not found");
+			}
+
+			if (passwordEncoder.matches(password, account.getPassword())) {
+				String token = jwtUtil.generateToken(new LoginDto(username, password), account.getAccountId());
+
+				return new ResponseEntity<>(
+						new Responses(token),
+						HttpStatus.OK);
+			}
+			throw new Exception("Wrong username or password");
+		} catch (AuthenticationException e) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+		}
+	}
+
+	@Data
+	@AllArgsConstructor
+	private class Responses{
+		private String token;
+	}
 }

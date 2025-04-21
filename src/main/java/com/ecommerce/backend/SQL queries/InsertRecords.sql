@@ -1,22 +1,20 @@
-﻿USE `e-commerce`;
-
 -- Insert bảng MembershipClass
 SET FOREIGN_KEY_CHECKS = 0;
 
 INSERT INTO `account` (username, `password`, `role`)
 VALUES
-	('0376872568', '123456789', 'customer'),
-    ('0968125694', '2159561563', 'customer'),
-    ('0352583109', '7822463256', 'customer'),
-    ('0369142631', 'setgsr85gs', 'customer'),
-    ('0862549670', 'st9e8ds567', 'customer'),
-    ('0761295168', 'sgresgh7se5', 'customer'),
-    ('0932345678', '5455dsfg56', 'employee'),
-    ('0946343210', 'wdgew8ga6s', 'employee'),
-    ('0975344567', 'ewe4s5eg48', 'employee'),
-    ('0914344156', 'se8ssd125e', 'employee'),
-    ('0352689512', 'sw3dg48fds', 'employee'),
-    ('0368512569', '37sei9dke8', 'employee');
+	('nguyenvannam@gmail.com', '$2a$10$sSbyOAXRXFZASuZ11M5aPuKcicy.QwDXM6sADA4xXpk/1WYwU2Dcu', 'ROLE_CUSTOMER'),     -- 123456789
+    ('ledinhbao@gmail.com', '$2a$10$wyTpxQhFYrr56fkTspl3TObBvw3q6AEnRuePdF0izC8jIAJM8AuHm', 'ROLE_CUSTOMER'),        -- 2159561563
+    ('buiconglan@gmail.com', '$2a$10$ZlPqYkLB4JCBk5T2IbA/R.ykKFGzZjkKPkD4Kb8I/EiOj6cMCwHse', 'ROLE_CUSTOMER'),       -- 7822463256
+    ('nguyenhoa1594@gmail.com', '$2a$10$sXTu24YQP6Yiozvwic1oyebyJiTqAD0G7m42KplwpBSRNa6vrueku', 'ROLE_CUSTOMER'),    -- setgsr85gs
+    ('tnguyen21ah@gmail.com', '$2a$10$XJs..IIhWP9A6OQNx24j1u7WjqBrfmJ01Sh7JOJMVFMyJm4U8Abpa', 'ROLE_CUSTOMER'),      -- st9e8ds567
+    ('thanhnguyen51@gmail.com', '$2a$10$DMCl29qdNvWW6TxyW1VmkucmDQS6dnnMKcfkwMhdzxHpMNmtEIvKe', 'ROLE_CUSTOMER'),    -- sgresgh7se5
+    ('anh.nguyen@example.com', '$2a$10$WMdBkSGGsAwZOKGQIxHCyOFOo.IUZhweOKGYlFIcLB2ENkJ6gJvay', 'ROLE_EMPLOYEE'),     -- 5455dsfg56
+    ('khoa.tran@example.com', '$2a$10$cMnKty3u5DuCZxNcSkItnu9giiF9otN6Y/tuJteB4pIr0seQlsnLi', 'ROLE_EMPLOYEE'),      -- wdgew8ga6s
+    ('phi.nguyen@example.com', '$2a$10$/JrS5LmIfCPTLt.5lk7.VO46dbhUAqb5yPc6ja.HrH3MPBd.Wcxh2', 'ROLE_EMPLOYEE'),     -- ewe4s5eg48
+    ('phi.le@example.com', '$2a$10$sdCOrLSlMJVMmsAS9F0AA.MvTNObH9RtgKK2PfAwZEev4cvNIHrXq', 'ROLE_EMPLOYEE'),         -- se8ssd125e
+    ('ptai205@example.com', '$2a$10$h74A1pJTdyMlX1aDP2YXHOFl7e9Xk4d5ZvBVeNjFtDYAYB5HzNRl.', 'ROLE_EMPLOYEE'),        -- sw3dg48fds
+    ('khoatrk22@example.com', '$2a$10$dUUQspjiwlahwcf7wVFxhusTXIwPVF3IMEgXxL9S.eTtNNS6124aq', 'ROLE_EMPLOYEE');      -- 37sei9dke8
 
 INSERT INTO membership_class (`name`, discount_percent, minimum_no_point)  
 VALUES 
