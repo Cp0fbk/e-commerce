@@ -33,10 +33,10 @@ public class Customer {
     private String shippingAddress;
 
     @Column(nullable = false, length = 40)
-    private String lName;
+    private String lname;
 
     @Column(nullable = false, length = 15)
-    private String fName;
+    private String fname;
 
     @Column(name="total_points")
     private Integer totalPoints = 0;
