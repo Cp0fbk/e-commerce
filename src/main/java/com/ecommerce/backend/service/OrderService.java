@@ -8,6 +8,8 @@ import com.ecommerce.backend.dtos.Order.Response.GetOrderResponse;
 import com.ecommerce.backend.model.Order;
 import com.ecommerce.backend.repository.OrderRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class OrderService {
 
@@ -29,6 +31,13 @@ public class OrderService {
 
 		public Order getOrderById(Integer orderId) {
 				return orderRepository.findByOrderId(orderId).
-					orElseThrow(() -> new IllegalArgumentException("Order not found"));
+					orElseThrow(() -> new EntityNotFoundException("Không tìm thấy order với orderId: " + orderId));
+		}
+
+		public void deleteOrderById(Integer orderId) {
+			if (!orderRepository.existsById(orderId)) {
+				throw new EntityNotFoundException("Không tìm thấy order với orderId: " + orderId);
+			}
+			orderRepository.deleteById(orderId);
 		}
 }
