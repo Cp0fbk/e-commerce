@@ -12,7 +12,7 @@ public class PaymentDtoConverter {
 	public PaymentDto convert (Payment from){
 		return new PaymentDto(
 			from.getOrderId(),
-			from.getPaymentDate().toString(),
+			from.getPaymentDate() != null ? from.getPaymentDate().toString() : "Chưa có thông tin",
 			from.getPaymentStatus(),
 			from.getMethod()
 		);

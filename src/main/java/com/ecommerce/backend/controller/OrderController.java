@@ -10,6 +10,7 @@ import com.ecommerce.backend.response.ApiResponse;
 import com.ecommerce.backend.service.OrderService;
 import com.ecommerce.backend.service.PaymentService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.persistence.EntityNotFoundException;
 
 import org.springframework.data.domain.Page;
@@ -19,6 +20,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.jaxb.SpringDataJaxb.OrderDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,17 +29,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/orders")
+@Validated
 public class OrderController {
 	private final OrderService orderService;
 	private final PaymentService paymentService;
 	private final OrderDetailDtoConverter orderDetailDtoConverter;
 
-	public OrderController(OrderService orderService, PaymentService paymentService,OrderDetailDtoConverter orderDetailDtoConverter) {
+	public OrderController(OrderService orderService, PaymentService paymentService,
+												OrderDetailDtoConverter orderDetailDtoConverter) {
 		this.orderService = orderService;
 		this.paymentService = paymentService;
 		this.orderDetailDtoConverter = orderDetailDtoConverter;
 	}
 
+	@Operation(description = "Lấy thông tin các đơn hàng của người dùng")
 	@GetMapping("/get-user-orders")
 	public ResponseEntity<ApiResponse<Page<GetOrderResponse>>> getOrdersByUserId(
 					@RequestParam Integer accountId,
@@ -55,6 +60,8 @@ public class OrderController {
 			}
 	}
 	
+
+	@Operation(description = "Lấy thông tin của một đơn hàng của người dùng")
 	@GetMapping("/get-order/{orderId}")
 	public ResponseEntity<ApiResponse<OrderDetailDto>> getOrderById(@PathVariable Integer orderId) {
 		try {
@@ -70,6 +77,7 @@ public class OrderController {
 		}
 	}
 
+	@Operation(description = "Xóa một đơn hàng của người dùng")
 	@DeleteMapping("/delete-order/{orderId}")
 	public ResponseEntity<ApiResponse<OrderDto>> deleteOrder(@PathVariable Integer orderId) {
 		try {

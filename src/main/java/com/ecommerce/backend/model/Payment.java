@@ -27,4 +27,7 @@ public class Payment {
     @MapsId
     @JoinColumn(name = "order_id")
     private Order order;
+
+    @Column(name = "payos_order_code")
+    private Long payOsOrderCode;
 }

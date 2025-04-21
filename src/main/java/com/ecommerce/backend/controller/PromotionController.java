@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,8 +14,11 @@ import com.ecommerce.backend.dtos.Promotion.PromotionDtoConverter;
 import com.ecommerce.backend.response.ApiResponse;
 import com.ecommerce.backend.service.PromotionService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping("/api/promotions")
+@Validated
 public class PromotionController {
 	private final PromotionService promotionService;
 	private final PromotionDtoConverter promotionDtoConverter;
@@ -24,6 +28,7 @@ public class PromotionController {
 		this.promotionDtoConverter = promotionDtoConverter;
 	}
 
+	@Operation(summary = "Lấy tất cả các chương trình khuyến mãi")
 	@GetMapping("/all")
 	public ResponseEntity<ApiResponse<List<PromotionDto>>> getAllPromotions() {
 		try {
@@ -37,7 +42,8 @@ public class PromotionController {
 
 	}
 
-	@GetMapping("/ondate")
+	@Operation(summary = "Lấy tất cả các chương trình khuyến mãi đang diễn ra")
+	@GetMapping("/onDate")
 	public ResponseEntity<ApiResponse<List<PromotionDto>>> getPromotionOnDate() {
 		try {
 			List<PromotionDto> promotions = promotionDtoConverter.convert(promotionService.getPromotionOnDate());

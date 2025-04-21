@@ -13,4 +13,10 @@ public class RegisterDto {
 	private String username;
 	@NotBlank
 	private String password;
+	@NotBlank
+	private String phoneNumber;
+	@NotBlank
+	private String lname;
+	@NotBlank
+	private String fname;
 }

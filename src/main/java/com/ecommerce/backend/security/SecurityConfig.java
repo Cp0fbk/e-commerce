@@ -50,9 +50,9 @@ public class SecurityConfig {
 												// Các endpoint không yêu cầu xác thực
 												.requestMatchers("/", "/api/auth/**", "/login", "/register", "/error", 
 													"/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/webjars/**", "/swagger-ui.html")						
-												.authenticated()
+												.permitAll()
 												// Các endpoint khác yêu cầu xác thực
-												.anyRequest().permitAll());
+												.anyRequest().authenticated());
 			return http.build();
 		}
 
