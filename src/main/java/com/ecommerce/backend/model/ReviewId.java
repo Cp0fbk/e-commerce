@@ -11,6 +11,7 @@ public class ReviewId {
 
     private Integer customer_id;
 
+    @Column(name = "`index`")
     private Integer index;
 
 }
