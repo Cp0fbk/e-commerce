@@ -55,8 +55,9 @@ public class SecurityConfig {
 				.authorizeHttpRequests(auth -> auth
 												// Các endpoint không yêu cầu xác thực
 												.requestMatchers("/", "/api/auth/**", "/login", "/register", "/error", 
-													"/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/webjars/**", "/swagger-ui.html")						
-												.permitAll()
+													"/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/webjars/**", "/swagger-ui.html")
+													.permitAll()
+												.requestMatchers("/api/webhook/**", "/api/payment/success", "/api/payment/cancel").permitAll()
 												// Các endpoint khác yêu cầu xác thực
 												.anyRequest().authenticated())
 												.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
