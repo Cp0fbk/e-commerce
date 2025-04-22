@@ -1,12 +1,10 @@
 package com.ecommerce.backend.component;
 
 import com.ecommerce.backend.dtos.auth.response.LoginDto;
-import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +15,7 @@ import java.util.Map;
 
 @Component
 public class JwtUtil {
-    Dotenv dotenv = Dotenv.configure().load();
-    private final String SECRET = dotenv.get("JWT_SECRET");
+    private final String SECRET = "welcome_to_bkap_lai_duc_chung_teacher";
 
     public String generateToken(LoginDto loginDto, Integer accountId) {
         Map<String, Object> claims = new HashMap<>();
