@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,9 @@ import com.ecommerce.backend.dtos.Account.AccountDtoConverter;
 import com.ecommerce.backend.dtos.auth.response.RegisterDto;
 import com.ecommerce.backend.response.ApiResponse;
 import com.ecommerce.backend.service.AccountService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +36,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
+@Validated
 public class AuthController {
 	private final AuthenticationManager authenticationManager;
 	private final AccountService accountService;
@@ -52,8 +57,10 @@ public class AuthController {
 	@Autowired
 	private JwtUtil jwtUtil;
 
+	@Operation(description = "Đăng ký tài khoản")
 	@PostMapping("/register")
-	public ResponseEntity<ApiResponse<AccountDto>> register(@RequestBody RegisterDto request) {
+	@Validated
+	public ResponseEntity<ApiResponse<AccountDto>> register(@RequestBody @Valid RegisterDto request) {
 		try {
 			AccountDto account = accountDtoConverter.convert(accountService.createAccount(request));
 

@@ -11,12 +11,14 @@ import lombok.*;
 @Table(name = "payment")
 public class Payment {
     @Id
-    private Integer order_id;
+    @Column(name = "order_id")
+    private Integer orderId;
 
-    private LocalDate payment_date;
+    @Column(name = "payment_date")
+    private LocalDate paymentDate;
 
-    @Column(length = 20, nullable = false)
-    private String payment_status;
+    @Column(name = "payment_status",length = 20, nullable = false)
+    private String paymentStatus = "pending";
 
     @Column(length = 30)
     private String method;
@@ -25,4 +27,7 @@ public class Payment {
     @MapsId
     @JoinColumn(name = "order_id")
     private Order order;
+
+    @Column(name = "payos_order_code")
+    private Long payOsOrderCode;
 }

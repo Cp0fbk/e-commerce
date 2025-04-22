@@ -144,7 +144,7 @@ public class CartController {
 
             Payment payment = new Payment();
             payment.setMethod(info.get("paymentMethod"));
-            payment.setPayment_status("pending");
+            payment.setPaymentStatus("pending");
             payment.setOrder(order);
             paymentService.addPayment(payment);
 
