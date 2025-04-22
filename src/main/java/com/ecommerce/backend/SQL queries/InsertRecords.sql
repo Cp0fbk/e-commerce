@@ -1,22 +1,20 @@
-﻿USE `e-commerce`;
-
 -- Insert bảng MembershipClass
 SET FOREIGN_KEY_CHECKS = 0;
 
 INSERT INTO `account` (username, `password`, `role`)
 VALUES
-	('0376872568', '123456789', 'customer'),
-    ('0968125694', '2159561563', 'customer'),
-    ('0352583109', '7822463256', 'customer'),
-    ('0369142631', 'setgsr85gs', 'customer'),
-    ('0862549670', 'st9e8ds567', 'customer'),
-    ('0761295168', 'sgresgh7se5', 'customer'),
-    ('0932345678', '5455dsfg56', 'employee'),
-    ('0946343210', 'wdgew8ga6s', 'employee'),
-    ('0975344567', 'ewe4s5eg48', 'employee'),
-    ('0914344156', 'se8ssd125e', 'employee'),
-    ('0352689512', 'sw3dg48fds', 'employee'),
-    ('0368512569', '37sei9dke8', 'employee');
+    ('nguyenvannam@gmail.com', '$2a$10$sSbyOAXRXFZASuZ11M5aPuKcicy.QwDXM6sADA4xXpk/1WYwU2Dcu', 'ROLE_CUSTOMER'),     -- 123456789
+    ('ledinhbao@gmail.com', '$2a$10$wyTpxQhFYrr56fkTspl3TObBvw3q6AEnRuePdF0izC8jIAJM8AuHm', 'ROLE_CUSTOMER'),        -- 2159561563
+    ('buiconglan@gmail.com', '$2a$10$ZlPqYkLB4JCBk5T2IbA/R.ykKFGzZjkKPkD4Kb8I/EiOj6cMCwHse', 'ROLE_CUSTOMER'),       -- 7822463256
+    ('nguyenhoa1594@gmail.com', '$2a$10$sXTu24YQP6Yiozvwic1oyebyJiTqAD0G7m42KplwpBSRNa6vrueku', 'ROLE_CUSTOMER'),    -- setgsr85gs
+    ('tnguyen21ah@gmail.com', '$2a$10$XJs..IIhWP9A6OQNx24j1u7WjqBrfmJ01Sh7JOJMVFMyJm4U8Abpa', 'ROLE_CUSTOMER'),      -- st9e8ds567
+    ('thanhnguyen51@gmail.com', '$2a$10$DMCl29qdNvWW6TxyW1VmkucmDQS6dnnMKcfkwMhdzxHpMNmtEIvKe', 'ROLE_CUSTOMER'),    -- sgresgh7se5
+    ('anh.nguyen@example.com', '$2a$10$WMdBkSGGsAwZOKGQIxHCyOFOo.IUZhweOKGYlFIcLB2ENkJ6gJvay', 'ROLE_EMPLOYEE'),     -- 5455dsfg56
+    ('khoa.tran@example.com', '$2a$10$cMnKty3u5DuCZxNcSkItnu9giiF9otN6Y/tuJteB4pIr0seQlsnLi', 'ROLE_EMPLOYEE'),      -- wdgew8ga6s
+    ('phi.nguyen@example.com', '$2a$10$/JrS5LmIfCPTLt.5lk7.VO46dbhUAqb5yPc6ja.HrH3MPBd.Wcxh2', 'ROLE_EMPLOYEE'),     -- ewe4s5eg48
+    ('phi.le@example.com', '$2a$10$sdCOrLSlMJVMmsAS9F0AA.MvTNObH9RtgKK2PfAwZEev4cvNIHrXq', 'ROLE_EMPLOYEE'),         -- se8ssd125e
+    ('ptai205@example.com', '$2a$10$h74A1pJTdyMlX1aDP2YXHOFl7e9Xk4d5ZvBVeNjFtDYAYB5HzNRl.', 'ROLE_EMPLOYEE'),        -- sw3dg48fds
+    ('khoatrk22@example.com', '$2a$10$dUUQspjiwlahwcf7wVFxhusTXIwPVF3IMEgXxL9S.eTtNNS6124aq', 'ROLE_EMPLOYEE');      -- 37sei9dke8
 
 INSERT INTO membership_class (`name`, discount_percent, minimum_no_point)  
 VALUES 
@@ -95,14 +93,14 @@ VALUES
     (7,'20 hours');
 
 -- Insert bảng Delivery
-INSERT INTO delivery (shipping_provider, actual_delivery_date, estimated_delivery_date, shipping_address, lname, fname) 
+INSERT INTO delivery (shipping_provider, actual_delivery_date, estimated_delivery_date, shipping_address, lname, fname, phone_number)
 VALUES 
-    ('Viettel Post', '2023-11-08', '2023-11-08', '345 Pham Van Dong Street, Thu Duc, HCMC', 'Tran', 'Nguyen'),
-    ('Vietnam Post', '2023-01-13', '2023-01-14', '31A Pham Van Dong Street, Thu Duc, HCMC', 'Le', 'Bao'),
-    ('J&T Express', '2023-12-05', '2023-12-04', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Hoa'),
-    ('Viettel Post', '2024-11-03', '2024-11-03', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Hoa'),
-	('J&T Express', '2024-12-03', '2023-12-02', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Bui', 'Lan'),
-	('J&T Express', '2023-12-01', '2023-12-01', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Nam');
+    ('Viettel Post', '2023-11-08', '2023-11-08', '345 Pham Van Dong Street, Thu Duc, HCMC', 'Tran', 'Nguyen', '0862549670'),
+    ('Vietnam Post', '2023-01-13', '2023-01-14', '31A Pham Van Dong Street, Thu Duc, HCMC', 'Le', 'Bao', '0968125694'),
+    ('J&T Express', '2023-12-05', '2023-12-04', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Hoa', '0369142631'),
+    ('Viettel Post', '2024-11-03', '2024-11-03', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Hoa', '0369142631'),
+	('J&T Express', '2024-12-03', '2023-12-02', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Bui', 'Lan', '0352583109'),
+	('J&T Express', '2023-12-01', '2023-12-01', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Nam', '0376872568');
 
 -- Insert bảng Employee
 INSERT INTO employee (employee_id, identity_card, lname, fname, phone_number, dob, hire_date, email, supervisor_id, supervise_date, store_id) 
@@ -209,7 +207,7 @@ VALUES (5, 2, 18500000, 1);
 
 SET SQL_SAFE_UPDATES = 0;
 
-UPDATE `orders` SET order_status = 'Completed';
+UPDATE `orders` SET order_status = 'completed';
 
 -- Insert bảng ProductLineManagedByEmployee
 INSERT INTO product_line_managed_by_employee(product_line_id, employee_id) 

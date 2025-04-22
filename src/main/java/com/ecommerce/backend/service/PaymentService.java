@@ -1,18 +1,17 @@
 package com.ecommerce.backend.service;
 
+import com.ecommerce.backend.model.Payment;
+import com.ecommerce.backend.repository.PaymentRepository;
+import com.ecommerce.backend.dtos.Payment.Request.CreatePaymentRequest;
+import com.ecommerce.backend.model.Order;
+import com.ecommerce.backend.repository.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
-
-import com.ecommerce.backend.dtos.Payment.Request.CreatePaymentRequest;
-import com.ecommerce.backend.model.Order;
-import com.ecommerce.backend.model.Payment;
-import com.ecommerce.backend.repository.OrderRepository;
-import com.ecommerce.backend.repository.PaymentRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -24,6 +23,7 @@ import vn.payos.type.WebhookData;
 
 @Service
 public class PaymentService {
+
 	private final PaymentRepository paymentRepository;
 	private final OrderRepository orderRepository;
 	private final PayOS payOS;
@@ -34,6 +34,10 @@ public class PaymentService {
 		this.orderRepository = orderRepository;
 		this.payOS = payOS;
 	}
+
+	public Payment addPayment(Payment payment) {
+        return paymentRepository.save(payment);
+    }
 	
 	public Payment getPayment(Integer orderId) {
 		Payment payment =  paymentRepository.findByOrderId(orderId);

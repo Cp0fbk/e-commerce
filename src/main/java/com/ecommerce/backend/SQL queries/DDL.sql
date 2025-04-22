@@ -3,9 +3,9 @@ USE `e-commerce`;
 
 CREATE TABLE `e-commerce`.`account` (
     account_id          INT             auto_increment PRIMARY KEY,
-    username            VARCHAR(20)     UNIQUE NOT NULL,
-    `password`          VARCHAR(30)     NOT NULL,
-    `role`              VARCHAR(8)      NOT NULL CHECK(role in ('customer', 'employee'))
+    username            VARCHAR(50)     UNIQUE NOT NULL,
+    `password`          VARCHAR(70)     NOT NULL,
+    `role`              VARCHAR(15)     NOT NULL CHECK(role in ('ROLE_CUSTOMER', 'ROLE_EMPLOYEE'))
 );
 
 CREATE TABLE `e-commerce`.`membership_class` (
@@ -109,7 +109,8 @@ CREATE TABLE `e-commerce`.delivery (
     shipping_province       VARCHAR(17),    -- check if shipping_province is valid
 	shipping_address		VARCHAR(100),
 	lname					VARCHAR(40)		NOT NULL,
-	fname					VARCHAR(15)		NOT NULL
+	fname					VARCHAR(15)		NOT NULL,
+    phone_number			CHAR(10)		NOT NULL
 );
 
 CREATE TABLE `e-commerce`.employee (
@@ -133,7 +134,7 @@ CREATE TABLE `e-commerce`.employee (
         FOREIGN KEY (employee_id) REFERENCES account(account_id)
 );
 
-CREATE TABLE `e-commerce`.`orders`(
+CREATE TABLE `e-commerce`.orders(
 	order_id			INT				auto_increment PRIMARY KEY,
 	order_date			DATE,
 	order_status		VARCHAR(20)		NOT NULL DEFAULT 'pending' CHECK (order_status IN ('pending', 'shipping', 'completed')),
@@ -185,7 +186,7 @@ CREATE TABLE `e-commerce`.`product` (
 
 CREATE TABLE `e-commerce`.review (
 	product_line_id		INT,
-	customer_id			INT,	
+	customer_id			INT,
 	`index`				INT,
 	review_date			DATE,
 	approval_status		VARCHAR(20)		NOT NULL DEFAULT 'pending' CHECK (approval_status IN ('pending', 'accepted', 'rejected')),

@@ -32,7 +32,11 @@ public class OrderService {
 
     public Order getOrderById(Integer orderId) {
             return orderRepository.findByOrderId(orderId).
-                orElseThrow(() -> new EntityNotFoundException("Không tìm thấy order với orderId: " + orderId));
+                orElseThrow(() -> new IllegalArgumentException("Order not found"));
+    }
+
+    public Order createOrder(Order order) {
+        return orderRepository.save(order);
     }
 
     @Transactional
