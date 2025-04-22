@@ -109,7 +109,8 @@ CREATE TABLE `e-commerce`.delivery (
     shipping_province       VARCHAR(17),    -- check if shipping_province is valid
 	shipping_address		VARCHAR(100),
 	lname					VARCHAR(40)		NOT NULL,
-	fname					VARCHAR(15)		NOT NULL
+	fname					VARCHAR(15)		NOT NULL,
+    phone_number			CHAR(10)		NOT NULL
 );
 
 CREATE TABLE `e-commerce`.employee (
@@ -133,7 +134,7 @@ CREATE TABLE `e-commerce`.employee (
         FOREIGN KEY (employee_id) REFERENCES account(account_id)
 );
 
-CREATE TABLE `e-commerce`.`orders`(
+CREATE TABLE `e-commerce`.orders(
 	order_id			INT				auto_increment PRIMARY KEY,
 	order_date			DATE,
 	order_status		VARCHAR(20)		NOT NULL DEFAULT 'pending' CHECK (order_status IN ('pending', 'shipping', 'completed')),

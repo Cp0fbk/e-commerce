@@ -3,6 +3,7 @@ package com.ecommerce.backend.service;
 import com.ecommerce.backend.model.Cart;
 import com.ecommerce.backend.model.MembershipClass;
 import com.ecommerce.backend.repository.CartRepository;
+import com.ecommerce.backend.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,12 @@ import java.util.Map;
 public class CartService {
     @Autowired
     private CartRepository cartRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
 
     public Cart createCart(Integer customerId) {
         Cart cart = new Cart();
-        cart.setCustomer_id(customerId);
+        cart.setCustomer(customerRepository.findById(customerId).orElse(null));
         cart.setCreated_date(LocalDate.now());
         cart.setTotal_amount(0.0);
         return cartRepository.save(cart);

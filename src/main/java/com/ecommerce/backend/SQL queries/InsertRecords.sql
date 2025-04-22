@@ -1,5 +1,3 @@
-﻿USE `e-commerce`;
-
 -- Insert bảng MembershipClass
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -95,14 +93,14 @@ VALUES
     (7,'20 hours');
 
 -- Insert bảng Delivery
-INSERT INTO delivery (shipping_provider, actual_delivery_date, estimated_delivery_date, shipping_address, lname, fname) 
+INSERT INTO delivery (shipping_provider, actual_delivery_date, estimated_delivery_date, shipping_address, lname, fname, phone_number)
 VALUES 
-    ('Viettel Post', '2023-11-08', '2023-11-08', '345 Pham Van Dong Street, Thu Duc, HCMC', 'Tran', 'Nguyen'),
-    ('Vietnam Post', '2023-01-13', '2023-01-14', '31A Pham Van Dong Street, Thu Duc, HCMC', 'Le', 'Bao'),
-    ('J&T Express', '2023-12-05', '2023-12-04', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Hoa'),
-    ('Viettel Post', '2024-11-03', '2024-11-03', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Hoa'),
-	('J&T Express', '2024-12-03', '2023-12-02', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Bui', 'Lan'),
-	('J&T Express', '2023-12-01', '2023-12-01', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Nam');
+    ('Viettel Post', '2023-11-08', '2023-11-08', '345 Pham Van Dong Street, Thu Duc, HCMC', 'Tran', 'Nguyen', '0862549670'),
+    ('Vietnam Post', '2023-01-13', '2023-01-14', '31A Pham Van Dong Street, Thu Duc, HCMC', 'Le', 'Bao', '0968125694'),
+    ('J&T Express', '2023-12-05', '2023-12-04', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Hoa', '0369142631'),
+    ('Viettel Post', '2024-11-03', '2024-11-03', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Hoa', '0369142631'),
+	('J&T Express', '2024-12-03', '2023-12-02', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Bui', 'Lan', '0352583109'),
+	('J&T Express', '2023-12-01', '2023-12-01', '123 Pham Van Dong Street, Thu Duc, HCMC', 'Nguyen', 'Nam', '0376872568');
 
 -- Insert bảng Employee
 INSERT INTO employee (employee_id, identity_card, lname, fname, phone_number, dob, hire_date, email, supervisor_id, supervise_date, store_id) 
@@ -209,7 +207,7 @@ VALUES (5, 2, 18500000, 1);
 
 SET SQL_SAFE_UPDATES = 0;
 
-UPDATE `orders` SET order_status = 'Completed';
+UPDATE `orders` SET order_status = 'completed';
 
 -- Insert bảng ProductLineManagedByEmployee
 INSERT INTO product_line_managed_by_employee(product_line_id, employee_id) 

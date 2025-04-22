@@ -31,4 +31,8 @@ public class OrderService {
 				return orderRepository.findByOrderId(orderId).
 					orElseThrow(() -> new IllegalArgumentException("Order not found"));
 		}
+
+		public Order createOrder(Order order) {
+			return orderRepository.save(order);
+		}
 }

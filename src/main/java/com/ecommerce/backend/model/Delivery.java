@@ -18,9 +18,6 @@ public class Delivery {
     @Column(name = "shipping_provider",length = 30)
     private String shippingProvider;
 
-    @Column(name = "delivery_status",length = 20, nullable = false)
-    private String deliveryStatus;
-
     @Column(name = "actual_delivery_date")
     private LocalDate actualDeliveryDate;
 
@@ -35,6 +32,9 @@ public class Delivery {
 
     @Column(length = 15, nullable = false)
     private String fname;
+
+    @Column(name = "phone_number", length = 10, nullable = false)
+    private String phoneNumber;
 
     // private boolean checkShippingProvince() {
 
