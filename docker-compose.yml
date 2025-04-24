@@ -1,0 +1,31 @@
+services:
+  mysqldb:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: samgiahuy
+      MYSQL_PASSWORD: samgiahuy
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: e-commerce
+    volumes:
+      - mysql_data:/var/lib/mysql
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/e-commerce
+      SPRING_DATASOURCE_USERNAME: samgiahuy
+      SPRING_DATASOURCE_PASSWORD: samgiahuy
+      PAYOS_CLIENT_ID: 7d176077-3794-4205-a2a8-91a0b0ec2f0e
+      PAYOS_API_KEY: af201495-e537-44dd-9fae-699542d55453
+      PAYOS_CHECKSUM_KEY: c3d2b85f007db281172486fa1ac6bab13a8678ff20bd7e56c2f9411b3967a987
+      JWT_SECRET: R7h9YcUjMKL3zNHdGQwaXtFZ12pJObAy8fQm5slkWbvPIRzDqXC3v8MrZNfjTSY5HtuwxpabVdLoUeKJFhTAm7zg3jYW8XrNMPkV6QLcBxZoHREWUSCv5aqnwDioJP7XpLZB3tr4hdz9eOsvymcgKiAXNfRJshE2GHTVBYrZ1dQFPbwLVru5odX9WvU1CTQz
+    depends_on:
+      - mysqldb
+    restart: always
+volumes:
+  mysql_data:

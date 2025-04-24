@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,7 @@ public class PromotionController {
 
 	@Operation(summary = "Lấy tất cả các chương trình khuyến mãi")
 	@GetMapping("/all")
+	@PreAuthorize("hasRole('CUSTOMER')")
 	public ResponseEntity<ApiResponse<List<PromotionDto>>> getAllPromotions() {
 		try {
 			List<PromotionDto> promotions = promotionDtoConverter.convert(promotionService.getAllPromotions());
@@ -44,6 +46,7 @@ public class PromotionController {
 
 	@Operation(summary = "Lấy tất cả các chương trình khuyến mãi đang diễn ra")
 	@GetMapping("/onDate")
+	@PreAuthorize("hasRole('CUSTOMER')")
 	public ResponseEntity<ApiResponse<List<PromotionDto>>> getPromotionOnDate() {
 		try {
 			List<PromotionDto> promotions = promotionDtoConverter.convert(promotionService.getPromotionOnDate());

@@ -5,6 +5,7 @@ import com.ecommerce.backend.response.ApiResponse;
 import com.ecommerce.backend.service.CategoryService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
     @GetMapping("/all")
+    @PreAuthorize("hasRole('CUSTOMER')")
     public ResponseEntity<ApiResponse<List<CategoryTypeDTO>>> GetAllCategories () {
         try {
             List<CategoryTypeDTO> data = categoryService.GetAllCategories();
