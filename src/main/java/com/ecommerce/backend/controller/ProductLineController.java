@@ -9,6 +9,7 @@ import com.ecommerce.backend.service.ProductLineService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class ProductLineController {
         this.productLineService = productLineService;
     }
     @GetMapping("/all")
+    @PreAuthorize("hasRole('CUSTOMER')")
     public ResponseEntity<ApiResponse<List<ProductLineDTO>>> GetAllProducts () {
         try{
             List<ProductLineDTO> data = productLineService.GetAllProducts();
@@ -32,6 +34,7 @@ public class ProductLineController {
         }
     }
     @PostMapping("/filter")
+    @PreAuthorize("hasRole('CUSTOMER')")
     public ResponseEntity<ApiResponse<Page<ProductLine>>> filterProducts(
             @RequestBody ProductFilterDTO filterDTO) {
 
@@ -56,6 +59,7 @@ public class ProductLineController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('CUSTOMER')")
     public ResponseEntity<ApiResponse<ProductLineDetailsDTO>> getProductById(@PathVariable Integer id) {
         try {
             ProductLineDetailsDTO productDetails = productLineService.getProductDetails(id);

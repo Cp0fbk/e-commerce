@@ -1,5 +1,6 @@
 package com.ecommerce.backend.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,6 +45,7 @@ public class OrderController {
 
 	@Operation(description = "Lấy thông tin các đơn hàng của người dùng")
 	@GetMapping("/get-user-orders")
+	@PreAuthorize("hasRole('CUSTOMER')")
 	public ResponseEntity<ApiResponse<Page<GetOrderResponse>>> getOrdersByUserId(
 					@RequestParam Integer accountId,
 					@RequestParam(defaultValue = "0") int page) {
@@ -63,6 +65,7 @@ public class OrderController {
 
 	@Operation(description = "Lấy thông tin của một đơn hàng của người dùng")
 	@GetMapping("/get-order/{orderId}")
+	@PreAuthorize("hasRole('CUSTOMER')")
 	public ResponseEntity<ApiResponse<OrderDetailDto>> getOrderById(@PathVariable Integer orderId) {
 		try {
 			OrderDetailDto order = orderDetailDtoConverter.convert(orderService.getOrderById(orderId));
@@ -79,6 +82,7 @@ public class OrderController {
 
 	@Operation(description = "Xóa một đơn hàng của người dùng")
 	@DeleteMapping("/delete-order/{orderId}")
+	@PreAuthorize("hasRole('CUSTOMER')")
 	public ResponseEntity<ApiResponse<OrderDto>> deleteOrder(@PathVariable Integer orderId) {
 		try {
 			paymentService.deletePaymentByOrderId(orderId);

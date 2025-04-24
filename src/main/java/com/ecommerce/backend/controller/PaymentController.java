@@ -1,5 +1,6 @@
 package com.ecommerce.backend.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -60,6 +61,7 @@ public class PaymentController {
 
 	@Operation(description = "Lấy thông tin thanh toán cho đơn hàng")
 	@GetMapping("/get-payment")
+	@PreAuthorize("hasRole('CUSTOMER')")
 	public ResponseEntity<ApiResponse<PaymentDto>> getPayment(@RequestParam Integer orderId) {
 		try {
 			PaymentDto paymentDto = paymentDtoConverter.convert(paymentService.getPayment(orderId));
@@ -79,6 +81,7 @@ public class PaymentController {
 
 	@Operation(description = "Xóa thông tin thanh toán cho đơn hàng")
 	@DeleteMapping("/delete-payment")
+	@PreAuthorize("hasRole('CUSTOMER')")
 	public ResponseEntity<ApiResponse<PaymentDto>> deletePayment(@RequestParam Integer orderId) {
 		try {
 			paymentService.deletePaymentByOrderId(orderId);
@@ -96,6 +99,7 @@ public class PaymentController {
 
 	@Hidden
 	@PostMapping(path = "/payos-webhook")
+	@PreAuthorize("hasRole('CUSTOMER')")
 	public ObjectNode paymentWebhookHandler(@RequestBody ObjectNode body) {
 			ObjectMapper objectMapper = new ObjectMapper();
 			ObjectNode response = objectMapper.createObjectNode();
@@ -123,6 +127,7 @@ public class PaymentController {
 	// Kiểm tra trạng thái thanh toán của đơn hàng trên PayOS
 	@Operation(description = "Kiểm tra trạng thái thanh toán cho đơn hàng trên PayOS")
 	@GetMapping("/check/{orderId}")
+	@PreAuthorize("hasRole('CUSTOMER')")
 	public ObjectNode checkPaymentStatus(@PathVariable Integer orderId) {
 			ObjectMapper objectMapper = new ObjectMapper();
 			ObjectNode response = objectMapper.createObjectNode();
@@ -148,6 +153,7 @@ public class PaymentController {
 	// Tạo payment link cho đơn hàng
 	@Operation(description = "Tạo payment link cho đơn hàng. Fe cần truyền returnUrl và cancelUrl để xử lý callback khi người dùng thanh toán thành công hoặc hủy thanh toán")
 	@PostMapping("/create")
+	@PreAuthorize("hasRole('CUSTOMER')")
 	public ObjectNode createPaymentForOrder(@RequestBody @Valid CreatePaymentRequest request) {
 			
 			ObjectNode response = objectMapper.createObjectNode();
@@ -172,6 +178,7 @@ public class PaymentController {
 	// Api đồng thời đuợc gọi từ PayOS khi thanh toán thành công nếu Fe không truyền returnUrl
 	@Operation(description = "Fe cần gọi api này khi người dùng thanh toán thành công")
 	@GetMapping("/success")
+	@PreAuthorize("hasRole('CUSTOMER')")
 	public ResponseEntity<Map<String, Object>> handleSuccess(
 					@RequestParam(required = false) Integer paymentId) {
 		Map<String, Object> response = new HashMap<>();
@@ -189,6 +196,7 @@ public class PaymentController {
 	// Api đồng thời đuợc gọi từ PayOS khi thanh toán bị hủy nếu Fe không truyền cancelUrl
 	@Operation(description = "Fe cần gọi api này khi người dùng thanh toán bị hủy")
 	@GetMapping("/cancel")
+	@PreAuthorize("hasRole('CUSTOMER')")
 	public ResponseEntity<Map<String, Object>> handleCancel(
 					@RequestParam(required = false) Integer paymentId) {
 		Map<String, Object> response = new HashMap<>();

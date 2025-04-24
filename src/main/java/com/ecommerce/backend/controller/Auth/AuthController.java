@@ -11,6 +11,7 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -102,6 +103,7 @@ public class AuthController {
 	}
 
 	@GetMapping("/logout")
+	@PreAuthorize("hasAnyRole('CUSTOMER', 'EMPLOYEE')")
 	public ResponseEntity<ApiResponse<String>> logout() {
 		ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK.value(), "Logout successful", null);
 		return new ResponseEntity<>(response, HttpStatus.OK);
