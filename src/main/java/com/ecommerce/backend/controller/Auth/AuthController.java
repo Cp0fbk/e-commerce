@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +23,7 @@ import com.ecommerce.backend.dtos.Account.AccountDtoConverter;
 import com.ecommerce.backend.dtos.auth.response.RegisterDto;
 import com.ecommerce.backend.response.ApiResponse;
 import com.ecommerce.backend.service.AccountService;
+import com.ecommerce.backend.service.TokenBlacklistService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -31,6 +31,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.Map;
 
@@ -39,20 +40,21 @@ import java.util.Map;
 @RequestMapping("/api/auth")
 @Validated
 public class AuthController {
-	private final AuthenticationManager authenticationManager;
 	private final AccountService accountService;
 	private final AccountDtoConverter accountDtoConverter;
 	private final AccountRepository accountRepository;
 	private final PasswordEncoder passwordEncoder;
+	private final TokenBlacklistService tokenBlacklistService;
 
-	public AuthController(AuthenticationManager authenticationManager,
+	public AuthController(
 			AccountService accountService, AccountDtoConverter accountDtoConverter,
-						  AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
-		this.authenticationManager = authenticationManager;
+						  AccountRepository accountRepository, PasswordEncoder passwordEncoder,
+													  TokenBlacklistService tokenBlacklistService) {
 		this.accountService = accountService;
 		this.accountDtoConverter = accountDtoConverter;
 		this.accountRepository = accountRepository;
 		this.passwordEncoder = passwordEncoder;
+		this.tokenBlacklistService = tokenBlacklistService;
 	}
 
 	@Autowired
@@ -104,7 +106,9 @@ public class AuthController {
 
 	@GetMapping("/logout")
 	@PreAuthorize("hasAnyRole('CUSTOMER', 'EMPLOYEE')")
-	public ResponseEntity<ApiResponse<String>> logout() {
+	public ResponseEntity<?> logout(@RequestHeader("Authorization") String authHeader) {
+		String token = authHeader.replace("Bearer ", "");
+		tokenBlacklistService.blacklist(token);
 		ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK.value(), "Logout successful", null);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}

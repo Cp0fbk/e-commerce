@@ -23,12 +23,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {	
-	private final CustomAccountDetailService accountDetailService;
-
-	public SecurityConfig(CustomAccountDetailService accountDetailService) {
-		this.accountDetailService = accountDetailService;
-	}
-
 	@Autowired
 	private JwtFilter jwtFilter;
 
