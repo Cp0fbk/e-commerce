@@ -1,6 +1,8 @@
 package com.ecommerce.backend.component;
 
 import com.ecommerce.backend.service.MyUserDetailsService;
+import com.ecommerce.backend.service.TokenBlacklistService;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,12 +26,15 @@ public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     private MyUserDetailsService userDetailsService;
 
+    @Autowired
+    private TokenBlacklistService tokenBlacklistService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization");
         String jwt = null;
-        String username = null;
+        String username = null;    
 
         // Lấy JWT từ header
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
@@ -41,6 +46,22 @@ public class JwtFilter extends OncePerRequestFilter {
             }
         }
 
+        // Kiểm tra xem token đã bị thu hồi hay chưa
+        if (jwt != null && tokenBlacklistService.isBlacklisted(jwt)) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            String jsonResponse = """
+                {
+                    "error": "Unauthorized",
+                    "message": "Token has been invalidated",
+                    "status": 401
+                }
+            """;
+            response.getWriter().write(jsonResponse);
+            return;
+        }    
+        
         // Nếu có username và chưa xác thực
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);

@@ -2,16 +2,12 @@ package com.ecommerce.backend.service;
 
 import com.ecommerce.backend.model.MembershipClass;
 import com.ecommerce.backend.repository.MembershipClassRepository;
-import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.ObjectNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ReflectionUtils;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
