@@ -46,5 +46,5 @@ public class Customer {
     private MembershipClass membershipClass;
 
     @Column(nullable = false)
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
 }

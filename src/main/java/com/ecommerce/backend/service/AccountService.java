@@ -58,7 +58,7 @@ public class AccountService {
 		Account account = new Account();
 		account.setUsername(request.getUsername());
 		account.setPassword(passwordEncoder.encode(request.getPassword()));
-		account.setRole("customer");
+		account.setRole("ROLE_CUSTOMER");
 		accountRepository.save(account);
 
 		MembershipClass membershipClass = membershipClassRepository.findById(1);
