@@ -11,9 +11,9 @@ const productData = {
   price: '32.990.000đ',
   oldPrice: '34.990.000đ',
   images: [
-    '/api/placeholder/400/400',
-    '/api/placeholder/400/400',
-    '/api/placeholder/400/400',
+    'https://cdn.tgdd.vn/Products/Images/42/305659/iphone-15-pro-max-blue-1-750x500.jpg',
+    'https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/42/305659/iphone-15-pro-max-titan-xanh-2-638629415390443671-750x500.jpg',
+    'https://cdn.tgdd.vn/Products/Images/42/305659/iphone-15-pro-max-blue-3-750x500.jpg',
   ],
   rating: 5,
   brand: 'Apple',
