@@ -6,11 +6,11 @@ import Footer from '../components/Footer';
 
 // Data mẫu
 const categories = [
-  { id: 1, name: 'Điện thoại', subcategories: ['iPhone', 'Samsung', 'Xiaomi', 'OPPO'] },
-  { id: 2, name: 'Laptop', subcategories: ['Macbook', 'Dell', 'HP', 'Lenovo', 'Asus'] },
-  { id: 3, name: 'Máy tính bảng', subcategories: ['iPad', 'Samsung Galaxy Tab', 'Xiaomi Pad'] },
-  { id: 4, name: 'Tai nghe', subcategories: ['AirPods', 'Sony', 'JBL', 'Beats'] },
-  { id: 5, name: 'Đồng hồ thông minh', subcategories: ['Apple Watch', 'Samsung Galaxy Watch', 'Xiaomi Watch'] },
+  { id: 1, name: 'Điện thoại', subcategories: ['iPhone', 'Samsung', 'Xiaomi', 'OPPO'], imageUrl: 'https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/42/334969/tecno-spark-30-white-thumb-638761785148564781-600x600.jpg' },
+  { id: 2, name: 'Laptop', subcategories: ['Macbook', 'Dell', 'HP', 'Lenovo', 'Asus'], imageUrl: 'https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook_1__2_5.png' },
+  { id: 3, name: 'Máy tính bảng', subcategories: ['iPad', 'Samsung Galaxy Tab', 'Xiaomi Pad'], imageUrl: 'https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/522/336738/samsung-galaxy-tab-s10-fe-5g-070425-120906-571-600x600.jpg' },
+  { id: 4, name: 'Tai nghe', subcategories: ['AirPods', 'Sony', 'JBL', 'Beats'], imageUrl: 'https://cdn.tgdd.vn/Products/Images/54/320249/tai-nghe-bluetooth-chup-tai-havit-h663bt-tb-600x600.jpg' },
+  { id: 5, name: 'Đồng hồ thông minh', subcategories: ['Apple Watch', 'Samsung Galaxy Watch', 'Xiaomi Watch'], imageUrl: 'https://cdn.tgdd.vn/Products/Images/7077/335763/huawei-band-10-vien-nhom-den-tb-600x600.jpg' },
 ];
 
 const featuredProducts = [
@@ -36,6 +36,16 @@ const newArrivals = [
   { id: 3, name: 'Asus ROG Phone 8', price: '23.990.000đ', image: 'https://cdn.mobilecity.vn/mobilecity-vn/images/2024/01/w300/asus-rog-phone-8-den.jpg.webp' },
   { id: 4, name: 'AirPods Max 2', price: '12.990.000đ', image: 'https://www.h2shop.vn/images/thumbnails/400/350/detailed/66/airpods-max-select-202409-blue_FV1.jpeg' },
 ];
+
+const brands = [
+  { id: 1, name: 'Apple', imageUrl: 'https://cdn.tgdd.vn/Brand//1/Apple482-b_37.jpg' },
+  { id: 2, name: 'Samsung', imageUrl: 'https://cdn.tgdd.vn/Brand//1/samsungnew-220x48-220x48-1.png' },
+  { id: 3, name: 'Sony', imageUrl: 'https://cdn.tgdd.vn/Brand//1/Sony482-b_41.jpg' },
+  { id: 4, name: 'Xiaomi', imageUrl: 'https://cdn.tgdd.vn/Brand//1/logo-xiaomi-220x48-14-220x48.png' },
+  { id: 5, name: 'Asus', imageUrl: 'https://cdn.tgdd.vn/Brand//1/Asus482-b_26.png' },
+  { id: 6, name: 'Oppo', imageUrl: 'https://cdn.tgdd.vn/Brand//1/OPPO42-b5-220x48-6.jpg' },
+];
+
 
 // const [categories, setCategories] = useState([]);
 // const [banners, setBanners] = useState([]);
@@ -138,12 +148,12 @@ export default function HomePage() {
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               {categories.map(category => (
                 <Link 
-                  to={`/products?category=${category.id}`} // Thay bằng link phù hợp
+                  to={`/products?category=${category.id}`}
                   key={category.id} 
                   className="flex flex-col items-center p-4 border rounded-lg hover:shadow-md transition-shadow"
                 >
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-                    <img src="/logo192.png" alt={category.name} className="w-8 h-8" />
+                    <img src={category.imageUrl} alt={category.name} className="w-8 h-8 object-contain" />
                   </div>
                   <span className="text-center font-medium">{category.name}</span>
                 </Link>
@@ -268,18 +278,19 @@ export default function HomePage() {
           <div className="container mx-auto px-4 py-8">
             <h2 className="text-2xl font-bold mb-6">Thương Hiệu Nổi Bật</h2>
             <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
-              {[...Array(6)].map((_, idx) => (
+              {brands.map((brand) => (
                 <Link 
-                  to={`/brands/${idx+1}`} 
-                  key={idx} 
+                  to={`/brands/${brand.id}`} 
+                  key={brand.id} 
                   className="border rounded-lg p-4 flex items-center justify-center h-20 hover:shadow-md transition-shadow"
                 >
-                  <img src={`/api/placeholder/80/40`} alt={`Brand ${idx+1}`} className="max-h-full" />
+                  <img src={brand.imageUrl} alt={brand.name} className="max-h-full" />
                 </Link>
               ))}
             </div>
           </div>
         </div>
+
 
         {/* Blog Posts */}
         <div className="bg-gray-50">
