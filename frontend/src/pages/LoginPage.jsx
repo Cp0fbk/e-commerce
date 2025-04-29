@@ -33,7 +33,7 @@ const LoginPage = () => {
     }
     catch(error){
       console.log(error);
-      alert('Email hoặc mật khẩu không đúng!');
+      alert('username hoặc mật khẩu không đúng!');
     }
     
     // if (loginData.email === 'nguyenvana@example.com' && loginData.password === '123456') {
@@ -65,7 +65,7 @@ const LoginPage = () => {
             <div>
               <label className="block text-sm font-medium mb-1">Email</label>
               <input
-                type="email"
+                type="string"
                 value={loginData.username}
                 onChange={(e) => setLoginData({ ...loginData, username: e.target.value })}
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
+import axios from 'axios';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AuthContext } from '../context/AuthContext';
@@ -17,24 +18,48 @@ const categories = [
 const RegisterPage = () => {
   const { setIsLoggedIn, setUserInfo } = useContext(AuthContext);
   const [registerData, setRegisterData] = useState({
-    name: '',
-    email: '',
-    phone: '',
+    username: '',
     password: '',
-    confirmPassword: '',
+    phoneNumber: '',
+    lname: '',
+    fname: '',
   });
+  // const [formData, setFormData] = useState({
+  //   fname: '',
+  //   lname: '',
+  //   email: '',
+  //   phone: '',
+  //   username: '',
+  //   password: '',
+  //   confirmPassword: '',
+  // });
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    if (registerData.password !== registerData.confirmPassword) {
-      alert('Mật khẩu xác nhận không khớp!');
-      return;
+    // if (registerData.password !== registerData.confirmPassword) {
+    //   alert('Mật khẩu xác nhận không khớp!');
+    //   return;
+    // }
+    try {
+      // Gửi dữ liệu đăng ký đến server
+      const response = await axios.post('http://localhost:8080/api/auth/register', registerData);
+      console.log(response.status);
+      if (response.status === 200) {
+        console.log(response.data);
+        setUserInfo({ 
+          name: registerData.fname + ' ' + registerData.lname, 
+          email: registerData.email, 
+          phone: registerData.phone });
+        setIsLoggedIn(false);
+        alert('Đăng ký thành công!');
+        navigate('/login');
+      }
     }
-    setUserInfo({ name: registerData.name, email: registerData.email, phone: registerData.phone });
-    setIsLoggedIn(true);
-    alert('Đăng ký thành công!');
-    navigate('/account');
+    catch {
+      alert('Đăng ký không thành công!');
+    }
+    
   };
 
   return (
@@ -55,21 +80,41 @@ const RegisterPage = () => {
         <div className="bg-white rounded-lg shadow-sm p-6 max-w-md mx-auto">
           <form onSubmit={handleRegister} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Họ và tên</label>
+              <label className="block text-sm font-medium mb-1">Họ</label>
               <input
                 type="text"
-                value={registerData.name}
-                onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
+                value={registerData.fname}
+                onChange={(e) => setRegisterData({ ...registerData, fname: e.target.value })}
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>
             <div>
+              <label className="block text-sm font-medium mb-1">Tên</label>
+              <input
+                type="text"
+                value={registerData.lname}
+                onChange={(e) => setRegisterData({ ...registerData, lname: e.target.value })}
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+            {/* <div>
               <label className="block text-sm font-medium mb-1">Email</label>
               <input
                 type="email"
                 value={registerData.email}
                 onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
+                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div> */}
+            <div>
+              <label className="block text-sm font-medium mb-1">Tên đăng nhập</label>
+              <input
+                type="string"
+                value={registerData.username}
+                onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })}
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
@@ -79,7 +124,7 @@ const RegisterPage = () => {
               <input
                 type="tel"
                 value={registerData.phone}
-                onChange={(e) => setRegisterData({ ...registerData, phone: e.target.value })}
+                onChange={(e) => setRegisterData({ ...registerData, phoneNumber: e.target.value })}
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
@@ -94,7 +139,7 @@ const RegisterPage = () => {
                 required
               />
             </div>
-            <div>
+            {/* <div>
               <label className="block text-sm font-medium mb-1">Xác nhận mật khẩu</label>
               <input
                 type="password"
@@ -103,7 +148,7 @@ const RegisterPage = () => {
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
-            </div>
+            </div> */}
             <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 w-full">
               Đăng ký
             </button>
