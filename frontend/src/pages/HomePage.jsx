@@ -14,10 +14,10 @@ const categories = [
 ];
 
 const featuredProducts = [
-  { id: 1, name: 'iPhone 15 Pro Max', price: '32.990.000đ', discount: '34.990.000đ', image: '/api/placeholder/200/200', rating: 5 },
-  { id: 2, name: 'Samsung Galaxy S24 Ultra', price: '28.990.000đ', discount: '30.990.000đ', image: '/api/placeholder/200/200', rating: 4.5 },
-  { id: 3, name: 'MacBook Pro M3', price: '36.990.000đ', discount: '38.990.000đ', image: '/api/placeholder/200/200', rating: 5 },
-  { id: 4, name: 'iPad Pro 2024', price: '22.990.000đ', discount: '24.990.000đ', image: '/api/placeholder/200/200', rating: 4.5 },
+  { id: 1, name: 'iPhone 15 Pro Max', price: '32.990.000đ', discount: '34.990.000đ', image: 'https://onewaymobile.vn/images/products/2024/08/27/large/1_1724729741.webp', rating: 5 },
+  { id: 2, name: 'Samsung Galaxy S24 Ultra', price: '28.990.000đ', discount: '30.990.000đ', image: 'https://onewaymobile.vn/images/products/2024/08/27/large/1_1724729741.webp', rating: 4.5 },
+  { id: 3, name: 'MacBook Pro M3', price: '36.990.000đ', discount: '38.990.000đ', image: 'https://onewaymobile.vn/images/products/2024/08/27/large/1_1724729741.webp', rating: 5 },
+  { id: 4, name: 'iPad Pro 2024', price: '22.990.000đ', discount: '24.990.000đ', image: 'https://onewaymobile.vn/images/products/2024/08/27/large/1_1724729741.webp', rating: 4.5 },
   { id: 5, name: 'Sony WH-1000XM5', price: '6.990.000đ', discount: '8.990.000đ', image: '/api/placeholder/200/200', rating: 5 },
   { id: 6, name: 'Apple Watch Series 9', price: '10.990.000đ', discount: '12.990.000đ', image: '/api/placeholder/200/200', rating: 4.5 },
   { id: 7, name: 'Samsung Galaxy Tab S9 Ultra', price: '23.990.000đ', discount: '25.990.000đ', image: '/api/placeholder/200/200', rating: 4 },
@@ -25,9 +25,9 @@ const featuredProducts = [
 ];
 
 const banners = [
-  { id: 1, title: 'iPhone 15 Pro Max', description: 'Giảm đến 5.000.000đ', image: '/api/placeholder/1200/400' },
-  { id: 2, title: 'MacBook Pro M3', description: 'Trả góp 0%', image: '/api/placeholder/1200/400' },
-  { id: 3, title: 'Samsung Galaxy S24 Ultra', description: 'Tặng tai nghe Galaxy Buds', image: '/api/placeholder/1200/400' },
+  { id: 1, title: 'iPhone 15 Pro Max', description: 'Giảm đến 5.000.000đ', image: 'https://viendidong.com/wp-content/uploads/2023/09/iphone-15-pro-max-ra-mat-thumbnail-viendidong.jpg' },
+  { id: 2, title: 'MacBook Pro M3', description: 'Trả góp 0%', image: 'https://images.vexels.com/media/users/3/126443/raw/ff9af1e1edfa2c4a46c43b0c2040ce52-banner-da-barra-de-toque-do-macbook-pro.jpg' },
+  { id: 3, title: 'Samsung Galaxy S24 Ultra', description: 'Tặng tai nghe Galaxy Buds', image: 'https://images.samsung.com/vn/smartphones/galaxy-s24-ultra/images/galaxy-s24-ultra-highlights-camera-overview-mo.jpg?imbypass=true' },
 ];
 
 const newArrivals = [
@@ -36,6 +36,41 @@ const newArrivals = [
   { id: 3, name: 'Asus ROG Phone 8', price: '23.990.000đ', image: '/api/placeholder/150/150' },
   { id: 4, name: 'AirPods Max 2', price: '12.990.000đ', image: '/api/placeholder/150/150' },
 ];
+
+// const [categories, setCategories] = useState([]);
+// const [banners, setBanners] = useState([]);
+// const [featuredProducts, setFeaturedProducts] = useState([]);
+// const [newArrivals, setNewArrivals] = useState([]);
+
+// React.useEffect(() => {
+//   async function fetchData() {
+//     try {
+//       const [catRes, bannerRes, featuredRes, newRes] = await Promise.all([
+//         fetch('/api/categories'),
+//         fetch('/api/banners'),
+//         fetch('/api/products/featured'),
+//         fetch('/api/products/new'),
+//       ]);
+
+//       const [catData, bannerData, featuredData, newData] = await Promise.all([
+//         catRes.json(),
+//         bannerRes.json(),
+//         featuredRes.json(),
+//         newRes.json(),
+//       ]);
+
+//       setCategories(catData);
+//       setBanners(bannerData);
+//       setFeaturedProducts(featuredData);
+//       setNewArrivals(newData);
+//     } catch (err) {
+//       console.error('Lỗi khi tải dữ liệu:', err);
+//     }
+//   }
+
+//   fetchData();
+// }, []);
+
 
 export default function HomePage() {
   const [currentBanner, setCurrentBanner] = useState(0);
@@ -108,7 +143,7 @@ export default function HomePage() {
                   className="flex flex-col items-center p-4 border rounded-lg hover:shadow-md transition-shadow"
                 >
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-                    <img src={`/api/placeholder/32/32`} alt={category.name} className="w-8 h-8" />
+                    <img src={`https://onewaymobile.vn/images/products/2024/08/27/large/1_1724729741.webp`} alt={category.name} className="w-8 h-8" />
                   </div>
                   <span className="text-center font-medium">{category.name}</span>
                 </Link>
