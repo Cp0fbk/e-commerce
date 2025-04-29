@@ -12,18 +12,18 @@ const categoryData = {
   description: 'Khám phá các mẫu điện thoại mới nhất với công nghệ hiện đại',
   subcategories: ['iPhone', 'Samsung', 'Xiaomi', 'OPPO', 'Vivo', 'Realme', 'Nokia'],
   products: [
-    { id: 1, name: 'iPhone 15 Pro Max', price: '32.990.000đ', oldPrice: '34.990.000đ', image: 'https://onewaymobile.vn/images/products/2024/08/27/large/1_1724729741.webp', rating: 5, brand: 'Apple', features: ['6.7 inch', '8GB RAM', '512GB', 'iOS 17'], inStock: true, category: 'Điện thoại' },
+    { id: 1, name: 'iPhone 15 Pro Max', price: '32.990.000đ', oldPrice: '34.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-blue-thumbnew-600x600.jpg', rating: 5, brand: 'Apple', features: ['6.7 inch', '8GB RAM', '512GB', 'iOS 17'], inStock: true, category: 'Điện thoại' },
     { id: 2, name: 'Samsung Galaxy S24 Ultra', price: '28.990.000đ', oldPrice: '30.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/42/307174/TimerThumb/samsung-galaxy-s24-ultra-5g-(68).jpg', rating: 4.5, brand: 'Samsung', features: ['6.8 inch', '12GB RAM', '256GB', 'Android 14'], inStock: true, category: 'Điện thoại' },
     { id: 3, name: 'Xiaomi 14 Ultra', price: '24.990.000đ', oldPrice: '27.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/42/313889/xiaomi-14-ultra-1-750x500.jpg', rating: 4.5, brand: 'Xiaomi', features: ['6.7 inch', '12GB RAM', '256GB', 'Android 14'], inStock: true, category: 'Điện thoại' },
     { id: 4, name: 'OPPO Find X7 Ultra', price: '21.990.000đ', oldPrice: '23.990.000đ', image: 'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/e/d/eda006276802c_1.jpg', rating: 4, brand: 'OPPO', features: ['6.8 inch', '12GB RAM', '256GB', 'Android 14'], inStock: false, category: 'Điện thoại' },
-    { id: 5, name: 'iPhone 15', price: '21.990.000đ', oldPrice: '22.990.000đ', image: 'https://viendidong.com/wp-content/uploads/2023/09/iphone-15-pro-max-ra-mat-thumbnail-viendidong.jpg', rating: 4.5, brand: 'Apple', features: ['6.1 inch', '6GB RAM', '128GB', 'iOS 17'], inStock: true, category: 'Điện thoại' },
-    { id: 6, name: 'Samsung Galaxy S24', price: '19.990.000đ', oldPrice: '20.990.000đ', image: 'https://images.samsung.com/vn/smartphones/galaxy-s24-ultra/images/galaxy-s24-ultra-highlights-camera-overview-mo.jpg?imbypass=true', rating: 4, brand: 'Samsung', features: ['6.2 inch', '8GB RAM', '256GB', 'Android 14'], inStock: true, category: 'Điện thoại' },
+    { id: 5, name: 'iPhone 15', price: '21.990.000đ', oldPrice: '22.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/42/281570/iphone-15-hong-thumb-1-600x600.jpg', rating: 4.5, brand: 'Apple', features: ['6.1 inch', '6GB RAM', '128GB', 'iOS 17'], inStock: true, category: 'Điện thoại' },
+    { id: 6, name: 'Samsung Galaxy S24', price: '19.990.000đ', oldPrice: '20.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/42/333363/TimerThumb/samsung-galaxy-s25-(24).jpg', rating: 4, brand: 'Samsung', features: ['6.2 inch', '8GB RAM', '256GB', 'Android 14'], inStock: true, category: 'Điện thoại' },
     { id: 7, name: 'Xiaomi 14', price: '16.990.000đ', oldPrice: '18.990.000đ', image: 'https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/42/333147/xiaomi-redmi-note-14-purple-1-638723659806437798-750x500.jpg', rating: 4, brand: 'Xiaomi', features: ['6.36 inch', '8GB RAM', '256GB', 'Android 14'], inStock: true, category: 'Điện thoại' },
-    { id: 8, name: 'OPPO Reno 12 Pro', price: '14.990.000đ', oldPrice: '15.990.000đ', image: '/api/placeholder/200/200', rating: 3.5, brand: 'OPPO', features: ['6.7 inch', '8GB RAM', '256GB', 'Android 14'], inStock: true, category: 'Điện thoại' },
-    { id: 9, name: 'Vivo X100 Pro', price: '22.990.000đ', oldPrice: '24.990.000đ', image: '/api/placeholder/200/200', rating: 4, brand: 'Vivo', features: ['6.78 inch', '12GB RAM', '256GB', 'Android 14'], inStock: true, category: 'Điện thoại' },
-    { id: 10, name: 'iPhone 14 Pro Max', price: '26.990.000đ', oldPrice: '29.990.000đ', image: '/api/placeholder/200/200', rating: 4.5, brand: 'Apple', features: ['6.7 inch', '6GB RAM', '256GB', 'iOS 16'], inStock: false, category: 'Điện thoại' },
-    { id: 11, name: 'Realme GT 6', price: '15.990.000đ', oldPrice: '16.990.000đ', image: '/api/placeholder/200/200', rating: 4, brand: 'Realme', features: ['6.78 inch', '8GB RAM', '256GB', 'Android 14'], inStock: true, category: 'Điện thoại' },
-    { id: 12, name: 'Nokia X50', price: '9.990.000đ', oldPrice: '10.990.000đ', image: '/api/placeholder/200/200', rating: 3.5, brand: 'Nokia', features: ['6.5 inch', '6GB RAM', '128GB', 'Android 14'], inStock: true, category: 'Điện thoại' },
+    { id: 8, name: 'OPPO Reno 12 Pro', price: '14.990.000đ', oldPrice: '15.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/42/327192/TimerThumb/oppo-reno12-5g-12gb-512gb-(32).jpg', rating: 3.5, brand: 'OPPO', features: ['6.7 inch', '8GB RAM', '256GB', 'Android 14'], inStock: true, category: 'Điện thoại' },
+    { id: 9, name: 'Vivo X100 Pro', price: '22.990.000đ', oldPrice: '24.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/42/307003/vivo-x100-pro-600x600.jpg', rating: 4, brand: 'Vivo', features: ['6.78 inch', '12GB RAM', '256GB', 'Android 14'], inStock: true, category: 'Điện thoại' },
+    { id: 10, name: 'iPhone 14 Pro Max', price: '26.990.000đ', oldPrice: '29.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/42/289700/iphone-14-pro-max-tim-thumb-600x600.jpg', rating: 4.5, brand: 'Apple', features: ['6.7 inch', '6GB RAM', '256GB', 'iOS 16'], inStock: false, category: 'Điện thoại' },
+    { id: 11, name: 'Realme GT 6', price: '15.990.000đ', oldPrice: '16.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/42/309861/realme-gt-neo6-600x600.jpg', rating: 4, brand: 'Realme', features: ['6.78 inch', '8GB RAM', '256GB', 'Android 14'], inStock: true, category: 'Điện thoại' },
+    { id: 12, name: 'Nokia X50', price: '9.990.000đ', oldPrice: '10.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/42/237944/nokia-x50-600x600.jpg', rating: 3.5, brand: 'Nokia', features: ['6.5 inch', '6GB RAM', '128GB', 'Android 14'], inStock: true, category: 'Điện thoại' },
   ],
   priceRanges: [
     { id: 1, name: 'Dưới 5 triệu', min: 0, max: 5000000 },
@@ -410,7 +410,7 @@ export default function CategoryPage() {
                 {currentProducts.map(product => (
                   <div key={product.id} className={`bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow ${viewMode === 'list' ? 'flex' : ''}`}>
                     <div className={viewMode === 'list' ? 'w-1/3 pr-4' : ''}>
-                      <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-md" />
+                      <img src={product.image} alt={product.name} className="w-full h-48 object-contain rounded-md" />
                     </div>
                     <div className={viewMode === 'list' ? 'w-2/3' : ''}>
                       <h3 className="font-medium text-gray-800 hover:text-blue-600 cursor-pointer">{product.name}</h3>

@@ -34,8 +34,8 @@ const productData = {
     { id: 2, user: 'Trần Thị B', rating: 4, comment: 'Thiết kế đẹp, pin dùng được cả ngày, nhưng giá hơi cao.', date: '2025-03-28' },
   ],
   relatedProducts: [
-    { id: 5, name: 'iPhone 15', price: '21.990.000đ', image: '/api/placeholder/200/200', rating: 4.5 },
-    { id: 10, name: 'iPhone 14 Pro Max', price: '26.990.000đ', image: '/api/placeholder/200/200', rating: 4.5 },
+    { id: 5, name: 'iPhone 15', price: '21.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/42/281570/iphone-15-hong-thumb-1-600x600.jpg', rating: 4.5 },
+    { id: 10, name: 'iPhone 14 Pro Max', price: '26.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/42/289700/iphone-14-pro-max-tim-thumb-600x600.jpg', rating: 4.5 },
   ],
 };
 
@@ -220,7 +220,7 @@ export default function ProductDetailPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {productData.relatedProducts.map(product => (
               <div key={product.id} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
-                <img src={product.image} alt={product.name} className="w-full h-48 object-cover rounded-md" />
+                <img src={product.image} alt={product.name} className="w-full h-48 object-contain rounded-md max-w-full" />
                 <h3 className="font-medium text-gray-800 hover:text-blue-600 cursor-pointer mt-2">{product.name}</h3>
                 <RatingStars rating={product.rating} />
                 <div className="mt-2">
