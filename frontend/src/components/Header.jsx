@@ -54,11 +54,12 @@ const Header = ({ categories }) => {
               >
                 {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
-              <Link to="/" className="text-2xl font-extrabold text-red-600 hover:text-red-700 transition-colors tracking-tight">
-                TechSphere
+              <Link to="/" className="flex items-center space-x-2 text-2xl font-extrabold text-red-600 hover:text-red-700 transition-colors tracking-tight">
+                <img src="/logo192.png" alt="Logo" className="h-10 w-10 mb-1" />
+                <span>TechSphere</span>
               </Link>
             </div>
-
+            
             {/* Desktop Search */}
             <div className="hidden md:flex flex-grow mx-8 relative max-w-2xl">
               <input 

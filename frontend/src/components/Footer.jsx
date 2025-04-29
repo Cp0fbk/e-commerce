@@ -9,8 +9,9 @@ const Footer = ({ categories }) => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
           {/* Cột 1: TechSphere */}
           <div>
-            <Link to="/" className="text-2xl font-extrabold text-red-600 hover:text-red-500 transition-colors tracking-tight">
-              TechSphere
+            <Link to="/" className="flex items-center space-x-2 text-2xl font-extrabold text-red-600 hover:text-red-500 transition-colors tracking-tight">
+              <img src="/logo192.png" alt="Logo" className="h-10 w-10 mb-1" />
+              <span>TechSphere</span>
             </Link>
             <p className="mt-4 text-gray-300 text-sm">
               Chuyên cung cấp các sản phẩm điện tử chính hãng với giá tốt nhất thị trường.
