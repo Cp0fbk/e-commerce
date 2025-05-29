@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
-import axios from 'axios';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AuthContext } from '../context/AuthContext';
+import Api from '../context/ApiContext';
 
 // Dữ liệu mẫu
 const categories = [
@@ -18,31 +18,30 @@ const categories = [
 const LoginPage = () => {
   const { setIsLoggedIn } = useContext(AuthContext);
   const [loginData, setLoginData] = useState({ username: '', password: '' });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try{
-      const response = await axios.post('http://localhost:8080/api/auth/login', loginData);
-      if (response.status === 200) {
+    setIsLoading(true);
+    setError('');
+    
+    try {
+      const response = await Api.Login(loginData);
+      if (response.status === 200) { 
+        console.log('Access Token:', response.data.token);
         setIsLoggedIn(true);
         alert('Đăng nhập thành công!');
-        localStorage.setItem('token', response.data.token);
         navigate('/account');
       }
+    } catch (error) {
+      console.error('Login failed:', error);
+      setError('Email hoặc mật khẩu không đúng!');
+      alert('Email hoặc mật khẩu không đúng!');
+    } finally {
+      setIsLoading(false);
     }
-    catch(error){
-      console.log(error);
-      alert('username hoặc mật khẩu không đúng!');
-    }
-    
-    // if (loginData.email === 'nguyenvana@example.com' && loginData.password === '123456') {
-    //   setIsLoggedIn(true);
-    //   alert('Đăng nhập thành công!');
-    //   navigate('/account');
-    // } else {
-    //   alert('Email hoặc mật khẩu không đúng!');
-    // }
   };
 
   return (
@@ -65,7 +64,7 @@ const LoginPage = () => {
             <div>
               <label className="block text-sm font-medium mb-1">Email</label>
               <input
-                type="string"
+                type="email"
                 value={loginData.username}
                 onChange={(e) => setLoginData({ ...loginData, username: e.target.value })}
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -82,8 +81,13 @@ const LoginPage = () => {
                 required
               />
             </div>
-            <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 w-full">
-              Đăng nhập
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+            <button 
+              type="submit" 
+              className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 w-full"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Đang xử lý...' : 'Đăng nhập'}
             </button>
             <p className="text-sm text-center">
               Chưa có tài khoản?{' '}
