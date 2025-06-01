@@ -50,7 +50,7 @@ public class SecurityConfig {
 												.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Stateless
 				.authorizeHttpRequests(auth -> auth
 												// Các endpoint không yêu cầu xác thực
-												.requestMatchers("/", "/api/auth/**", "/login", "/register", "/error", "/api/products/all", "/api/products/filter", "/api/products/**",
+												.requestMatchers("/", "/api/auth/**", "/login", "/register", "/error", "/api/products/all", "/api/products/filter", "/api/products/**", "/api/images/upload",
 													"/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/webjars/**", "/swagger-ui.html")
 													.permitAll()
 												.requestMatchers("/api/webhook/**", "/api/payment/success", "/api/payment/cancel").permitAll()
