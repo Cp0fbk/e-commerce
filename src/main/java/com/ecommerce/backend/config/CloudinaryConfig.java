@@ -1,7 +1,7 @@
 package com.ecommerce.backend.config;
 
 import com.cloudinary.Cloudinary;
-import io.github.cdimascio.dotenv.Dotenv;
+//import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class CloudinaryConfig {
     @Bean
     public Cloudinary cloudinary() {
-        Dotenv dotenv = Dotenv.load();
-        return new Cloudinary(dotenv.get("CLOUDINARY_URL"));
+//        Dotenv dotenv = Dotenv.load();
+//        return new Cloudinary(dotenv.get("CLOUDINARY_URL"));
+        return new Cloudinary(System.getenv("CLOUDINARY_URL"));
     }
 }
