@@ -15,4 +15,7 @@ public class Images {
     @MapsId("productLineId")
     @JoinColumn(name = "product_line_id")
     private ProductLine productLine;
+
+    @Column(name = "image_url", nullable = false)
+    private String imageUrl;
 }
