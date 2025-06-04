@@ -15,12 +15,17 @@ const categories = [
   { id: 5, name: 'Đồng hồ thông minh', subcategories: ['Apple Watch', 'Samsung Galaxy Watch', 'Xiaomi Watch'] },
 ];
 
+const isValidEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+
 const RegisterPage = () => {
   const { setIsLoggedIn, setUserInfo } = useContext(AuthContext);
   const [registerData, setRegisterData] = useState({
     name: '',
-    username: '', // Thêm trường tên đăng nhập
-    email: '',
+    username: '', // username là email
     phoneNumber: '',
     password: '',
     confirmPassword: '',
@@ -38,6 +43,11 @@ const RegisterPage = () => {
       return;
     }
     
+    if (!isValidEmail(registerData.username)) {
+      alert('Địa chỉ email không hợp lệ!');
+      return;
+    }
+
     setIsLoading(true);
     setError('');
     
@@ -121,22 +131,11 @@ const RegisterPage = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1">Tên đăng nhập</label>
+                <label className="block text-sm font-medium mb-1">Email</label>
                 <input
                   type="text"
                   value={registerData.username}
                   onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })}
-                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium mb-1">Email</label>
-                <input
-                  type="email"
-                  value={registerData.email}
-                  onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
                   className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
@@ -152,7 +151,6 @@ const RegisterPage = () => {
                   required
                 />
               </div>
-              <div></div>
               <div>
                 <label className="block text-sm font-medium mb-1">Mật khẩu</label>
                 <input

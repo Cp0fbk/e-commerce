@@ -30,7 +30,7 @@ export default function CheckoutPage({ appliedVoucher = null }) {
     city: '',
     note: ''
   });
-  const [paymentMethod, setPaymentMethod] = useState('cod'); // cod, card, momo
+  const [paymentMethod, setPaymentMethod] = useState('cod'); // cod, qr
   const [orderConfirmed, setOrderConfirmed] = useState(false);
 
   useEffect(() => {
@@ -62,39 +62,50 @@ export default function CheckoutPage({ appliedVoucher = null }) {
     setShippingInfo({ ...shippingInfo, [e.target.name]: e.target.value });
   };
 
-  // const handleSubmitOrder = (e) => {
-  //   e.preventDefault();
-  //   // Kiểm tra thông tin vận chuyển
-  //   if (!shippingInfo.fullName || !shippingInfo.phone || !shippingInfo.address || !shippingInfo.city) {
-  //     alert('Vui lòng điền đầy đủ thông tin vận chuyển');
-  //     return;
-  //   }
-  //   // Xử lý đặt hàng (có thể gửi API ở đây)
-  //   setOrderConfirmed(true);
-  // };
-
   const handleSubmitOrder = async () => {
-  const checkoutInfo = {
-    shippingAddress: shippingInfo.address,
-    lname: shippingInfo.lname,
-    fname: shippingInfo.fname,
-    phoneNumber: shippingInfo.phone,
-    paymentMethod: paymentMethod,
+    const checkoutInfo = {
+      shippingAddress: shippingInfo.address,
+      lname: shippingInfo.lname,
+      fname: shippingInfo.fname,
+      phoneNumber: shippingInfo.phone,
+      paymentMethod: paymentMethod,
+      note: shippingInfo.note || '',
+    };
+
+    try {
+      const orderResponse = await Api.checkout(checkoutInfo);
+      const orderId = orderResponse?.orderId;
+
+      if (paymentMethod === 'qr') {
+        const returnUrl = `${window.location.origin}/payment/success?paymentId=${orderId}`;
+        const cancelUrl = `${window.location.origin}/payment/cancel?paymentId=${orderId}`;
+
+        const paymentPayload = {
+          orderId: orderId,
+          returnUrl,
+          cancelUrl
+        };
+
+        console.log('Creating payment with payload:', paymentPayload);
+
+        const paymentRes = await Api.createPayment(paymentPayload); 
+
+        if (paymentRes?.data?.checkoutUrl) {
+          window.location.href = paymentRes.data.checkoutUrl;
+        } else {
+          console.error('Lỗi khi tạo payment:', paymentRes.message);
+          alert("Không thể tạo liên kết thanh toán. Vui lòng thử lại!");
+        }
+      } else {
+        alert(orderResponse.message || "Đặt hàng thành công!");
+        setOrderConfirmed(true);
+        window.location.href = "/";
+      }
+    } catch (error) {
+      alert("Đặt hàng thất bại. Vui lòng thử lại!");
+      console.error(error);
+    }
   };
-
-  try {
-    const result = await Api.checkout(checkoutInfo);
-    alert(result.message || "Đặt hàng thành công!");
-
-    // Tuỳ chọn: Clear giỏ hàng từ localStorage
-    setOrderConfirmed(true);
-    window.location.href = "/"; // Hoặc chuyển hướng sang trang cảm ơn
-  } catch (error) {
-    alert("Đặt hàng thất bại. Vui lòng thử lại!");
-    console.error(error);
-  }
-};
-
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -218,28 +229,14 @@ export default function CheckoutPage({ appliedVoucher = null }) {
                       <input
                         type="radio"
                         name="paymentMethod"
-                        value="card"
-                        checked={paymentMethod === 'card'}
+                        value="qr"
+                        checked={paymentMethod === 'qr'}
                         onChange={(e) => setPaymentMethod(e.target.value)}
                         className="mr-2"
                       />
                       <div>
-                        <p className="font-medium">Thẻ tín dụng/Thẻ ghi nợ</p>
-                        <p className="text-sm text-gray-600">Visa, Mastercard, JCB</p>
-                      </div>
-                    </label>
-                    <label className="flex items-center p-4 border rounded-md cursor-pointer hover:bg-gray-50">
-                      <input
-                        type="radio"
-                        name="paymentMethod"
-                        value="momo"
-                        checked={paymentMethod === 'momo'}
-                        onChange={(e) => setPaymentMethod(e.target.value)}
-                        className="mr-2"
-                      />
-                      <div>
-                        <p className="font-medium">Ví điện tử MoMo</p>
-                        <p className="text-sm text-gray-600">Thanh toán qua ứng dụng MoMo</p>
+                        <p className="font-medium">Thanh toán trực tuyến</p>
+                        <p className="text-sm text-gray-600">Quét mã QR code</p>
                       </div>
                     </label>
                   </div>

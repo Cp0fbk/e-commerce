@@ -84,7 +84,7 @@ export default function UserAccountPage() {
             <div className="bg-white rounded-lg shadow-sm p-4">
               <div className="mb-4">
                 <p className="font-medium">{userInfo.name}</p>
-                <p className="text-sm text-gray-600">{userInfo.email}</p>
+                <p className="text-sm text-gray-600">{userInfo.username}</p>
               </div>
               <nav className="space-y-2">
                 <button onClick={() => setActiveTab('profile')} className={`w-full text-left py-2 px-4 rounded-md ${activeTab === 'profile' ? 'bg-blue-100 text-blue-600' : 'hover:bg-gray-100'}`}>
@@ -121,8 +121,8 @@ export default function UserAccountPage() {
                     <label className="block text-sm font-medium mb-1">Email</label>
                     <input
                       type="email"
-                      value={userInfo.email}
-                      onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
+                      value={userInfo.username}
+                      onChange={(e) => setUserInfo({ ...userInfo, username: e.target.value })}
                       className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
@@ -130,8 +130,8 @@ export default function UserAccountPage() {
                     <label className="block text-sm font-medium mb-1">Số điện thoại</label>
                     <input
                       type="tel"
-                      value={userInfo.phone}
-                      onChange={(e) => setUserInfo({ ...userInfo, phone: e.target.value })}
+                      value={userInfo.phoneNumber}
+                      onChange={(e) => setUserInfo({ ...userInfo, phoneNumber: e.target.value })}
                       className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
@@ -208,7 +208,7 @@ export default function UserAccountPage() {
                     <div>
                       <h3 className="font-medium mb-2">Thông tin giao hàng</h3>
                       <p className="text-sm text-gray-600">Tên: {userInfo.name}</p>
-                      <p className="text-sm text-gray-600">Số điện thoại: {userInfo.phone}</p>
+                      <p className="text-sm text-gray-600">Số điện thoại: {userInfo.phoneNumber}</p>
                       <p className="text-sm text-gray-600">Địa chỉ: 123 Đường Lê Lợi, Quận 1, TP.HCM (Mặc định)</p>
                     </div>
                     {selectedOrder.status === 'Chờ xử lý' && (

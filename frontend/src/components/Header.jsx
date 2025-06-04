@@ -1,8 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Search, ShoppingCart, Menu, X, User, LogOut, Package } from 'lucide-react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { CategoryContext } from '../context/CategoryContext';
+import Api from '../context/ApiContext';
 
 const Header = () => {
   const { isLoggedIn, logout } = useContext(AuthContext);
@@ -10,6 +11,23 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   const { categories, loading } = useContext(CategoryContext);
+  const [cartItemCount, setCartItemCount] = useState(0);
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const data = await Api.getCart();
+        const totalQuantity = data.content.reduce((sum, item) => sum + item.quantity, 0);
+        setCartItemCount(totalQuantity);
+      } catch (error) {
+        console.error('Không thể lấy thông tin giỏ hàng:', error);
+      }
+    };
+
+    fetchCart();
+  }, []);
+
+
   const handleLogout = () => {
     logout();
     setMobileMenuOpen(false);
@@ -102,17 +120,19 @@ const Header = () => {
                     <Package size={22} className="mr-1" />
                     <span className="hidden lg:inline">Tra cứu đơn hàng</span>
                   </NavLink>
-                  <NavLink 
-                    to="/cart" 
-                    className={({ isActive }) => 
+                  <NavLink
+                    to="/cart"
+                    className={({ isActive }) =>
                       `flex items-center hover:text-green-600 transition-colors relative ${isActive ? 'text-green-600' : 'text-gray-800'}`
                     }
                   >
                     <ShoppingCart size={22} className="mr-1" />
                     <span className="hidden md:inline">Giỏ hàng</span>
-                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                      3
-                    </span>
+                    {cartItemCount > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                        {cartItemCount}
+                      </span>
+                    )}
                   </NavLink>
                   <button
                     onClick={handleLogout}
