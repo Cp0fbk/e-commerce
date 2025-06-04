@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronRight} from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
-
-// Dữ liệu mẫu từ CartPage
-const initialCartItems = [
-  { id: 1, name: 'iPhone 15 Pro Max', price: 32990000, quantity: 1, image: '/api/placeholder/100/100', color: 'Titan Đen', storage: '256GB' },
-  { id: 3, name: 'MacBook Pro M3', price: 36990000, quantity: 1, image: '/api/placeholder/100/100', color: 'Xám', storage: '512GB' },
-  { id: 5, name: 'Sony WH-1000XM5', price: 6990000, quantity: 2, image: '/api/placeholder/100/100', color: 'Đen', options: 'Bluetooth 5.0' }
-];
+import Api from '../context/ApiContext';
 
 // eslint-disable-next-line no-unused-vars
 const availableVouchers = [
@@ -27,7 +21,8 @@ const categories = [
   { id: 5, name: 'Đồng hồ thông minh', subcategories: ['Apple Watch', 'Samsung Galaxy Watch', 'Xiaomi Watch'] },
 ];
 
-export default function CheckoutPage({ cartItems = initialCartItems, appliedVoucher = null }) {
+export default function CheckoutPage({ appliedVoucher = null }) {
+  const [cartItems, setCartItems] = useState([]);
   const [shippingInfo, setShippingInfo] = useState({
     fullName: '',
     phone: '',
@@ -37,6 +32,16 @@ export default function CheckoutPage({ cartItems = initialCartItems, appliedVouc
   });
   const [paymentMethod, setPaymentMethod] = useState('cod'); // cod, card, momo
   const [orderConfirmed, setOrderConfirmed] = useState(false);
+
+  useEffect(() => {
+    Api.getCart()
+      .then(data => {
+        setCartItems(data.content);
+      })
+      .catch(error => {
+        console.error("Failed to load cart:", error);
+      });
+  }, []);
 
   // Tính toán tổng tiền
   const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
@@ -57,16 +62,39 @@ export default function CheckoutPage({ cartItems = initialCartItems, appliedVouc
     setShippingInfo({ ...shippingInfo, [e.target.name]: e.target.value });
   };
 
-  const handleSubmitOrder = (e) => {
-    e.preventDefault();
-    // Kiểm tra thông tin vận chuyển
-    if (!shippingInfo.fullName || !shippingInfo.phone || !shippingInfo.address || !shippingInfo.city) {
-      alert('Vui lòng điền đầy đủ thông tin vận chuyển');
-      return;
-    }
-    // Xử lý đặt hàng (có thể gửi API ở đây)
-    setOrderConfirmed(true);
+  // const handleSubmitOrder = (e) => {
+  //   e.preventDefault();
+  //   // Kiểm tra thông tin vận chuyển
+  //   if (!shippingInfo.fullName || !shippingInfo.phone || !shippingInfo.address || !shippingInfo.city) {
+  //     alert('Vui lòng điền đầy đủ thông tin vận chuyển');
+  //     return;
+  //   }
+  //   // Xử lý đặt hàng (có thể gửi API ở đây)
+  //   setOrderConfirmed(true);
+  // };
+
+  const handleSubmitOrder = async () => {
+  const checkoutInfo = {
+    shippingAddress: shippingInfo.address,
+    lname: shippingInfo.lname,
+    fname: shippingInfo.fname,
+    phoneNumber: shippingInfo.phone,
+    paymentMethod: paymentMethod,
   };
+
+  try {
+    const result = await Api.checkout(checkoutInfo);
+    alert(result.message || "Đặt hàng thành công!");
+
+    // Tuỳ chọn: Clear giỏ hàng từ localStorage
+    setOrderConfirmed(true);
+    window.location.href = "/"; // Hoặc chuyển hướng sang trang cảm ơn
+  } catch (error) {
+    alert("Đặt hàng thất bại. Vui lòng thử lại!");
+    console.error(error);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -99,16 +127,29 @@ export default function CheckoutPage({ cartItems = initialCartItems, appliedVouc
                   <h2 className="text-xl font-semibold mb-4">Thông tin vận chuyển</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium mb-1">Họ và tên *</label>
-                      <input
-                        type="text"
-                        name="fullName"
-                        value={shippingInfo.fullName}
-                        onChange={handleShippingChange}
-                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        required
-                      />
-                    </div>
+                        <label className="block text-sm font-medium mb-1">Họ *</label>
+                        <input
+                          type="text"
+                          name="lname"
+                          value={shippingInfo.lname}
+                          onChange={handleShippingChange}
+                          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          required
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-1">Tên *</label>
+                        <input
+                          type="text"
+                          name="fname"
+                          value={shippingInfo.fname}
+                          onChange={handleShippingChange}
+                          className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          required
+                        />
+                      </div>
+
                     <div>
                       <label className="block text-sm font-medium mb-1">Số điện thoại *</label>
                       <input
