@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -78,6 +79,7 @@ public class CartController {
             cartIncludesProductLine.setCustomerId(customerRepository.findById(customerId).orElse(null));
             cartIncludesProductLine.setProductLineId(productLineRepository.findById(id.getProduct_line_id()).orElse(null));
             cartIncludesProductLineService.createCartIncludesProductLine(cartIncludesProductLine);
+            cartService.updateCartTotal(customerId); // Update the total amount in the cart
             Map<String, String> response = new HashMap<>();
             response.put("message", "Product added successfully");
 
@@ -151,10 +153,12 @@ public class CartController {
             cartRepository.delete(cart);
             cartIncludesProductLineService.deleteCartByCustomerId(customerId);
 
-            Map<String, String> response = new HashMap<>();
+            Map<String, Object> response = new HashMap<>();
             response.put("message", "Cart checked out successfully");
+            response.put("orderId", order.getOrderId());
 
-            return ResponseEntity.status(201).body(response);
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
         } catch (Exception e) {
             Map<String, String> errorResponse = new HashMap<>();
             errorResponse.put("message", "Error while checkout");

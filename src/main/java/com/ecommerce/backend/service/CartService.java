@@ -1,8 +1,12 @@
 package com.ecommerce.backend.service;
 
+import com.ecommerce.backend.dtos.cartDTO.CartDTO;
 import com.ecommerce.backend.model.Cart;
+import com.ecommerce.backend.repository.CartIncludesProductLineRepository;
 import com.ecommerce.backend.repository.CartRepository;
 import com.ecommerce.backend.repository.CustomerRepository;
+
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -18,6 +23,8 @@ public class CartService {
     private CartRepository cartRepository;
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private CartIncludesProductLineRepository cartIncludesProductLineRepository;
 
     public Cart createCart(Integer customerId) {
         Cart cart = new Cart();
@@ -57,6 +64,21 @@ public class CartService {
             return ResponseEntity.status(201).body(response);
         }  catch (DataIntegrityViolationException e) {
             return ResponseEntity.badRequest().body("One or more keys are taken");
+        }
+    }
+
+    public void updateCartTotal(Integer customerId) {
+        List<CartDTO> cartItems = cartIncludesProductLineRepository.findByCustomerId(customerId);
+
+        double total = cartItems.stream()
+                .mapToDouble(item -> item.getPrice() * item.getQuantity())
+                .sum();
+
+        Optional<Cart> cart = cartRepository.findByCustomer_id(customerId);
+        if (cart.isPresent()) {
+            Cart existingCart = cart.get();
+            existingCart.setTotal_amount(total);
+            cartRepository.save(existingCart);
         }
     }
 }

@@ -20,7 +20,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
     @GetMapping("/all")
-    @PreAuthorize("hasRole('CUSTOMER')")
+//    @PreAuthorize("hasRole('CUSTOMER')")
     public ResponseEntity<ApiResponse<List<CategoryTypeDTO>>> GetAllCategories () {
         try {
             List<CategoryTypeDTO> data = categoryService.GetAllCategories();

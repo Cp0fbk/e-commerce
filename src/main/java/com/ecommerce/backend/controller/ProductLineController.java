@@ -22,7 +22,7 @@ public class ProductLineController {
         this.productLineService = productLineService;
     }
     @GetMapping("/all")
-    @PreAuthorize("hasRole('CUSTOMER')")
+//    @PreAuthorize("hasRole('CUSTOMER')")
     public ResponseEntity<ApiResponse<List<ProductLineDTO>>> GetAllProducts () {
         try{
             List<ProductLineDTO> data = productLineService.GetAllProducts();
@@ -34,7 +34,7 @@ public class ProductLineController {
         }
     }
     @PostMapping("/filter")
-    @PreAuthorize("hasRole('CUSTOMER')")
+//    @PreAuthorize("hasRole('CUSTOMER')")
     public ResponseEntity<ApiResponse<Page<ProductLine>>> filterProducts(
             @RequestBody ProductFilterDTO filterDTO) {
 
@@ -59,7 +59,7 @@ public class ProductLineController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('CUSTOMER')")
+//    @PreAuthorize("hasRole('CUSTOMER')")
     public ResponseEntity<ApiResponse<ProductLineDetailsDTO>> getProductById(@PathVariable Integer id) {
         try {
             ProductLineDetailsDTO productDetails = productLineService.getProductDetails(id);

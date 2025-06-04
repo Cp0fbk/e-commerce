@@ -1,42 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { ShoppingCart, X, ChevronRight, Trash2, Minus, Plus, ChevronLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-// Data mẫu cho giỏ hàng
-const initialCartItems = [
-  { 
-    id: 1, 
-    name: 'iPhone 15 Pro Max', 
-    price: 32990000, 
-    originalPrice: 34990000,
-    quantity: 1, 
-    image: '/api/placeholder/100/100',
-    color: 'Titan Đen',
-    storage: '256GB'
-  },
-  { 
-    id: 3, 
-    name: 'MacBook Pro M3', 
-    price: 36990000, 
-    originalPrice: 38990000,
-    quantity: 1, 
-    image: '/api/placeholder/100/100',
-    color: 'Xám',
-    storage: '512GB'
-  },
-  { 
-    id: 5, 
-    name: 'Sony WH-1000XM5', 
-    price: 6990000, 
-    originalPrice: 8990000,
-    quantity: 2, 
-    image: '/api/placeholder/100/100',
-    color: 'Đen',
-    options: 'Bluetooth 5.0'
-  }
-];
+import Api from '../context/ApiContext';
 
 // Các mã giảm giá có thể sử dụng
 const availableVouchers = [
@@ -46,10 +13,25 @@ const availableVouchers = [
 ];
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState(initialCartItems);
+  const [cartItems, setCartItems] = useState([]);
   const [voucherCode, setVoucherCode] = useState('');
   const [appliedVoucher, setAppliedVoucher] = useState(null);
   const [voucherError, setVoucherError] = useState('');
+
+  const fetchCart = () => {
+  Api.getCart()
+    .then((data) => {
+      setCartItems(data.content);
+    })
+    .catch((error) => {
+      console.error("Failed to load cart:", error);
+    });
+};
+
+  useEffect(() => {
+  fetchCart();
+}, []);
+
   
   // Tính toán tổng tiền
   const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
@@ -69,16 +51,35 @@ export default function CartPage() {
   
   // Cập nhật số lượng sản phẩm
   const updateQuantity = (id, newQuantity) => {
-    if (newQuantity < 1) return;
-    setCartItems(cartItems.map(item => 
-      item.id === id ? { ...item, quantity: newQuantity } : item
-    ));
-  };
+  if (newQuantity < 1) return;
+
+  Api.updateCartQuantity(id, newQuantity)
+    .then(() => {
+      fetchCart();
+    })
+    .catch((error) => {
+      console.error("Update quantity failed:", error);
+      alert("Cập nhật số lượng thất bại, vui lòng thử lại.");
+    });
+};
+
+
   
   // Xóa sản phẩm khỏi giỏ hàng
   const removeItem = (id) => {
-    setCartItems(cartItems.filter(item => item.id !== id));
-  };
+    if (!window.confirm('Bạn có chắc muốn xóa sản phẩm này?')) return;
+    // console.log(id);
+    
+  Api.removeFromCart(id)
+    .then(() => {
+      fetchCart();
+    })
+    .catch((error) => {
+      console.error("Remove item failed:", error);
+    });
+};
+
+
   
   // Áp dụng mã giảm giá
   const applyVoucher = () => {
@@ -97,7 +98,7 @@ export default function CartPage() {
     setVoucherError('');
     setVoucherCode(''); // Reset input sau khi áp dụng thành công
   };
-  
+
   // Danh mục sản phẩm cho menu
   const categories = [
     { id: 1, name: 'Điện thoại', subcategories: ['iPhone', 'Samsung', 'Xiaomi', 'OPPO'] },
@@ -144,7 +145,7 @@ export default function CartPage() {
                 </div>
                 
                 {cartItems.map((item) => (
-                  <div key={item.id} className="p-4 border-b flex flex-col md:flex-row md:items-center">
+                  <div key={item.productId.id} className="p-4 border-b flex flex-col md:flex-row md:items-center">
                     <div className="flex md:w-2/5 mb-4 md:mb-0">
                       <img src={item.image} alt={item.name} className="w-20 h-20 object-contain mr-4" />
                       <div>
@@ -155,7 +156,7 @@ export default function CartPage() {
                           {item.options && <p>Tùy chọn: {item.options}</p>}
                         </div>
                         <button 
-                          onClick={() => removeItem(item.id)}
+                          onClick={() => removeItem(item.productId.id)}
                           className="text-red-500 text-sm flex items-center md:hidden"
                         >
                           <Trash2 size={16} className="mr-1" />
@@ -178,7 +179,7 @@ export default function CartPage() {
                       <span className="md:hidden font-medium">Số lượng:</span>
                       <div className="flex items-center border rounded-md">
                         <button 
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          onClick={() => updateQuantity(item.productId.id, item.quantity - 1)}
                           className="px-2 py-1 text-gray-600 hover:bg-gray-100 disabled:opacity-50"
                           disabled={item.quantity <= 1}
                         >
@@ -187,11 +188,15 @@ export default function CartPage() {
                         <input 
                           type="number" 
                           value={item.quantity} 
-                          onChange={(e) => updateQuantity(item.id, parseInt(e.target.value) || 1)}
+                          onChange={(e) => {
+                            const value = Math.max(1, parseInt(e.target.value) || 1);
+                            updateQuantity(item.productId.id, value);
+                          }}
+
                           className="w-12 text-center border-x focus:outline-none"
                         />
                         <button 
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          onClick={() => updateQuantity(item.productId.id, item.quantity + 1)}
                           className="px-2 py-1 text-gray-600 hover:bg-gray-100"
                         >
                           <Plus size={16} />
@@ -205,7 +210,7 @@ export default function CartPage() {
                     </div>
                     
                     <button 
-                      onClick={() => removeItem(item.id)}
+                      onClick={() => removeItem(item.productId.id)}
                       className="hidden md:block text-gray-400 hover:text-red-500 ml-4"
                     >
                       <Trash2 size={20} />
@@ -218,17 +223,6 @@ export default function CartPage() {
                     <ChevronLeft size={16} className="mr-1" />
                     Tiếp tục mua sắm
                   </Link>
-                  <button 
-                    onClick={() => {
-                      if (window.confirm('Bạn có chắc chắn muốn xóa tất cả sản phẩm trong giỏ hàng?')) {
-                        setCartItems([]);
-                      }
-                    }}
-                    className="text-red-500 flex items-center hover:underline"
-                  >
-                    <Trash2 size={16} className="mr-1" />
-                    Xóa tất cả
-                  </button>
                 </div>
               </div>
             </div>

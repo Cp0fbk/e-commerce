@@ -16,6 +16,8 @@ import { AuthProvider } from './context/AuthContext';
 import ContactPage from './pages/ContactPage';
 import NewsPage from './pages/NewsPage';  
 import { CategoryProvider } from './context/CategoryContext';
+import PaymentCancel from './pages/PaymentCancel';
+import PaymentSuccess  from './pages/PaymentSuccess';
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/news" element={<NewsPage />} />
+            <Route path="/payment/cancel" element={<PaymentCancel />} />
+            <Route path="/payment/success" element={<PaymentSuccess />} />
           </Routes>
         </BrowserRouter>
       </CategoryProvider>

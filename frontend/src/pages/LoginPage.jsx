@@ -64,7 +64,7 @@ const LoginPage = () => {
             <div>
               <label className="block text-sm font-medium mb-1">Email</label>
               <input
-                type="email"
+                type="text"
                 value={loginData.username}
                 onChange={(e) => setLoginData({ ...loginData, username: e.target.value })}
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"

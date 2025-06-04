@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_BASE_URL = "https://e-commerce-16de.onrender.com/api";
+//const API_BASE_URL = "https://e-commerce-16de.onrender.com/api";
+const API_BASE_URL = "http://localhost:8080/api";
 
 class ApiService {
   constructor() {
@@ -235,6 +236,26 @@ class ApiService {
     }
   }
 
+  async paymentSuccess(paymentId) {
+    try {
+      const response = await this.axios.get(`/payment/success?paymentId=${paymentId}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error confirming payment success:", error);
+      throw error;
+    }
+  }
+
+  async cancelPayment(paymentId) {
+    try {
+      const response = await this.axios.get(`/payment/cancel?paymentId=${paymentId}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error confirming payment cancellation:", error);
+      throw error;
+    }
+  }
+
   // Promotion methods
   async getAllPromotions() {
     try {
@@ -278,7 +299,7 @@ class ApiService {
       throw error;
     }
   }
-  
+
   // Thêm hoặc cập nhật phương thức filterByBrand
   async filterByBrand(brand) {
     try {
