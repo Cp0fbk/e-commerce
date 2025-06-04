@@ -15,28 +15,32 @@ import RegisterPage from './pages/RegisterPage';
 import { AuthProvider } from './context/AuthContext';
 import ContactPage from './pages/ContactPage';
 import NewsPage from './pages/NewsPage';  
+import { CategoryProvider } from './context/CategoryContext';
+
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/detail" element={<DetailPage />} />
-          <Route path="/products/:id" element={<DetailProduct />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/orders" element={<OrderTrackingPage />} />
-          <Route path="/promotions" element={<PromotionsPage />} />
-          <Route path="/stores" element={<StoreLocatorPage />} />
-          <Route path="/account" element={<UserAccountPage />} />
-          <Route path="/NewProducts" element={<NewProductPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/news" element={<NewsPage />} />
-        </Routes>
-      </BrowserRouter>
+      <CategoryProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/detail/:categoryId?" element={<DetailPage />} />
+            <Route path="/products/:id" element={<DetailProduct />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/orders" element={<OrderTrackingPage />} />
+            <Route path="/promotions" element={<PromotionsPage />} />
+            <Route path="/stores" element={<StoreLocatorPage />} />
+            <Route path="/account" element={<UserAccountPage />} />
+            <Route path="/NewProducts" element={<NewProductPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/news" element={<NewsPage />} />
+          </Routes>
+        </BrowserRouter>
+      </CategoryProvider>
     </AuthProvider>
   );
 }

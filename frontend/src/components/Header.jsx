@@ -2,13 +2,14 @@ import React, { useState, useContext } from 'react';
 import { Search, ShoppingCart, Menu, X, User, LogOut, Package } from 'lucide-react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { CategoryContext } from '../context/CategoryContext';
 
-const Header = ({ categories }) => {
+const Header = () => {
   const { isLoggedIn, logout } = useContext(AuthContext);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
-
+  const { categories, loading } = useContext(CategoryContext);
   const handleLogout = () => {
     logout();
     setMobileMenuOpen(false);
@@ -308,22 +309,37 @@ const Header = ({ categories }) => {
       <nav className="bg-green-100 border-b border-green-200 hidden md:block">
         <div className="container mx-auto px-4">
           <div className="flex items-center space-x-6 py-3">
-            {categories && categories.length > 0 ? (
-              categories.map((category) => (
+            {loading ? (
+              <span className="text-gray-500">Đang tải danh mục...</span>
+            ) : categories && categories.length > 0 ? (
+              categories
+              .sort((a, b) => a.categoryTypeId - b.categoryTypeId)
+              .map((category) => {
+                const customNames = {
+                  1: "Điện thoại",
+                  2: "Laptop",
+                  3: "Máy tính bảng",
+                  4: "Tai nghe",
+                  5: "Chuột",
+                  6: "Bàn phím",
+                };
+                const displayName = customNames[category.categoryTypeId] || category.name;
+                return (
                 <NavLink
-                  key={category.id}
-                  to={`/detail?category=${category.name}`}
+                  key={category.categoryTypeId}
+                  to={`/detail/${category.categoryTypeId}`}
                   className={({ isActive }) => 
                     `text-gray-800 hover:bg-blue-600 hover:text-white hover:scale-105 px-3 py-1 rounded-md transition-all duration-200 ${
                       isActive ? 'text-green-700 font-semibold' : ''
                     }`
                   }
                 >
-                  {category.name}
+                  {displayName}
                 </NavLink>
-              ))
+                );
+              })
             ) : (
-              <span className="text-gray-500">Đang tải danh mục...</span>
+              <span className="text-gray-500">Không có danh mục nào</span>
             )}
             
             <NavLink 

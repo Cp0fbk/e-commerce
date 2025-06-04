@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronRight, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom'; // Thêm import Link từ react-router-dom
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Api from '../context/ApiContext';
 
 // Data mẫu
 const categories = [
@@ -84,7 +85,9 @@ const brands = [
 
 export default function HomePage() {
   const [currentBanner, setCurrentBanner] = useState(0);
-
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   // Star component for ratings
   const RatingStars = ({ rating }) => {
     return (
@@ -103,6 +106,22 @@ export default function HomePage() {
     }, 5000);
     return () => clearTimeout(timer);
   }, [currentBanner]);
+  
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        const data = await Api.getAllCategories();
+        setCategories(data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching categories:", err);
+        setError("Không thể tải danh mục sản phẩm");
+        setLoading(false);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -142,22 +161,98 @@ export default function HomePage() {
           </div>
         </div>
 
+        {/* Category thumbnails
+        <div className="bg-white">
+          <div className="container mx-auto px-4 py-8">
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+              {categories
+                .sort((a, b) => a.categoryTypeId - b.categoryTypeId)
+                .map(category => {
+                  const customNames = {
+                    1: "Điện thoại",
+                    2: "Laptop",
+                    3: "Máy tính bảng",
+                    4: "Tai nghe",
+                    5: "Chuột",
+                    6: "Bàn phím",
+                  };
+                  
+                  const customImages = {
+                    1: "https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-blue-thumbnew-600x600.jpg",
+                    2: "https://surfaceviet.vn/wp-content/uploads/2024/05/Surface-Laptop-7-Platinum-13.8-inch.jpg",
+                    3: "https://cdn.tgdd.vn/Products/Images/522/247517/iPad-9-wifi-trang-600x600.jpg",
+                    4: "https://bizweb.dktcdn.net/100/340/129/products/tai-nghe-sony-ch-ch520-cuongphanvn-15.jpg?v=1728015465527",
+                    5: "https://product.hstatic.net/200000637319/product/logitech-g102-lightsync-rgb-wired-gaming-mouse-black-903150-_41483e8daff448edbb83afc2524b811f_master.jpg",
+                    6: "https://product.hstatic.net/1000233206/product/logitech-g-pro-x-mechanical-gaming-keyboard_2-600x400_0472fe2fcf3640dd8836c1fed7377043_grande.jpg"
+                  };
+
+                  return (
+                    <Link 
+                      to={`/detail/${category.categoryTypeId}`}
+                      key={category.categoryTypeId} 
+                      className="flex flex-col items-center p-4 border rounded-lg hover:shadow-md transition-shadow"
+                    >
+                      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-2">
+                        <img 
+                          src={customImages[category.categoryTypeId]} 
+                          alt={customNames[category.categoryTypeId]} 
+                          className="w-8 h-8 object-contain" 
+                        />
+                      </div>
+                      <span className="text-center font-medium">
+                        {customNames[category.categoryTypeId]}
+                      </span>
+                    </Link>
+                  );
+                })}
+            </div>
+          </div>
+        </div> */}
+
         {/* Category thumbnails */}
         <div className="bg-white">
           <div className="container mx-auto px-4 py-8">
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              {categories.map(category => (
-                <Link 
-                  to={`/products?category=${category.id}`}
-                  key={category.id} 
-                  className="flex flex-col items-center p-4 border rounded-lg hover:shadow-md transition-shadow"
-                >
-                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-2">
-                    <img src={category.imageUrl} alt={category.name} className="w-8 h-8 object-contain" />
-                  </div>
-                  <span className="text-center font-medium">{category.name}</span>
-                </Link>
-              ))}
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-6">
+              {categories
+                .sort((a, b) => a.categoryTypeId - b.categoryTypeId)
+                .map(category => {
+                  const customNames = {
+                    1: "Điện thoại",
+                    2: "Laptop",
+                    3: "Máy tính bảng",
+                    4: "Tai nghe",
+                    5: "Chuột",
+                    6: "Bàn phím",
+                  };
+                  
+                  const customImages = {
+                    1: "https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-blue-thumbnew-600x600.jpg",
+                    2: "https://surfaceviet.vn/wp-content/uploads/2024/05/Surface-Laptop-7-Platinum-13.8-inch.jpg",
+                    3: "https://cdn.tgdd.vn/Products/Images/522/247517/iPad-9-wifi-trang-600x600.jpg",
+                    4: "https://bizweb.dktcdn.net/100/340/129/products/tai-nghe-sony-ch-ch520-cuongphanvn-15.jpg?v=1728015465527",
+                    5: "https://product.hstatic.net/200000637319/product/logitech-g102-lightsync-rgb-wired-gaming-mouse-black-903150-_41483e8daff448edbb83afc2524b811f_master.jpg",
+                    6: "https://product.hstatic.net/1000233206/product/logitech-g-pro-x-mechanical-gaming-keyboard_2-600x400_0472fe2fcf3640dd8836c1fed7377043_grande.jpg"
+                  };
+
+                  return (
+                    <Link 
+                      to={`/detail/${category.categoryTypeId}`}
+                      key={category.categoryTypeId} 
+                      className="flex flex-col items-center p-6 border rounded-lg hover:shadow-lg transition-shadow"
+                    >
+                      <div className="w-24 h-24 md:w-32 md:h-32 bg-gray-50 rounded-full flex items-center justify-center mb-4 overflow-hidden">
+                        <img 
+                          src={customImages[category.categoryTypeId]} 
+                          alt={customNames[category.categoryTypeId]} 
+                          className="w-20 h-20 md:w-28 md:h-28 object-contain hover:scale-110 transition-transform duration-300" 
+                        />
+                      </div>
+                      <span className="text-center font-medium text-sm md:text-base">
+                        {customNames[category.categoryTypeId]}
+                      </span>
+                    </Link>
+                  );
+                })}
             </div>
           </div>
         </div>
