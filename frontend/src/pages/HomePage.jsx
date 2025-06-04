@@ -139,7 +139,7 @@ export default function HomePage() {
                       <h2 className="text-2xl md:text-4xl font-bold mb-2">{banner.title}</h2>
                       <p className="text-lg md:text-xl mb-4">{banner.description}</p>
                       <Link 
-                        to="/products/1" // Thay bằng link đến sản phẩm phù hợp
+                        to={`/products/${banner.id}`} // Thay bằng link đến sản phẩm phù hợp
                         className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 inline-block"
                       >
                         Mua ngay
