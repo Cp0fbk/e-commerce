@@ -54,7 +54,8 @@ public class SecurityConfig {
 													"/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**", "/webjars/**", "/swagger-ui.html")
 													.permitAll()
 												.requestMatchers("/api/webhook/**", "/api/payment/success", "/api/payment/cancel", "/api/categories/all",
-														"/api/products/all", "/api/products/filter", "/api/products/**", "/api/images/upload", "/api/images/product-line/**").permitAll()
+														"/api/products/all", "/api/products/filter", "/api/products/**", "/api/images/upload",
+														"/api/promotions/all", "/api/promotions/onDate", "/api/images/product-line/**").permitAll()
 												// Các endpoint khác yêu cầu xác thực
 												.anyRequest().authenticated())
 												.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
