@@ -14,5 +14,5 @@
 - Bước 3: Chạy file EcommerceApplication.java. Nếu dùng Visual Studio Code thì chạy trên Spring Boot Dashboard (biểu tượng nút mở/tắt trong hình lục giác đều)
 ### Frontend (Vite + ReactJS)
 - Bước 1: Chuyển terminal sang thư mục frontend
-- Bước 2: Chạy câu lệnh npm install, sau đó là npm run dev
+- Bước 2: Chạy câu lệnh npm install, sau đó là npm start để khởi chạy web
 - Bước 3: Nếu chạy thành công, vào http://localhost:5173/ để kiểm tra.

@@ -5,7 +5,7 @@ INSERT INTO `account` (username, `password`, `role`)
 VALUES
     ('nguyenvannam@gmail.com', '$2a$10$sSbyOAXRXFZASuZ11M5aPuKcicy.QwDXM6sADA4xXpk/1WYwU2Dcu', 'ROLE_CUSTOMER'),     -- 123456789
     ('ledinhbao@gmail.com', '$2a$10$wyTpxQhFYrr56fkTspl3TObBvw3q6AEnRuePdF0izC8jIAJM8AuHm', 'ROLE_CUSTOMER'),        -- 2159561563
-    ('buiconglan@gmail.com', '$2a$10$ZlPqYkLB4JCBk5T2IbA/R.ykKFGzZjkKPkD4Kb8I/EiOj6cMCwHse', 'ROLE_CUSTOMER'),       -- 7822463256
+    ('buiconglan@gmail.com', '$2a$10$ZlPqYkLB4JCBk5T2IbA    /R.ykKFGzZjkKPkD4Kb8I/EiOj6cMCwHse', 'ROLE_CUSTOMER'),       -- 7822463256
     ('nguyenhoa1594@gmail.com', '$2a$10$sXTu24YQP6Yiozvwic1oyebyJiTqAD0G7m42KplwpBSRNa6vrueku', 'ROLE_CUSTOMER'),    -- setgsr85gs
     ('tnguyen21ah@gmail.com', '$2a$10$XJs..IIhWP9A6OQNx24j1u7WjqBrfmJ01Sh7JOJMVFMyJm4U8Abpa', 'ROLE_CUSTOMER'),      -- st9e8ds567
     ('thanhnguyen51@gmail.com', '$2a$10$DMCl29qdNvWW6TxyW1VmkucmDQS6dnnMKcfkwMhdzxHpMNmtEIvKe', 'ROLE_CUSTOMER'),    -- sgresgh7se5
@@ -60,11 +60,10 @@ VALUES
 INSERT INTO category_type(`name`) 
 VALUES 
 	('Smartphone'),
+    ('Laptop'),
 	('Tablet'),
-	('Laptop'),
     ('Headphone'),
-    ('Earphone'),
-	('Keyboard');
+	('Smartwatch');
 
 -- Insert bảng ProductLine
 INSERT INTO product_line(`name`, brand, is_used, stock_status, price, `description`, category, color, promotion_id, discount_percentage, category_type_id) 
@@ -76,6 +75,49 @@ VALUES
     ('Lenovo ThinkBook 14 G6 IRL', 'Lenovo', 0, 1, 18290000, 'Lenovo ThinkBook 14 G6 IRL hoan hao cho cong viec thuong ngay cua ban, san sang duong dau moi thu thach.', 'device', 'Grey', NULL, 0, 1),
     ('Tai nghe Bluetooth Edifier W800BT Pro', 'Edifier', 0, 1, 1080000, 'Tai nghe chup tai voi am thanh vuot troi.', 'accessory', 'Black', NULL, 0, 5),
     ('Tai nghe AirPods Max', 'Apple', 0, 1, 12990000, 'AirPods Max dem toi su can bang hoan hao giua trai nghiem am thanh trung thuc va tinh tien dung.', 'accessory', 'Silver', 1, 10, 4);
+    ('iPhone 15 Pro Max','Apple',0,1,32990000,'iPhone 15 Pro Max trang bị chip A17 Pro, cụm camera chuyên nghiệp và màn hình Super Retina XDR 6.7 inch.','device',NULL,NULL,0,1),
+    ('Samsung Galaxy S24 Ultra','Samsung',0,1,28990000,'Samsung Galaxy S24 Ultra sở hữu màn hình Dynamic AMOLED 2X 6.8 inch và camera 200MP ấn tượng.','device',NULL,NULL,0,1),
+    ('Xiaomi 14 Ultra','Xiaomi',0,1,24990000,'Xiaomi 14 Ultra mang đến hiệu năng vượt trội với chip Snapdragon 8 Gen 3 và camera Leica cao cấp.','device',NULL,NULL,0,1),
+    ('OPPO Find X7 Ultra','OPPO',0,0,21990000,'OPPO Find X7 Ultra có thiết kế tinh tế, màn hình AMOLED 6.8 inch và camera ấn tượng.','device',NULL,NULL,0,1),
+    ('iPhone 15','Apple',0,1,21990000,'iPhone 15 thiết kế gọn nhẹ, trang bị chip A16 Bionic và camera kép chất lượng.','device',NULL,NULL,0,1),
+    ('Samsung Galaxy S24','Samsung',0,1,19990000,'Samsung Galaxy S24 với màn hình Dynamic AMOLED 2X 6.2 inch và chip Exynos 2400.','device',NULL,NULL,0,1),
+    ('Xiaomi 14','Xiaomi',0,1,16990000,'Xiaomi 14 nổi bật với cấu hình mạnh mẽ, chip Snapdragon 8 Gen 3 và camera 50MP.','device',NULL,NULL,0,1),
+    ('OPPO Reno 12 Pro','OPPO',0,1,14990000,'OPPO Reno 12 Pro sở hữu thiết kế thời thượng, màn hình 6.7 inch và camera 50MP.','device',NULL,NULL,0,1),
+    ('Vivo X100 Pro','Vivo',0,1,22990000,'Vivo X100 Pro trang bị chip Snapdragon 8 Gen 3, camera chuyên nghiệp và màn hình 6.78 inch.','device',NULL,NULL,0,1),
+    ('iPhone 14 Pro Max','Apple',0,0,26990000,'iPhone 14 Pro Max với màn hình ProMotion 6.7 inch, chip A16 Bionic và camera Pro 48MP.','device',NULL,NULL,0,1),
+    ('Realme GT 6','Realme',0,1,15990000,'Realme GT 6 cung cấp hiệu năng cao với chip Snapdragon 8s Gen 3 và màn hình 6.78 inch.','device',NULL,NULL,0,1),
+    ('Nokia X50','Nokia',0,1,9990000,'Nokia X50 thiết kế bền bỉ, trang bị chip Snapdragon và camera Zeiss chất lượng.','device',NULL,NULL,0,1),
+    ('MacBook Pro 16-inch','Apple',0,1,55990000,'MacBook Pro 16-inch trang bị chip M2 Pro, màn hình Retina sắc nét và bàn phím Magic Keyboard.','device',NULL,NULL,0,2),
+    ('Dell XPS 13','Dell',0,1,33990000,'Dell XPS 13 với thiết kế mỏng nhẹ, màn hình InfinityEdge 13.4 inch và chip Intel i7-1355U.','device',NULL,NULL,0,2),
+    ('HP Spectre x360','HP',0,1,30990000,'HP Spectre x360 14 inch 2-in-1 có màn hình OLED và chip Intel i7 thế hệ 12.','device',NULL,NULL,0,2),
+    ('Lenovo ThinkPad X1 Carbon','Lenovo',0,1,31990000,'ThinkPad X1 Carbon 14 inch nhẹ nhàng, chip Intel i7-1365U và độ bền quân sự.','device',NULL,NULL,0,2),
+    ('ASUS ROG Zephyrus G14','ASUS',0,1,36990000,'ASUS ROG Zephyrus G14 sở hữu CPU Ryzen 9 7940HS, GPU RTX 4070 và màn hình 14 inch 120Hz.','device',NULL,NULL,0,2),
+    ('Acer Swift 5','Acer',0,1,25990000,'Acer Swift 5 14 inch siêu nhẹ, chip Intel i5-1335U và thời lượng pin lâu.','device',NULL,NULL,0,2),
+    ('Microsoft Surface Laptop 5','Microsoft',0,1,27990000,'Surface Laptop 5 13.5 inch, chip Intel i5-1235U và bàn phím Alcantara.','device',NULL,NULL,0,2),
+    ('Razer Blade 14','Razer',0,1,41990000,'Razer Blade 14 gaming laptop với CPU Ryzen 9 7940HS và GPU RTX 4070, màn hình 14 inch QHD 165Hz.','device',NULL,NULL,0,2),
+    ('iPad Pro 11-inch','Apple',0,1,24990000,'iPad Pro 11-inch M2 với màn hình Liquid Retina 120Hz và hỗ trợ Apple Pencil 2.','device',NULL,NULL,0,3),
+    ('Samsung Galaxy Tab S8','Samsung',0,1,19990000,'Galaxy Tab S8 với màn hình TFT 11 inch, chip Snapdragon 8 Gen 1 và bút S Pen.','device',NULL,NULL,0,3),
+    ('Xiaomi Pad 6','Xiaomi',0,1,8990000,'Xiaomi Pad 6 11 inch, chip Snapdragon 870 và loa stereo Harman Kardon.','device',NULL,NULL,0,3),
+    ('Huawei MatePad Pro','Huawei',0,1,17990000,'Huawei MatePad Pro 12.6 inch OLED, chip Kirin 9000E và bút M-Pencil.','device',NULL,NULL,0,3),
+    ('Lenovo Tab P11 Pro','Lenovo',0,1,11990000,'Lenovo Tab P11 Pro 11.5 inch OLED, chip Snapdragon 730G và bốn loa JBL.','device',NULL,NULL,0,3),
+    ('Amazon Fire HD 10','Amazon',0,1,4990000,'Amazon Fire HD 10 11th Gen, màn hình 10.1 inch Full HD và pin 12 giờ.','device',NULL,NULL,0,3),
+    ('Microsoft Surface Go 3','Microsoft',0,1,10990000,'Surface Go 3 10.5 inch, chip Intel Pentium Gold 6500Y và hỗ trợ Type Cover.','device',NULL,NULL,0,3),
+    ('Huawei MatePad','Huawei',0,1,9990000,'Huawei MatePad 10.4 inch, chip Kirin 810 và hỗ trợ bút cảm ứng.','device',NULL,NULL,0,3),
+    ('Sony WH-1000XM5','Sony',0,1,7990000,'Sony WH-1000XM5 tai nghe chống ồn chủ động, pin 30 giờ và âm thanh cao cấp.','device',NULL,NULL,0,4),
+    ('Bose QuietComfort 45','Bose',0,1,7490000,'Bose QuietComfort 45 chống ồn, pin 24 giờ và kết nối Bluetooth 5.1.','device',NULL,NULL,0,4),
+    ('Sennheiser HD 450BT','Sennheiser',0,1,3490000,'Sennheiser HD 450BT tai nghe không dây, chống ồn và âm thanh Hi-Fi.','device',NULL,NULL,0,4),('Apple AirPods Max','Apple',0,0,12990000,'AirPods Max tai nghe over-ear với âm thanh động lực học cao cấp và chống ồn chủ động.','device',NULL,NULL,0,4),
+    ('Beats Studio3','Beats',0,1,5290000,'Beats Studio3 Wireless, chống ồn chủ động và thời lượng pin 22 giờ.','device',NULL,NULL,0,4),
+    ('JBL Live 660NC','JBL',0,1,2990000,'JBL Live 660NC chống ồn, kết nối Bluetooth 5.0 và âm thanh JBL Signature.','device',NULL,NULL,0,4),
+    ('Bang & Olufsen Beoplay HX','Bang & Olufsen',0,1,12990000,'Beoplay HX cao cấp, âm thanh 3D và pin 35 giờ.','device',NULL,NULL,0,4),
+    ('Jabra Elite 85h','Jabra',0,1,3990000,'Jabra Elite 85h chống ồn chủ động, pin 36 giờ và chống nước IP52.','device',NULL,NULL,0,4),
+    ('Apple Watch Series 9','Apple',0,1,11990000,'Apple Watch Series 9 với chip S9, màn hình Always-On Retina và đo ECG.','device',NULL,NULL,0,5),
+    ('Samsung Galaxy Watch 6','Samsung',0,1,7490000,'Galaxy Watch 6 44mm, màn hình Super AMOLED và theo dõi sức khỏe toàn diện.','device',NULL,NULL,0,5),
+    ('Fitbit Sense 2','Fitbit',0,1,4990000,'Fitbit Sense 2 đo ECG, đo nhiệt độ da và theo dõi stress.','device',NULL,NULL,0,5),
+    ('Garmin Venu 3','Garmin',0,1,8990000,'Garmin Venu 3 OLED, định vị GPS, đo nhịp tim và theo dõi thể thao.','device',NULL,NULL,0,5),
+    ('Huawei Watch GT 4','Huawei',0,1,6490000,'Huawei Watch GT 4 pin 2 tuần, màn hình AMOLED và theo dõi sức khỏe.','device',NULL,NULL,0,5),
+    ('Amazfit GTR 4','Amazfit',0,1,3990000,'Amazfit GTR 4 1.43 inch AMOLED, đo nồng độ oxy máu và GPS đa chế độ.','device',NULL,NULL,0,5),
+    ('Fossil Gen 6','Fossil',0,1,5490000,'Fossil Gen 6 Snapdragon Wear 4100+ và sạc nhanh, theo dõi sức khỏe cơ bản.','device',NULL,NULL,0,5),
+    ('TicWatch Pro 3','Mobvoi',0,1,6790000,'TicWatch Pro 3 với dual-layer display, chip Snapdragon Wear 4100 và pin 3 ngày.','device',NULL,NULL,0,5);
 
 -- Insert bảng Device
 INSERT INTO device (id, ram, operator_system, battery_capacity, `weight`, camera, storage, screen_size, display_resolution) 
@@ -181,6 +223,21 @@ VALUES
     (5, 'image5.jpg'),
     (6, 'image6.png'),
     (7, 'image7.png');
+    (8, 'https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-blue-thumbnew-600x600.jpg'),
+    (9, 'https://cdn.tgdd.vn/Products/Images/42/307174/TimerThumb/samsung-galaxy-s24-ultra-5g-(68).jpg'),
+    (10, 'https://cdn.tgdd.vn/Products/Images/42/313889/xiaomi-14-ultra-1-750x500.jpg'),
+    (11, 'https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/e/d/eda006276802c_1.jpg'),
+    (12, 'https://cdn.tgdd.vn/Products/Images/42/281570/iphone-15-hong-thumb-1-600x600.jpg'),
+    (13, 'https://cdn.tgdd.vn/Products/Images/42/333363/TimerThumb/samsung-galaxy-s25-(24).jpg'),
+    (14, 'https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/42/333147/xiaomi-redmi-note-14-purple-1-638723659806437798-750x500.jpg'),
+    (15, 'https://cdn.tgdd.vn/Products/Images/42/327192/TimerThumb/oppo-reno12-5g-12gb-512gb-(32).jpg'),
+    (16, 'https://cdn.tgdd.vn/Products/Images/42/307003/vivo-x100-pro-600x600.jpg'),
+    (17, 'https://cdn.tgdd.vn/Products/Images/42/289700/iphone-14-pro-max-tim-thumb-600x600.jpg'),
+    (18, 'https://cdn.tgdd.vn/Products/Images/42/309861/realme-gt-neo6-600x600.jpg'),
+    (19, 'https://cdn.tgdd.vn/Products/Images/42/237944/nokia-x50-600x600.jpg'),
+    (20, 'https://laptopkhanhtran.vn/pic/product/Dell-XPS-_638702064881017032_HasThumb.jpg'),
+    (21, 'https://hanoilab.com/wp-content/uploads/2024/10/Hp-Speectre-X360-HanoiLab--768x768.jpg')
+
 
 -- Insert bảng CartIncludesProductLine
 INSERT INTO cart_includes_product_line(product_line_id, customer_id, price, quantity) 
