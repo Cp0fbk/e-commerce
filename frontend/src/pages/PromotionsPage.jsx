@@ -82,6 +82,7 @@ const categories = [
 
 export default function PromotionsPage() {
   const [promotions, setPromotions] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [activePromotions, setActivePromotions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

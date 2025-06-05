@@ -155,6 +155,7 @@ const ContactPage = () => {
                   className="w-full h-64 md:h-80 rounded-lg shadow-md"
                   allowFullScreen=""
                   loading="lazy"
+                  title="Google map location"
                 ></iframe>
               </div>
             </div>
