@@ -348,7 +348,7 @@ export default function HomePage() {
                 <img src="https://cdn.hoanghamobile.com/i/preview-np-V2/Uploads/ImageHightlight/6701_xiaomi-redmi-13-6gb-128gb/xiaomi-redmi-13-6gb-128gb638555336287725673.jpg" alt="Khuyến mãi điện thoại" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center p-6">
                   <div className="text-white">
-                    <h3 className="text-xl font-bold mb-2">Chào đón hè về</h3>
+                    <h3 className="text-xl font-bold mb-2">Khuyến mãi cuối tuần</h3>
                     <p className="mb-4">Giảm 10% cho tất cả điện thoại</p>
                     <Link 
                       to="/promotions" 

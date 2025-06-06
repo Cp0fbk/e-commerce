@@ -75,14 +75,14 @@ const promotionExtras = {
   4: {
     image:
       "https://file.hstatic.net/1000329106/file/13-3-23_ipad_6e6b3bba09d24c98a9ff4fccdc84dad0_1024x1024.jpg",
-    code: "WEEKEND15",
+    code: "SUMMER15",
     discount: "Giảm 15% không giới hạn giá trị đơn hàng",
     description: "Chỉ cuối tuần! Giảm giá cực sâu cho máy tính bảng.",
   },
   5: {
     image:
       "https://cdnv2.tgdd.vn/mwg-static/common/News/1425248/top-5-dien-thoai-samsung-ban-chay-nhat-thang-03-2022-tai-20.jpg",
-    code: "SUMMER10",
+    code: "WEEKEND10",
     discount: "Giảm 10% tối đa 400.000đ",
     description: "Khuyến mãi hè rực rỡ cho tất cả điện thoại.",
   },
