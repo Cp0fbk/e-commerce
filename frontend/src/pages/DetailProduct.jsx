@@ -133,6 +133,7 @@ export default function ProductDetailPage() {
     };
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   // Xử lý khi bấm Thêm vào giỏ hàng
