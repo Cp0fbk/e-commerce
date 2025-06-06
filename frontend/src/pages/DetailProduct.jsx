@@ -133,7 +133,7 @@ export default function ProductDetailPage() {
     };
 
     fetchData();
-  }, [id, productImages]);
+  }, [id]);
 
   // Xử lý khi bấm Thêm vào giỏ hàng
   const handleAddToCart = async () => {
