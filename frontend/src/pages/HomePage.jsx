@@ -134,7 +134,7 @@ export default function HomePage() {
                       <h2 className="text-2xl md:text-4xl font-bold mb-2">{banner.title}</h2>
                       <p className="text-lg md:text-xl mb-4">{banner.description}</p>
                       <Link 
-                        to="/products/1" // Thay bằng link đến sản phẩm phù hợp
+                        to={`/products/${banner.id}`} // Thay bằng link đến sản phẩm phù hợp
                         className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 inline-block"
                       >
                         Mua ngay
@@ -221,12 +221,12 @@ export default function HomePage() {
                   };
                   
                   const customImages = {
-                    1: "https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-blue-thumbnew-600x600.jpg",
-                    2: "https://surfaceviet.vn/wp-content/uploads/2024/05/Surface-Laptop-7-Platinum-13.8-inch.jpg",
-                    3: "https://cdn.tgdd.vn/Products/Images/522/247517/iPad-9-wifi-trang-600x600.jpg",
-                    4: "https://bizweb.dktcdn.net/100/340/129/products/tai-nghe-sony-ch-ch520-cuongphanvn-15.jpg?v=1728015465527",
-                    5: "https://product.hstatic.net/200000637319/product/logitech-g102-lightsync-rgb-wired-gaming-mouse-black-903150-_41483e8daff448edbb83afc2524b811f_master.jpg",
-                    6: "https://product.hstatic.net/1000233206/product/logitech-g-pro-x-mechanical-gaming-keyboard_2-600x400_0472fe2fcf3640dd8836c1fed7377043_grande.jpg"
+                    1: "https://image01-in.oneplus.net/media/202406/19/ec64eb41a8e787a798be1b71c13a51bb.png?x-amz-process=image/format,webp/quality,Q_80",
+                    2: "https://cdn2.fptshop.com.vn/unsafe/lenovo_thinkbook_14_g7_iml_1_86346ba35a.png",
+                    3: "https://p2-ofp.static.pub/fes/cms/2021/10/28/juqs65pgl1gh3dysi7yv1tnvtsiqva364946.png",
+                    4: "https://sony.scene7.com/is/image/sonyglobalsolutions/wh-ch520_Primary_image?$categorypdpnav$&fmt=png-alpha",
+                    5: "https://resource.logitechg.com/w_386,ar_1.0,c_limit,f_auto,q_auto,dpr_2.0/d_transparent.gif/content/dam/gaming/en/non-braid/hyjal-g502-hero/g502-hero-gallery-2-nb.png?v=1",
+                    6: "https://resource.logitechg.com/w_692,c_lpad,ar_4:3,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/gaming/en/non-braid/g213-finch/g213-gallery-1-nb.png?v=1"
                   };
 
                   return (
@@ -288,7 +288,7 @@ export default function HomePage() {
           <div className="container mx-auto px-4 py-8">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold">Sản Phẩm Nổi Bật</h2>
-              <Link to="/products/featured" className="text-blue-600 hover:underline flex items-center">
+              <Link to="/detail/1" className="text-blue-600 hover:underline flex items-center">
                 Xem tất cả <ChevronRight size={16} />
               </Link>
             </div>
@@ -330,13 +330,13 @@ export default function HomePage() {
           <div className="container mx-auto px-4 py-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="relative rounded-lg overflow-hidden h-48">
-                <img src="https://cdnv2.tgdd.vn/mwg-static/tgdd/Banner/89/4d/894d364d44b64e52e08d8aac0700601d.png" alt="Khuyến mãi laptop" className="w-full h-full object-cover" />
+                <img src="https://file.hstatic.net/1000329106/file/13-3-23_ipad_6e6b3bba09d24c98a9ff4fccdc84dad0_1024x1024.jpg" alt="Khuyến mãi máy tính bảng" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center p-6">
                   <div className="text-white">
-                    <h3 className="text-xl font-bold mb-2">Laptop giảm đến 20%</h3>
+                    <h3 className="text-xl font-bold mb-2">Máy tính bảng sale cực đậm</h3>
                     <p className="mb-4">Ưu đãi đặc biệt cho sinh viên</p>
                     <Link 
-                      to="/promotions/laptops" 
+                      to="/promotions" 
                       className="bg-white text-blue-600 px-4 py-2 rounded-md hover:bg-gray-100 inline-block"
                     >
                       Xem ngay
@@ -348,10 +348,10 @@ export default function HomePage() {
                 <img src="https://cdn.hoanghamobile.com/i/preview-np-V2/Uploads/ImageHightlight/6701_xiaomi-redmi-13-6gb-128gb/xiaomi-redmi-13-6gb-128gb638555336287725673.jpg" alt="Khuyến mãi điện thoại" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center p-6">
                   <div className="text-white">
-                    <h3 className="text-xl font-bold mb-2">Điện thoại trả góp 0%</h3>
-                    <p className="mb-4">Trả trước chỉ từ 20%</p>
+                    <h3 className="text-xl font-bold mb-2">Khuyến mãi cuối tuần</h3>
+                    <p className="mb-4">Giảm 10% cho tất cả điện thoại</p>
                     <Link 
-                      to="/promotions/phones" 
+                      to="/promotions" 
                       className="bg-white text-blue-600 px-4 py-2 rounded-md hover:bg-gray-100 inline-block"
                     >
                       Xem ngay
