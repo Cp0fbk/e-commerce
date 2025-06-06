@@ -18,15 +18,31 @@ export default function CartPage() {
   const [appliedVoucher, setAppliedVoucher] = useState(null);
   const [voucherError, setVoucherError] = useState('');
 
-  const fetchCart = () => {
-  Api.getCart()
-    .then((data) => {
-      setCartItems(data.content);
-    })
-    .catch((error) => {
-      console.error("Failed to load cart:", error);
-    });
+  const fetchCart = async () => {
+  try {
+    const data = await Api.getCart();
+    const items = data.content;
+
+    // Lấy ảnh cho từng item
+    const itemsWithImages = await Promise.all(
+      items.map(async (item) => {
+        try {
+          const imageUrl = await Api.getImagesByProductLine(item.productId.id);
+          
+          return { ...item, image: imageUrl }; // Gán image vào item
+        } catch (error) {
+          console.error("Image fetch failed for product:", item.productId.id);
+          return { ...item, image: '' }; // fallback
+        }
+      })
+    );
+
+    setCartItems(itemsWithImages);
+  } catch (error) {
+    console.error("Failed to load cart:", error);
+  }
 };
+
 
   useEffect(() => {
   fetchCart();

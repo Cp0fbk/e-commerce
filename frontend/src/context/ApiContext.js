@@ -312,6 +312,16 @@ class ApiService {
       throw error;
     }
   }
+
+  async getImagesByProductLine(productLineId) {
+    try {
+      const response = await this.axios.get(`/images/product-line/${productLineId}`);
+      return response.data.data[0]?.imageUrl;
+    } catch (error) {
+      console.error("Error fetching images by product line:", error);
+      throw error;
+    }
+  }
 }
 
 const Api = new ApiService();
