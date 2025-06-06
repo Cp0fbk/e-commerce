@@ -80,7 +80,7 @@ const ContactPage = () => {
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800 text-center mb-8">Về TechSphere</h2>
           <div className="flex flex-col md:flex-row items-center gap-8">
             <div className="md:w-1/2">
-              <img src="/api/placeholder/600/400" alt="TechSphere Team" className="w-full h-64 md:h-96 object-cover rounded-lg shadow-md" />
+              <img src="im.png" alt="TechSphere Team" className="w-full h-64 md:h-96 object-cover rounded-lg shadow-md" />
             </div>
             <div className="md:w-1/2">
               <p className="text-gray-600 leading-relaxed">

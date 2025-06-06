@@ -124,7 +124,7 @@ export default function CheckoutPage({ appliedVoucher = null }) {
         {orderConfirmed ? (
           <div className="bg-white rounded-lg shadow-sm p-8 text-center">
             <h1 className="text-2xl font-bold mb-4 text-green-600">Đặt hàng thành công!</h1>
-            <p className="text-gray-600 mb-6">Cảm ơn bạn đã mua sắm tại ElectroShop. Đơn hàng của bạn đã được ghi nhận.</p>
+            <p className="text-gray-600 mb-6">Cảm ơn bạn đã mua sắm tại TechSphere. Đơn hàng của bạn đã được ghi nhận.</p>
             <p className="text-gray-600 mb-6">Chúng tôi sẽ liên hệ với bạn sớm để xác nhận chi tiết.</p>
             <Link to={`/`} className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">Quay lại trang chủ</Link>
           </div>

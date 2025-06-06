@@ -119,7 +119,7 @@ export default function StoreLocatorPage() {
           <span className="text-gray-900 font-medium">Hệ thống cửa hàng</span>
         </div>
 
-        <h1 className="text-2xl font-bold mb-6">Hệ thống cửa hàng ElectroShop</h1>
+        <h1 className="text-2xl font-bold mb-6">Hệ thống cửa hàng TechSphere</h1>
 
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Danh sách cửa hàng */}
