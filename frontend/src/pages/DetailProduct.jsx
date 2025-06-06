@@ -45,7 +45,7 @@ export default function ProductDetailPage() {
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [productImages, setProductImages] = useState([]);
+  const [productImages, setProductImages] = useState({});
   const [selectedImage, setSelectedImage] = useState("");
   const [availableStock, setAvailableStock] = useState(50); // Giả sử mỗi sản phẩm có 50 đơn vị
   useEffect(() => {
@@ -56,37 +56,73 @@ export default function ProductDetailPage() {
         const productData = await Api.getProductById(id);
         setProduct(productData);
 
-        // Fetch product images
-        const images = await Api.getProductImages(id);
-        setProductImages(images);
-        setSelectedImage(images[0]?.url || "");
+        // Fetch product images cho sản phẩm chính
+        try {
+          const images = await Api.getProductImages(productData.id);
+          setProductImages((prev) => ({
+            ...prev,
+            [productData.id]: images,
+          }));
+          setSelectedImage(
+            (images && images[0]?.imageUrl) || productData.imageUrl
+          );
+        } catch (imageError) {
+          console.error("Error fetching main product images:", imageError);
+          setSelectedImage(productData.imageUrl);
+        }
 
         // Fetch categories
         const categoriesData = await Api.getAllCategories();
         setCategories(categoriesData);
 
-        // Fetch related products (using filter with same category)
+        // Fetch related products
         const relatedProductsData = await Api.filterProducts({
           categoryTypeId: productData.categoryTypeId,
           page: 0,
           size: 4,
         });
-        // Get only 4 related products and fetch their images
+
+        // Lọc và giới hạn 4 sản phẩm liên quan
         const filteredProducts = relatedProductsData.content
           .filter((p) => p.id !== productData.id)
           .slice(0, 4);
 
-        // Fetch images for each related product
+        // Fetch images cho từng sản phẩm liên quan
         const productsWithImages = await Promise.all(
           filteredProducts.map(async (product) => {
-            const images = await Api.getProductImages(product.id);
-            return {
-              ...product,
-              images: images,
-              rating: Math.floor(Math.random() * 3) + 3, // Random rating từ 3-5
-            };
+            try {
+              const images = await Api.getProductImages(product.id);
+              return {
+                ...product,
+                rating: Math.floor(Math.random() * 3) + 3,
+              };
+            } catch (error) {
+              console.error(
+                `Error fetching images for product ${product.id}:`,
+                error
+              );
+              return {
+                ...product,
+                rating: Math.floor(Math.random() * 3) + 3,
+              };
+            }
           })
         );
+
+        // Lưu ảnh của các sản phẩm liên quan vào state
+        const newProductImages = { ...productImages };
+        for (const product of filteredProducts) {
+          try {
+            const images = await Api.getProductImages(product.id);
+            newProductImages[product.id] = images;
+          } catch (error) {
+            console.error(
+              `Error fetching images for product ${product.id}:`,
+              error
+            );
+          }
+        }
+        setProductImages(newProductImages);
         setRelatedProducts(productsWithImages);
         setLoading(false);
       } catch (err) {
@@ -219,21 +255,29 @@ export default function ProductDetailPage() {
               <img
                 src={selectedImage || product.imageUrl}
                 alt={product.name}
-                className="w-full h-96 object-cover rounded-md"
+                className="w-full h-96 object-contain rounded-md"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "https://via.placeholder.com/150";
+                }}
               />
               <div className="flex gap-2 mt-4 justify-center">
-                {productImages.map((img, idx) => (
+                {productImages[product.id]?.map((img, idx) => (
                   <img
                     key={idx}
-                    src={img.url}
+                    src={img.imageUrl}
                     alt={`${product.name} ${idx + 1}`}
-                    className={`w-20 h-20 object-cover rounded-md cursor-pointer border-2 
+                    className={`w-20 h-20 object-contain rounded-md cursor-pointer border-2 
                       ${
-                        selectedImage === img.url
+                        selectedImage === img.imageUrl
                           ? "border-blue-600"
                           : "border-gray-200"
                       }`}
-                    onClick={() => setSelectedImage(img.url)}
+                    onClick={() => setSelectedImage(img.imageUrl)}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "https://via.placeholder.com/150";
+                    }}
                   />
                 ))}
               </div>
@@ -380,14 +424,27 @@ export default function ProductDetailPage() {
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <div className="mt-6">
-            <h2 className="text-xl font-bold text-gray-800 mb-4">Sản phẩm liên quan</h2>
+            <h2 className="text-xl font-bold text-gray-800 mb-4">
+              Sản phẩm liên quan
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {relatedProducts.map(product => (
-                <div key={product.id} className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
-                  <img 
-                    src={product.images[0]?.url || product.imageUrl} 
-                    alt={product.name} 
-                    className="w-full h-48 object-contain rounded-md" 
+              {relatedProducts.map((product) => (
+                <div
+                  key={product.id}
+                  className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow"
+                >
+                  <img
+                    src={
+                      (productImages[product.id] &&
+                        productImages[product.id][0]?.imageUrl) ||
+                      "https://via.placeholder.com/150"
+                    }
+                    alt={product.name}
+                    className="w-full h-48 object-contain rounded-md"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "https://via.placeholder.com/150";
+                    }}
                   />
                   <h3 className="font-medium text-gray-800 hover:text-blue-600 cursor-pointer mt-2">
                     {product.name}
@@ -395,11 +452,11 @@ export default function ProductDetailPage() {
                   <RatingStars rating={product.rating} />
                   <div className="mt-2">
                     <span className="text-red-600 font-bold text-lg">
-                      {product.price.toLocaleString('vi-VN')}đ
+                      {product.price.toLocaleString("vi-VN")}đ
                     </span>
                   </div>
                   <Link
-                    to={`/detail/${product.id}`}
+                    to={`/products/${product.id}`}
                     className="mt-3 w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 block text-center"
                   >
                     Xem chi tiết

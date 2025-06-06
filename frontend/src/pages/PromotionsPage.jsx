@@ -72,6 +72,27 @@ const promotionExtras = {
     discount: "Giảm 10% tối đa 2.000.000đ",
     description: "Ưu đãi đặc biệt mùa tựu trường cho các dòng laptop học tập.",
   },
+  4: {
+    image:
+      "https://file.hstatic.net/1000329106/file/13-3-23_ipad_6e6b3bba09d24c98a9ff4fccdc84dad0_1024x1024.jpg",
+    code: "WEEKEND15",
+    discount: "Giảm 15% không giới hạn giá trị đơn hàng",
+    description: "Chỉ cuối tuần! Giảm giá cực sâu cho máy tính bảng.",
+  },
+  5: {
+    image:
+      "https://cdnv2.tgdd.vn/mwg-static/common/News/1425248/top-5-dien-thoai-samsung-ban-chay-nhat-thang-03-2022-tai-20.jpg",
+    code: "SUMMER10",
+    discount: "Giảm 10% tối đa 400.000đ",
+    description: "Khuyến mãi hè rực rỡ cho tất cả điện thoại.",
+  },
+  6: {
+    image:
+      "https://fitsmallbusiness.com/wp-content/uploads/2021/08/Screenshot_HSN_Free_Shipping_Promotion.jpg",
+    code: "FREESHIP100",
+    discount: "Miễn phí vận chuyển cho đơn từ 100.000đ",
+    description: "Áp dụng toàn quốc cho mọi sản phẩm công nghệ.",
+  },
 };
 
 // Danh mục sản phẩm cho menu
@@ -215,11 +236,11 @@ export default function PromotionsPage() {
                   <span
                     className={`text-xs px-2 py-1 rounded-full ${
                       isActive(promo.endDate)
-                        ? "bg-green-100 text-green-600"
+                        ? (isActive(promo.startDate) ? "bg-yellow-100 text-yellow-600" : "bg-green-100 text-green-600")
                         : "bg-gray-100 text-gray-600"
                     }`}
                   >
-                    {isActive(promo.endDate) ? "Đang hoạt động" : "Đã hết hạn"}
+                    {isActive(promo.endDate) ? (isActive(promo.startDate) ? "Sắp diễn ra" : "Đang hoạt động") : "Đã hết hạn"}
                   </span>
                 </div>
                 <p className="text-xs text-gray-500 mb-2">

@@ -362,7 +362,7 @@ const Header = () => {
               <span className="text-gray-500">Không có danh mục nào</span>
             )}
             
-            <NavLink 
+            {/* <NavLink 
               to="/detail" 
               className={({ isActive }) => 
                 `text-gray-800 hover:bg-blue-600 hover:text-white hover:scale-105 px-3 py-1 rounded-md transition-all duration-200 ${
@@ -370,8 +370,8 @@ const Header = () => {
                 }`
               }
             >
-              Tìm kiếm nâng cao
-            </NavLink>
+              
+            </NavLink> */}
             
             <NavLink 
               to="/promotions" 

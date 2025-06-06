@@ -13,8 +13,8 @@ const mockOrders = [
 ];
 
 const mockFavorites = [
-  { id: 1, name: 'iPhone 15 Pro Max', price: 32990000, image: '/api/placeholder/100/100' },
-  { id: 2, name: 'MacBook Pro M3', price: 36990000, image: '/api/placeholder/100/100' },
+  { id: 1, name: 'iPhone 15 Pro Max', price: 32990000, image: 'https://cdn.tgdd.vn/Products/Images/42/305658/iphone-15-pro-max-blue-thumbnew-600x600.jpg' },
+  { id: 2, name: 'MacBook Pro M3', price: 36990000, image: 'https://ttcenter.com.vn/uploads/images/SA%CC%89N%20PHA%CC%82%CC%89M/Macbook%20Pro%2014%20inch%20M3/macbook-pro-14-inch-m3-2.jpg' },
 ];
 
 const categories = [
