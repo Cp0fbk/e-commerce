@@ -8,27 +8,27 @@ import Api from '../context/ApiContext';
 // Data mẫu
 
 const featuredProducts = [
-  { id: 1, name: 'iPhone 15 Pro Max', price: '32.990.000đ', discount: '34.990.000đ', image: 'https://onewaymobile.vn/images/products/2024/08/27/large/1_1724729741.webp', rating: 5 },
-  { id: 2, name: 'Samsung Galaxy S24 Ultra', price: '28.990.000đ', discount: '30.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/42/307174/TimerThumb/samsung-galaxy-s24-ultra-5g-(68).jpg', rating: 4.5 },
-  { id: 3, name: 'MacBook Pro M3', price: '36.990.000đ', discount: '38.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/44/318229/apple-macbook-pro-m3-2023-041123-101435-600x600.jpg', rating: 5 },
-  { id: 4, name: 'iPad Pro 2024', price: '22.990.000đ', discount: '24.990.000đ', image: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQcISjarb9YruOdJwMxuOXRSArQc1COOqYEX7WlBNyrPrGfTw0GgTzinWQp9lve-Gs2VeAi1J8GQ-dVJlEOS-s8RNWk96VPvDyd2Y-kY5NJhNHaUBc3Ucp1o51jqK2buvV7YAeOpt2SHA&usqp=CAc', rating: 4.5 },
-  { id: 5, name: 'Sony WH-1000XM5', price: '6.990.000đ', discount: '8.990.000đ', image: 'https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/54/313694/tai-nghe-bluetooth-chup-tai-sony-wh-ch520-210425-043507-151-600x600.jpg', rating: 5 },
-  { id: 6, name: 'Apple Watch Series 9', price: '10.990.000đ', discount: '12.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/7077/315998/apple-watch-s9-vien-nhom-day-vai-den-tb-600x600.jpg', rating: 4.5 },
-  { id: 7, name: 'Samsung Galaxy Tab S9 Ultra', price: '23.990.000đ', discount: '25.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/522/303299/TimerThumb/samsung-galaxy-tab-s9-(32).jpg', rating: 4 },
-  { id: 8, name: 'Dell XPS 15', price: '35.990.000đ', discount: '38.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/44/314837/dell-xps-15-9530-i7-71015716-4-750x500.jpg', rating: 4.5 },
+  { id: 25, name: 'Acer Swift 5', price: '25.990.000đ', discount: '26.990.000đ', image: 'image/image25.jpg', rating: 5 },
+  { id: 36, name: 'Sony WH-1000XM5', price: '7.990.000đ', discount: '9.790.000đ', image: 'image/image36.jpg', rating: 4.5 },
+  { id: 29, name: 'Samsung Galaxy Tab S8', price: '19.990.000đ', discount: '20.990.000đ', image: 'image/image29.jpg', rating: 5 },
+  { id: 51, name: 'Corsair Scimitar RGB Elite', price: '22.990.000đ', discount: '24.990.000đ', image: 'image/image51.jpg', rating: 4.5 },
+  { id: 15, name: 'OPPO Reno 12 Pro', price: '14.990.000đ', discount: '16.300.000đ', image: 'image/image15.jpg', rating: 5 },
+  { id: 59, name: 'Corsair K70 RGB MK.2', price: '10.990.000đ', discount: '12.990.000đ', image: 'image/image59.webp', rating: 4.5 },
+  { id: 48, name: 'Logitech G102 Prodigy', price: '1.050.000đ', discount: '1.650.000đ', image: 'image/image48.png', rating: 4 },
+  { id: 8, name: 'iPhone 15 Pro Max', price: '32.990.000đ', discount: '35.990.000đ', image: 'image/image8.jpg', rating: 4 },
 ];
 
 const banners = [
   { id: 1, title: 'iPhone 15 Pro Max', description: 'Giảm đến 5.000.000đ', image: 'https://viendidong.com/wp-content/uploads/2023/09/iphone-15-pro-max-ra-mat-thumbnail-viendidong.jpg' },
   { id: 2, title: 'MacBook Pro M3', description: 'Trả góp 0%', image: 'https://images.vexels.com/media/users/3/126443/raw/ff9af1e1edfa2c4a46c43b0c2040ce52-banner-da-barra-de-toque-do-macbook-pro.jpg' },
-  { id: 3, title: 'Samsung Galaxy S24 Ultra', description: 'Tặng tai nghe Galaxy Buds', image: 'https://images.samsung.com/vn/smartphones/galaxy-s24-ultra/images/galaxy-s24-ultra-highlights-camera-overview-mo.jpg?imbypass=true' },
+  { id: 8, title: 'Samsung Galaxy S24 Ultra', description: 'Tặng tai nghe Galaxy Buds', image: 'https://images.samsung.com/vn/smartphones/galaxy-s24-ultra/images/galaxy-s24-ultra-highlights-camera-overview-mo.jpg?imbypass=true' },
 ];
 
 const newArrivals = [
-  { id: 1, name: 'Samsung Galaxy Z Fold 6', price: '42.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/42/320721/TimerThumb/samsung-galaxy-z-fold6-(32).jpg' },
-  { id: 2, name: 'Google Pixel 9 Pro', price: '26.990.000đ', image: 'https://cdn.tgdd.vn/Products/Images/42/321899/google-pixel-9-pro-290124-054748-600x600.jpg' },
-  { id: 3, name: 'Asus ROG Phone 8', price: '23.990.000đ', image: 'https://cdn.mobilecity.vn/mobilecity-vn/images/2024/01/w300/asus-rog-phone-8-den.jpg.webp' },
-  { id: 4, name: 'AirPods Max 2', price: '12.990.000đ', image: 'https://www.h2shop.vn/images/thumbnails/400/350/detailed/66/airpods-max-select-202409-blue_FV1.jpeg' },
+  { id: 9, name: 'Samsung Galaxy Z Fold 6', price: '41.990.000đ', image: 'image/image9.jpg' },
+  { id: 60, name: 'Razer BlackWidow V3 Mini', price: '1.400.000đ', image: 'image/image60.png' },
+  { id: 10, name: 'Xiaomi 14 Ultra', price: '23.990.000đ', image: 'image/image10.jpg' },
+  { id: 7, name: 'Tai nghe AirPods Max', price: '12.990.000đ', image: 'image/image7.webp' },
 ];
 
 const brands = [

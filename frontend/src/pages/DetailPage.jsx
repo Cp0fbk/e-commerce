@@ -43,7 +43,7 @@ export default function CategoryPage() {
   const [openFilterSection, setOpenFilterSection] = useState({
     category: true,
     price: true,
-    brand: true,
+    brand: false,
     features: {},
   });
 
