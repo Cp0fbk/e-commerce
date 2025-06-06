@@ -478,7 +478,7 @@ export default function CategoryPage() {
     fetchBrands();
   }, []);
   // Phân trang
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   // Xử lý bộ lọc
   const toggleFilterSection = (section) => {

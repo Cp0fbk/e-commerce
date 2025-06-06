@@ -91,7 +91,7 @@ export default function ProductDetailPage() {
         const productsWithImages = await Promise.all(
           filteredProducts.map(async (product) => {
             try {
-              const images = await Api.getProductImages(product.id);
+              // const images = await Api.getProductImages(product.id);
               return {
                 ...product,
                 rating: Math.floor(Math.random() * 3) + 3,
@@ -133,7 +133,7 @@ export default function ProductDetailPage() {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, productImages]);
 
   // Xử lý khi bấm Thêm vào giỏ hàng
   const handleAddToCart = async () => {
