@@ -33,15 +33,35 @@ export default function CheckoutPage({ appliedVoucher = null }) {
   const [paymentMethod, setPaymentMethod] = useState('cod'); // cod, qr
   const [orderConfirmed, setOrderConfirmed] = useState(false);
 
-  useEffect(() => {
-    Api.getCart()
-      .then(data => {
-        setCartItems(data.content);
+  const fetchCart = async () => {
+  try {
+    const data = await Api.getCart();
+    const items = data.content;
+
+    // Lấy ảnh cho từng item
+    const itemsWithImages = await Promise.all(
+      items.map(async (item) => {
+        try {
+          const imageUrl = await Api.getImagesByProductLine(item.productId.id);
+          
+          return { ...item, image: imageUrl }; // Gán image vào item
+        } catch (error) {
+          console.error("Image fetch failed for product:", item.productId.id);
+          return { ...item, image: '' }; // fallback
+        }
       })
-      .catch(error => {
-        console.error("Failed to load cart:", error);
-      });
-  }, []);
+    );
+
+    setCartItems(itemsWithImages);
+  } catch (error) {
+    console.error("Failed to load cart:", error);
+  }
+};
+
+
+  useEffect(() => {
+  fetchCart();
+}, []);
 
   // Tính toán tổng tiền
   const subtotal = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
