@@ -6,13 +6,6 @@ import Footer from '../components/Footer';
 import Api from '../context/ApiContext';
 
 // Data mẫu
-const categories = [
-  { id: 1, name: 'Điện thoại', subcategories: ['iPhone', 'Samsung', 'Xiaomi', 'OPPO'], imageUrl: 'https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/42/334969/tecno-spark-30-white-thumb-638761785148564781-600x600.jpg' },
-  { id: 2, name: 'Laptop', subcategories: ['Macbook', 'Dell', 'HP', 'Lenovo', 'Asus'], imageUrl: 'https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/macbook_1__2_5.png' },
-  { id: 3, name: 'Máy tính bảng', subcategories: ['iPad', 'Samsung Galaxy Tab', 'Xiaomi Pad'], imageUrl: 'https://cdnv2.tgdd.vn/mwg-static/tgdd/Products/Images/522/336738/samsung-galaxy-tab-s10-fe-5g-070425-120906-571-600x600.jpg' },
-  { id: 4, name: 'Tai nghe', subcategories: ['AirPods', 'Sony', 'JBL', 'Beats'], imageUrl: 'https://cdn.tgdd.vn/Products/Images/54/320249/tai-nghe-bluetooth-chup-tai-havit-h663bt-tb-600x600.jpg' },
-  { id: 5, name: 'Đồng hồ thông minh', subcategories: ['Apple Watch', 'Samsung Galaxy Watch', 'Xiaomi Watch'], imageUrl: 'https://cdn.tgdd.vn/Products/Images/7077/335763/huawei-band-10-vien-nhom-den-tb-600x600.jpg' },
-];
 
 const featuredProducts = [
   { id: 1, name: 'iPhone 15 Pro Max', price: '32.990.000đ', discount: '34.990.000đ', image: 'https://onewaymobile.vn/images/products/2024/08/27/large/1_1724729741.webp', rating: 5 },
@@ -86,7 +79,9 @@ const brands = [
 export default function HomePage() {
   const [currentBanner, setCurrentBanner] = useState(0);
   const [categories, setCategories] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(true);
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(null);
   // Star component for ratings
   const RatingStars = ({ rating }) => {
