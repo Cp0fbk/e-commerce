@@ -151,6 +151,7 @@ export default function ProductDetailPage() {
     try {
       await Api.addToCart({
         productLineId: product.id,
+        price: product.price,
         quantity: quantity,
       });
       setAvailableStock((prev) => prev - quantity);
