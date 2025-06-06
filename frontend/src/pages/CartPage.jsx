@@ -312,11 +312,11 @@ export default function CartPage() {
                 </Link>
                 
                 <div className="mt-4 flex justify-center gap-4">
-                  <img src="/api/placeholder/40/25" alt="VISA" className="h-6" />
-                  <img src="/api/placeholder/40/25" alt="Mastercard" className="h-6" />
-                  <img src="/api/placeholder/40/25" alt="JCB" className="h-6" />
-                  <img src="/api/placeholder/40/25" alt="Momo" className="h-6" />
-                  <img src="/api/placeholder/40/25" alt="ZaloPay" className="h-6" />
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Visa_2021.svg/2560px-Visa_2021.svg.png" alt="VISA" className="h-6" />
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-6" />
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSgber4MngQY983WF6ItDL0bzmmImENuVrPw&s" alt="JCB" className="h-6" />
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnV4cUM7jBauINof35Yn_unOz976Iz5okV8A&s" alt="Momo" className="h-6" />
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTlp4qW2M8xPofmuZHwEfGi9mNMWUG0zs53A&s" alt="ZaloPay" className="h-6" />
                 </div>
               </div>
             </div>

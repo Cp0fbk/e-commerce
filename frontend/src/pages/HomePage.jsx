@@ -39,7 +39,32 @@ const brands = [
   { id: 5, name: 'Asus', imageUrl: 'https://cdn.tgdd.vn/Brand//1/Asus482-b_26.png' },
   { id: 6, name: 'Oppo', imageUrl: 'https://cdn.tgdd.vn/Brand//1/OPPO42-b5-220x48-6.jpg' },
 ];
-
+const blogPosts = [
+  {
+    id: 1,
+    title: 'iPhone 16 Pro: Camera đột phá với AI',
+    description: 'Apple ra mắt iPhone 16 Pro với công nghệ camera tích hợp AI, cải thiện khả năng chụp ảnh trong điều kiện thiếu sáng.',
+    date: '15/04/2025',
+    image: 'https://news.khangz.com/wp-content/uploads/2024/09/hang-loat-tinh-nang-ai-manh-me-tren-iphone-16-series.jpg',
+    link: '/news',
+  },
+  {
+    id: 2,
+    title: 'Laptop gaming ASUS ROG 2025: Hiệu năng vượt trội',
+    description: 'ASUS giới thiệu dòng laptop gaming ROG 2025 với GPU RTX 5090 và màn hình 240Hz.',
+    date: '10/04/2025',
+    image: 'https://shortlink.vn/wp-content/uploads/2025/04/shortlink-vn-492-1140x570.jpg', // Thay bằng URL ảnh thực tế
+    link: '/news',
+  },
+  {
+    id: 3,
+    title: 'iPad Pro M4: Sức mạnh của máy tính bảng',
+    description: 'iPad Pro M4 mang đến hiệu năng ngang PC với chip M4 và hỗ trợ Apple Pencil Pro.',
+    date: '05/04/2025',
+    image: 'https://dangvu.vn/wp-content/uploads/2024/08/ipad-pro-13-m4-15.webp',
+    link: '/news',
+  },
+];
 
 // const [categories, setCategories] = useState([]);
 // const [banners, setBanners] = useState([]);
@@ -384,36 +409,38 @@ export default function HomePage() {
 
         {/* Blog Posts */}
         <div className="bg-gray-50">
-          <div className="container mx-auto px-4 py-8">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-2xl font-bold">Tin Tức Công Nghệ</h2>
-              <Link to="/blog" className="text-blue-600 hover:underline flex items-center">
-                Xem tất cả <ChevronRight size={16} />
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[...Array(3)].map((_, idx) => (
-                <Link 
-                  to={`/blog/${idx+1}`} 
-                  key={idx} 
-                  className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow"
-                >
-                  <img src={`https://news.khangz.com/wp-content/uploads/2023/12/TOP-DIEN-THOAI-TAM-TRUNG-DANG-MUA-NHAT-2023-1-1.jpg`} alt={`Blog ${idx+1}`} className="w-full h-48 object-cover" />
-                  <div className="p-4">
-                    <h3 className="font-semibold text-lg mb-2">Top 10 điện thoại đáng mua năm 2025</h3>
-                    <p className="text-gray-600 mb-3 line-clamp-3">
-                      Khám phá những mẫu điện thoại mới nhất với công nghệ đột phá và hiệu năng vượt trội...
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-500">24/03/2025</span>
-                      <span className="text-blue-600 hover:underline">Đọc tiếp</span>
-                    </div>
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl font-bold">Tin Tức Công Nghệ</h2>
+            <Link to="/news" className="text-blue-600 hover:underline flex items-center">
+              Xem tất cả <ChevronRight size={16} />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {blogPosts.map((post) => (
+              <Link
+                to={post.link}
+                key={post.id}
+                className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow"
+              >
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg mb-2">{post.title}</h3>
+                  <p className="text-gray-600 mb-3 line-clamp-3">{post.description}</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-500">{post.date}</span>
+                    <span className="text-blue-600 hover:underline">Đọc tiếp</span>
                   </div>
-                </Link>
-              ))}
-            </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
+      </div>
       </main>
       <Footer categories={categories} />
     </div>
